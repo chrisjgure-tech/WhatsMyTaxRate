@@ -12,7 +12,7 @@ data.js         federal tax data + explainer copy
 states.js       state tax data — 51 jurisdictions
 app.js          calculation engine + rendering
 favicon.svg     tab icon
-og-image.png    1200×630 link-preview card (regenerate from og-image.svg)
+og-image.jpg    1200×630 link-preview card (regenerate from og-image.svg)
 netlify.toml    Netlify config: redirects, security headers, caching
 vercel.json     Vercel config: the same headers and caching rules
 robots.txt / sitemap.xml
@@ -156,6 +156,8 @@ the illustrative ones described in the Credits section.
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" \
   --headless --disable-gpu --screenshot=og-image.png \
   --window-size=1200,630 --hide-scrollbars og-image.svg
+
+sips -s format jpeg -s formatOptions 45 og-image.png --out og-image.jpg
 ```
 
 ---
