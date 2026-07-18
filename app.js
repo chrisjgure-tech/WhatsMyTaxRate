@@ -533,14 +533,16 @@
        always whole percentages. */
     var peak = pts.reduce(function (m, p) { return Math.max(m, p.y); }, 0);
     peak = Math.max(peak, r.allInEffective);
-    var axisMax = clamp(Math.ceil((peak + 3) / 5) * 5, 15, 45);
+
+    /* Pick a round step first, then snap the maximum to a multiple of it, so
+       every gridline label is a whole, tidy percentage — never 8.75%. */
+    var step = (peak + 3) <= 20 ? 5 : 10;
+    var axisMax = clamp(Math.ceil((peak + 3) / step) * step, 15, 50);
 
     var X = function (v) { return CH.l + (v - lo) / (hi - lo) * pw; };
     var Y = function (v) { return CH.t + (1 - clamp(v, 0, axisMax) / axisMax) * ph; };
 
-    var steps = 4;
-    for (var s = 0; s <= steps; s++) {
-      var v = axisMax * s / steps;
+    for (var v = 0; v <= axisMax + 0.001; v += step) {
       g.appendChild(svgEl('line', { x1: CH.l, x2: CH.w - CH.r, y1: Y(v), y2: Y(v),
         stroke: 'rgba(255,255,255,.14)', 'stroke-width': 1 }));
       var t = svgEl('text', { x: CH.l - 9, y: Y(v) + 4, 'text-anchor': 'end',
@@ -617,10 +619,15 @@
     renderHistory(r);
     renderCurve(r);
 
-    // Local-tax disclosure (FIX #17)
+    // Local-tax disclosure + provisional-data caution (FIX #17)
     var stMeta = S[ui.state] || { name: '—', notes: '' };
-    if (stMeta.notes) {
-      el.localnoteText.textContent = stMeta.notes;
+    var note = stMeta.notes || '';
+    if (stMeta.provisional) {
+      note += (note ? ' ' : '')
+        + 'These 2026 figures are provisional — the state has not published final amounts yet.';
+    }
+    if (note) {
+      el.localnoteText.textContent = note;
       el.localnote.hidden = false;
     } else {
       el.localnote.hidden = true;

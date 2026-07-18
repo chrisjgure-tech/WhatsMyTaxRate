@@ -180,34 +180,4 @@ window.TAX_HISTORY = [
   { year: 2026, rate: 37 }
 ];
 
-/* ==========================================================================
-   State income tax — populated below by state-data.js contract.
-   ========================================================================== */
-
-window.TAX_STATES = window.TAX_STATES || {};
-
-/* INTERIM STUB — replaced by verified 51-jurisdiction data. */
-window.TAX_STATES = {
-  NC: { name: 'North Carolina', type: 'flat',
-        brackets: { single: [{ rate: 0.0399, min: 0, max: null }] },
-        standardDeduction: { single: 12750, mfj: 25500, hoh: 19125, mfs: 12750 },
-        notes: 'Local income taxes are not included.' },
-  TX: { name: 'Texas', type: 'none' },
-  CA: { name: 'California', type: 'graduated',
-        brackets: { single: [
-          { rate: 0.01, min: 0, max: 10756 }, { rate: 0.02, min: 10756, max: 25499 },
-          { rate: 0.04, min: 25499, max: 40245 }, { rate: 0.06, min: 40245, max: 55866 },
-          { rate: 0.08, min: 55866, max: 70606 }, { rate: 0.093, min: 70606, max: 360659 },
-          { rate: 0.103, min: 360659, max: 432787 }, { rate: 0.113, min: 432787, max: 721314 },
-          { rate: 0.123, min: 721314, max: null } ] },
-        standardDeduction: { single: 5540, mfj: 11080, hoh: 11080, mfs: 5540 },
-        notes: 'Excludes the 1% Mental Health Services surcharge above $1M.' },
-  NY: { name: 'New York', type: 'graduated',
-        brackets: { single: [
-          { rate: 0.04, min: 0, max: 8500 }, { rate: 0.045, min: 8500, max: 11700 },
-          { rate: 0.0525, min: 11700, max: 13900 }, { rate: 0.055, min: 13900, max: 80650 },
-          { rate: 0.06, min: 80650, max: 215400 }, { rate: 0.0685, min: 215400, max: 1077550 },
-          { rate: 0.0965, min: 1077550, max: null } ] },
-        standardDeduction: { single: 8000, mfj: 16050, hoh: 11200, mfs: 8000 },
-        notes: 'New York City and Yonkers local income taxes are not included.' }
-};
+/* State income tax data lives in states.js — see the contract in README.md. */
