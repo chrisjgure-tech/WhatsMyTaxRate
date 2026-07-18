@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#3D1C56"/>
+      <stop offset="1" stop-color="#1F0B2E"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.78" cy="0" r="0.7">
+      <stop offset="0" stop-color="#4E2470" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#4E2470" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- wordmark -->
+  <g transform="translate(72,64)">
+    <path d="M2 15 L16 7 L30 15" fill="none" stroke="#C4B5FD" stroke-width="2.8" stroke-linejoin="round"/>
+    <path d="M6 18v11M12.7 18v11M19.3 18v11M26 18v11" stroke="#C4B5FD" stroke-width="2.8" stroke-linecap="round"/>
+    <path d="M3.5 32.5h25" stroke="#C4B5FD" stroke-width="2.8" stroke-linecap="round"/>
+    <text x="46" y="27" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+          font-size="25" font-weight="700" fill="#FFFFFF" letter-spacing="-0.6">What's My</text>
+    <text x="185" y="27" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+          font-size="25" font-weight="700" fill="#C4B5FD" letter-spacing="-0.6">Tax Rate</text>
+  </g>
+
+  <!-- headline -->
+  <text x="72" y="240" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="76" font-weight="700" fill="#FFFFFF" letter-spacing="-2.8">Your marginal rate is</text>
+  <text x="72" y="322" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="76" font-weight="700" fill="#FFFFFF" letter-spacing="-2.8">
+    <tspan fill="#C4B5FD" font-style="italic">not</tspan><tspan> your real tax rate.</tspan>
+  </text>
+
+  <text x="72" y="382" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="27" fill="#C4B5FD">See what you actually pay — federal, state and FICA.</text>
+
+  <!-- the comparison -->
+  <g transform="translate(72,440)">
+    <rect x="0" y="0" width="248" height="118" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
+    <text x="24" y="36" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+          font-size="14" font-weight="700" fill="#A79BB6" letter-spacing="1.6">WHAT YOU ACTUALLY PAY</text>
+    <text x="24" y="94" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+          font-size="52" font-weight="700" fill="#4ADE80" letter-spacing="-2">10.2%</text>
+
+    <text x="284" y="72" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+          font-size="34" fill="#8B7BA0">vs</text>
+
+    <rect x="344" y="0" width="248" height="118" rx="18" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.18)"/>
+    <text x="368" y="36" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+          font-size="14" font-weight="700" fill="#A79BB6" letter-spacing="1.6">THE BRACKET YOU QUOTE</text>
+    <text x="368" y="94" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+          font-size="52" font-weight="700" fill="#FFFFFF" letter-spacing="-2">22%</text>
+  </g>
+
+  <text x="1128" y="570" text-anchor="end" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+        font-size="21" fill="#8B7BA0">whatsmytaxrate.com</text>
+</svg>

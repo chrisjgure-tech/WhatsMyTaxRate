@@ -1,0 +1,39 @@
+### Deploy config for whatsmytaxrate.com
+### Static site — no build step, no dependencies.
+
+[build]
+  publish = "."
+  command = ""
+
+# Canonical host: send the apex/www variants to one place so the custom domain
+# is the only thing that ever appears in a share link.
+[[redirects]]
+  from = "https://www.whatsmytaxrate.com/*"
+  to = "https://whatsmytaxrate.com/:splat"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'none'"
+
+# Fingerprint-free assets, so cache conservatively and let HTML revalidate.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"

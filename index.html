@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- FIX #5 / #9 — real branding + real metadata, no placeholder text -->
+<title>What's My Tax Rate? — See your real federal, state and FICA tax rate</title>
+<meta name="description" content="Find out what you actually pay in tax. Compare your federal effective rate against your marginal rate, see where every dollar goes, and understand why your paycheck withholding is higher than your real tax bill. Free, 2026 tax year.">
+<link rel="canonical" href="https://whatsmytaxrate.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="What's My Tax Rate?">
+<meta property="og:url" content="https://whatsmytaxrate.com/">
+<meta property="og:title" content="What's My Tax Rate?">
+<meta property="og:description" content="Your marginal rate is not your real rate. See exactly what you pay in federal, state and FICA tax — and why your paycheck lies to you.">
+<meta property="og:image" content="https://whatsmytaxrate.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What's My Tax Rate?">
+<meta name="twitter:description" content="Your marginal rate is not your real rate. See exactly what you pay — and why your paycheck lies to you.">
+<meta name="twitter:image" content="https://whatsmytaxrate.com/og-image.png">
+<meta name="theme-color" content="#2E1140">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ======================================================================
+     Top bar + jump links (FIX #8)
+     ====================================================================== -->
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" href="#top">
+      <svg class="brand__mark" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M3 9.2 12 4l9 5.2" stroke="#6D3A9E" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M5.5 10.5v7M9.8 10.5v7M14.2 10.5v7M18.5 10.5v7" stroke="#6D3A9E" stroke-width="2" stroke-linecap="round"/>
+        <path d="M3.5 20h17" stroke="#6D3A9E" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <span class="brand__name">What's My <em>Tax Rate</em></span>
+    </a>
+    <nav class="jump" aria-label="Jump to section">
+      <a href="#breakdown">Breakdown</a>
+      <a href="#brackets">Brackets</a>
+      <a href="#withholding">Withholding</a>
+      <a href="#bonuses">Bonuses</a>
+      <a href="#history">History</a>
+      <a href="#deductions">Deductions</a>
+      <a href="#credits">Credits</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Sticky mini-result (FIX #6) -->
+<div class="ministrip" id="ministrip" data-show="0" aria-hidden="true">
+  <div class="ministrip__inner">
+    <span class="ministrip__ctx" id="mini-ctx">—</span>
+    <span class="ministrip__stat"><span>Fed effective</span><b class="num" id="mini-eff">—</b></span>
+    <span class="ministrip__stat"><span>Fed marginal</span><b class="num" id="mini-marg">—</b></span>
+    <span class="ministrip__stat"><span>Take-home</span><b class="num" id="mini-take">—</b></span>
+    <button class="btn btn--ghost btn-share" type="button" data-share>Share</button>
+  </div>
+</div>
+
+<main id="top">
+
+<!-- ======================================================================
+     Hero + calculator
+     ====================================================================== -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero__head">
+      <!-- FIX (credibility) — visible data vintage -->
+      <span class="hero__stamp"><span class="dot"></span>2026 tax year · rates current as of <span id="stamp-date">July 2026</span></span>
+      <h1>Your marginal rate is <em>not</em> your real tax rate.</h1>
+      <p class="hero__sub">Most people quote the bracket they land in and assume that's what they pay. It isn't — not even close. Enter your income and see the gap for yourself.</p>
+    </div>
+
+    <div class="calc">
+      <div class="calc__grid">
+
+        <!-- ---------------- Inputs ---------------- -->
+        <div class="calc__inputs">
+          <div class="field">
+            <label for="income">Gross annual income</label>
+            <div class="income">
+              <span class="income__sym" aria-hidden="true">$</span>
+              <!-- FIX — numeric keypad on mobile, properly labelled -->
+              <input id="income" type="text" inputmode="numeric" autocomplete="off"
+                     spellcheck="false" value="75,000" aria-describedby="income-help">
+            </div>
+            <p id="income-help" class="sr-only">Enter your total yearly income before any taxes or deductions are taken out.</p>
+            <div class="chips" id="quickpicks" role="group" aria-label="Common income amounts"></div>
+          </div>
+
+          <fieldset class="field">
+            <legend class="field__legend">Filing status</legend>
+            <div class="segs" id="status" role="radiogroup" aria-label="Filing status"></div>
+          </fieldset>
+
+          <div class="field">
+            <label for="state">State</label>
+            <div class="selectwrap">
+              <select id="state"></select>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <!-- FIX #17 — explicit local-tax disclosure -->
+            <p class="localnote" id="localnote" hidden>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 8v5M12 16.5v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span id="localnote-text"></span>
+            </p>
+          </div>
+        </div>
+
+        <!-- ---------------- Result: the like-for-like pairing (FIX #1) ---------------- -->
+        <div class="calc__result">
+          <div class="pair">
+            <div class="pair__cell">
+              <span class="pair__label">Federal effective rate<br>what you actually pay</span>
+              <span class="pair__val pair__val--eff num" id="fed-eff">—</span>
+            </div>
+            <div class="pair__arrow" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="pair__cell">
+              <span class="pair__label">Federal marginal rate<br>tax on your next dollar</span>
+              <span class="pair__val num" id="fed-marg">—</span>
+            </div>
+          </div>
+
+          <p class="gapnote" id="gapnote">—</p>
+
+          <div class="allin">
+            <span class="allin__l">All-in effective rate <span style="color:var(--ink-3);font-weight:600">(federal + FICA + state)</span></span>
+            <span class="allin__v num" id="allin">—</span>
+          </div>
+
+          <div class="splitbar">
+            <div class="splitbar__track" id="splitbar" role="img" aria-label="Split of gross income between taxes and take-home pay"></div>
+            <div class="splitbar__key" id="splitkey"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---------------- "What if I earn more?" (FIX #13) ---------------- -->
+      <div class="raise">
+        <div class="raise__top">
+          <span class="raise__q">What if I earn more?</span>
+          <div class="raise__amts" id="raise-amts" role="group" aria-label="Raise amount"></div>
+        </div>
+        <div class="raise__flow">
+          <div class="raise__box"><b class="num" id="raise-gross">—</b><span>extra earned</span></div>
+          <div class="raise__op" aria-hidden="true">−</div>
+          <div class="raise__box"><b class="num" id="raise-tax">—</b><span>extra tax</span></div>
+          <div class="raise__op" aria-hidden="true">=</div>
+          <div class="raise__box raise__box--keep"><b class="num" id="raise-keep">—</b><span>you keep</span></div>
+        </div>
+        <p class="raise__verdict" id="raise-verdict">—</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Breakdown
+     ====================================================================== -->
+<section class="section" id="breakdown">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Where every dollar goes</h2>
+      <p class="section__lead">Three separate taxes come out of a W-2 paycheck, and they work nothing alike. Federal income tax is progressive. FICA is flat until it stops. State tax depends entirely on where you live.</p>
+    </div>
+    <div class="breakdown" id="breakdown-cards"></div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Brackets
+     ====================================================================== -->
+<section class="section section--tint" id="brackets">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>How your federal tax is actually calculated</h2>
+      <p class="section__lead">Your income fills the low brackets first. Only the money above each threshold is taxed at the higher rate — which is why landing in the 22% bracket does not mean paying 22%.</p>
+    </div>
+
+    <div class="card">
+      <!-- FIX #15 — segment widths are strictly proportional to dollars taxed -->
+      <div class="fill">
+        <div class="fill__track" id="fill-track" role="img" aria-label="Proportional view of your taxable income across federal brackets"></div>
+        <div class="fill__scale"><span>$0</span><span class="num" id="fill-max">—</span></div>
+        <p class="fill__cap" id="fill-cap">—</p>
+      </div>
+
+      <div class="tablewrap">
+        <table class="brk">
+          <caption class="sr-only">Federal tax owed in each bracket for your income and filing status</caption>
+          <thead>
+            <tr>
+              <th scope="col">Bracket</th>
+              <th scope="col">Rate</th>
+              <th scope="col" class="r">Your income in this bracket</th>
+              <th scope="col" class="r">Tax owed here</th>
+            </tr>
+          </thead>
+          <tbody id="brk-body"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3">Total federal income tax</td>
+              <td class="r num" id="brk-total">—</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <p class="source" id="brk-source">—</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     FIX #10 — Withholding vs. your real rate
+     ====================================================================== -->
+<section class="section" id="withholding">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Why your paycheck makes it look worse</h2>
+      <p class="section__lead">Two things conspire here. First, people quote their <em>marginal</em> rate as if it applied to every dollar. Second, what comes out of your paycheck is only an <em>estimate</em> your employer makes on the IRS's behalf — and it is usually too high. The two are settled up in April.</p>
+    </div>
+
+    <div class="compare">
+      <div class="cmp cmp--myth">
+        <span class="cmp__tag">The rate people quote</span>
+        <div class="cmp__big num" id="wh-feels">—</div>
+        <p class="cmp__cap">Your all-in <strong>marginal</strong> rate — federal bracket plus FICA plus state. It's the bite on your <em>next</em> dollar, and it's the number that sticks in your head when you look at a raise or a bonus.</p>
+      </div>
+      <div class="cmp cmp--real">
+        <span class="cmp__tag">The rate you actually pay</span>
+        <div class="cmp__big num" id="wh-real">—</div>
+        <p class="cmp__cap">Your all-in <strong>effective</strong> rate — total tax divided by total income, once the standard deduction and every lower bracket have done their work. This is the real number.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h4>A refund is not a bonus. It's your own money coming back.</h4>
+      <p id="wh-refund">—</p>
+    </div>
+
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
+      <h4>Why over-withholding happens</h4>
+      <p>Withholding tables assume every paycheck is typical and that you take only the standard deduction. If you started mid-year, worked two jobs, got a raise, have a working spouse, or claimed nothing on your W-4, the tables will usually take too much. You can correct it — Form W-4 Step 4(b) lets you account for deductions, and Step 3 for credits. Getting it right means a bigger paycheck all year instead of a lump sum in April.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     FIX #11 — Bonuses
+     ====================================================================== -->
+<section class="section section--tint" id="bonuses">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>"My bonus got destroyed"</h2>
+      <p class="section__lead">It didn't. Bonuses are <em>withheld</em> differently, not <em>taxed</em> differently. The IRS lets employers withhold supplemental wages at a flat 22% — regardless of your actual bracket — and that flat rate is usually wrong for you.</p>
+    </div>
+
+    <div class="card">
+      <div class="compare" style="gap:24px">
+        <div>
+          <span class="eyebrow">On your bonus check</span>
+          <div class="ledger" id="bonus-withheld"></div>
+        </div>
+        <div>
+          <span class="eyebrow">What it's really taxed at</span>
+          <div class="ledger" id="bonus-actual"></div>
+        </div>
+      </div>
+      <p class="fill__cap" id="bonus-verdict" style="margin-top:20px">—</p>
+    </div>
+
+    <div class="callout">
+      <h4>The rule to remember</h4>
+      <p>A bonus is ordinary income. It stacks on top of your salary and is taxed at your marginal rate — the same as any other dollar you earn. The flat 22% withholding is just a placeholder. If your marginal rate is below 22%, the difference comes back to you as a refund. If it's above, you'll owe a little more in April.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     History + curve  (FIX #2, #3)
+     ====================================================================== -->
+<section class="section section--ink" id="history">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>For context: rates are near historic lows</h2>
+      <p class="section__lead">The top statutory rate has fallen from 91% in the 1950s to 37% today. Your own all-in effective rate sits far below even that.</p>
+    </div>
+
+    <div class="chartgrid">
+      <div class="card">
+        <h3 style="font-size:17px;margin-bottom:14px">Top federal marginal rate, 1955–2026</h3>
+        <!-- FIX #3 — explicit legend -->
+        <div class="legend">
+          <span class="legend__item"><span class="legend__key legend__key--dash" style="color:#F87171"></span>Top statutory marginal rate</span>
+          <span class="legend__item"><span class="legend__key" style="background:#C4B5FD"></span>Your all-in effective rate</span>
+        </div>
+        <svg class="chart" id="chart-history" viewBox="0 0 640 320" preserveAspectRatio="xMidYMid meet" role="img"
+             aria-labelledby="hist-title hist-desc">
+          <title id="hist-title">Top federal marginal tax rate from 1955 to 2026</title>
+          <desc id="hist-desc">A line chart showing the top statutory federal marginal rate falling from 91 percent in 1955 to 37 percent in 2026, with your own all-in effective rate plotted well below it.</desc>
+        </svg>
+        <p class="source">Source: IRS Statistics of Income, <a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener">Historical Table 23</a>, and the Tax Foundation's historical federal income tax rates series. Top statutory rate on ordinary income; excludes surtaxes and the Net Investment Income Tax.</p>
+      </div>
+
+      <div class="card">
+        <h3 style="font-size:17px;margin-bottom:14px">Your effective rate across the income spectrum</h3>
+        <div class="legend">
+          <span class="legend__item"><span class="legend__key" style="background:#C4B5FD"></span>All-in effective rate</span>
+          <span class="legend__item"><span class="legend__key" style="background:#4ADE80"></span>You, at your income</span>
+        </div>
+        <svg class="chart" id="chart-curve" viewBox="0 0 640 320" preserveAspectRatio="xMidYMid meet" role="img"
+             aria-labelledby="curve-title curve-desc">
+          <title id="curve-title">Effective tax rate by income level</title>
+          <desc id="curve-desc">A curve showing how the all-in effective tax rate rises gradually with income for your filing status and state, with your position marked.</desc>
+        </svg>
+        <p class="source">Federal + FICA + state tax as a share of gross income, calculated for your filing status and state at each income level. Assumes the standard deduction and wage income only.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Deductions  (FIX #7 — always visible, never collapsed)
+     ====================================================================== -->
+<section class="section" id="deductions">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Deductions: lower the income you're taxed on</h2>
+      <p class="section__lead">A deduction comes off your income before tax is calculated, so it's worth your <em>marginal</em> rate — <span id="ded-rate-inline">—</span> for you. Shelter a dollar, keep that share of it.</p>
+    </div>
+    <div class="lever" id="deduction-cards"></div>
+    <p class="source" id="ded-source">—</p>
+  </div>
+</section>
+
+<!-- ======================================================================
+     FIX #12 — Credits
+     ====================================================================== -->
+<section class="section section--tint" id="credits">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Credits: come straight off the tax itself</h2>
+      <p class="section__lead">This is the distinction almost everyone gets wrong. A deduction reduces your taxable <em>income</em>. A credit reduces your tax <em>bill</em>, dollar for dollar. A credit is almost always worth more.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <h3 style="font-size:17px;margin-bottom:4px">$2,000 deduction vs. $2,000 credit</h3>
+      <p class="dcbar__s" style="margin-bottom:18px">At your marginal rate of <b id="dc-rate">—</b>, here's what each is actually worth to you.</p>
+      <div class="dcbars">
+        <div class="dcbar">
+          <div class="dcbar__h">$2,000 deduction</div>
+          <div class="dcbar__s">Reduces taxable income by $2,000</div>
+          <div class="dcbar__track"><div class="dcbar__f dcbar__f--ded num" id="dc-ded-bar">—</div></div>
+          <p class="dcbar__note" id="dc-ded-note">—</p>
+        </div>
+        <div class="dcbar">
+          <div class="dcbar__h">$2,000 credit</div>
+          <div class="dcbar__s">Reduces tax owed by $2,000</div>
+          <div class="dcbar__track"><div class="dcbar__f dcbar__f--cred num" id="dc-cred-bar">—</div></div>
+          <p class="dcbar__note">Worth the full <b>$2,000</b> — the same to every filer, whatever bracket you're in.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="lever" id="credit-cards"></div>
+
+    <div class="callout">
+      <h4>Where charitable giving actually fits</h4>
+      <p>Charitable donations are a <strong>deduction</strong>, not a credit — and an <em>itemized</em> one, which means they only help if all your itemized deductions together beat the standard deduction of <b id="chr-std">—</b>. For most W-2 earners they don't, so the donation costs full price. When itemizing does make sense, the deduction is worth your marginal rate: a $1,000 gift reduces your tax by about <b id="chr-val">—</b>. It's the cleanest illustration of the rule that a deduction's value scales with your bracket, while a credit's never does.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================================================================
+     Footer
+     ====================================================================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h4>What's My Tax Rate?</h4>
+        <p style="line-height:1.65">A free, plain-language explainer for W-2 earners who want to understand what they actually pay — and why the number on their paycheck looks so much worse.</p>
+        <p style="margin-top:14px">
+          <button class="btn btn--ghost btn-share" type="button" data-share>Share this result</button>
+          <button class="btn btn--ghost btn-share" type="button" onclick="window.print()">Print / save PDF</button>
+        </p>
+      </div>
+      <div>
+        <h4>Sections</h4>
+        <ul>
+          <li><a href="#breakdown">Where your money goes</a></li>
+          <li><a href="#brackets">How brackets work</a></li>
+          <li><a href="#withholding">Withholding vs. real rate</a></li>
+          <li><a href="#bonuses">How bonuses are taxed</a></li>
+          <li><a href="#history">Historical context</a></li>
+          <li><a href="#deductions">Deductions</a></li>
+          <li><a href="#credits">Credits</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sources</h4>
+        <ul>
+          <li><a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32</a> — 2026 brackets &amp; deductions</li>
+          <li><a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">SSA</a> — Social Security wage base</li>
+          <li><a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation</a> — state income tax rates</li>
+          <li><a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener">IRS SOI Table 23</a> — historical rates</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__legal">
+      <p><strong>For educational purposes only. This is not tax or financial advice.</strong></p>
+      <p style="margin-top:9px">Calculations assume wage (W-2) income only and the standard deduction, for the <span id="foot-year">2026</span> tax year. They exclude local and municipal income taxes, the Alternative Minimum Tax, the Net Investment Income Tax, capital gains and qualified dividend rates, self-employment tax, itemized deductions, and most credits. Your actual liability will differ. Consult a qualified tax professional before acting on anything here.</p>
+      <p style="margin-top:9px">State rates and deductions verified <span id="foot-updated">July 2026</span>. © <span id="foot-copy">2026</span> whatsmytaxrate.com</p>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

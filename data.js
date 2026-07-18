@@ -1,0 +1,213 @@
+/* ==========================================================================
+   Tax data — the only file that needs a yearly refresh.
+   See README.md for the update order and the state data contract.
+
+   Federal figures: IRS Rev. Proc. 2025-32 (2026 inflation adjustments),
+   IRS Notice 2025-67 (retirement limits), Rev. Proc. 2025-19 (HSA/HDHP),
+   SSA cost-of-living announcement (Social Security wage base).
+   ========================================================================== */
+
+window.TAX_FEDERAL = {
+
+  taxYear: 2026,
+  dataAsOf: 'July 2026',
+
+  // Hard ceiling on the income input, so the page can never render a
+  // nine-figure fantasy that makes the whole tool look broken.
+  maxIncome: 10000000,
+
+  standardDeduction: { single: 16100, mfj: 32200, hoh: 24150, mfs: 16100 },
+
+  brackets: {
+    single: [
+      { rate: 0.10, min: 0,      max: 12400 },
+      { rate: 0.12, min: 12400,  max: 50400 },
+      { rate: 0.22, min: 50400,  max: 105700 },
+      { rate: 0.24, min: 105700, max: 201775 },
+      { rate: 0.32, min: 201775, max: 256225 },
+      { rate: 0.35, min: 256225, max: 640600 },
+      { rate: 0.37, min: 640600, max: null }
+    ],
+    mfj: [
+      { rate: 0.10, min: 0,      max: 24800 },
+      { rate: 0.12, min: 24800,  max: 100800 },
+      { rate: 0.22, min: 100800, max: 211400 },
+      { rate: 0.24, min: 211400, max: 403550 },
+      { rate: 0.32, min: 403550, max: 512450 },
+      { rate: 0.35, min: 512450, max: 768700 },
+      { rate: 0.37, min: 768700, max: null }
+    ],
+    hoh: [
+      { rate: 0.10, min: 0,      max: 17700 },
+      { rate: 0.12, min: 17700,  max: 67450 },
+      { rate: 0.22, min: 67450,  max: 105700 },
+      { rate: 0.24, min: 105700, max: 201775 },
+      { rate: 0.32, min: 201775, max: 256200 },
+      { rate: 0.35, min: 256200, max: 640600 },
+      { rate: 0.37, min: 640600, max: null }
+    ],
+    mfs: [
+      { rate: 0.10, min: 0,      max: 12400 },
+      { rate: 0.12, min: 12400,  max: 50400 },
+      { rate: 0.22, min: 50400,  max: 105700 },
+      { rate: 0.24, min: 105700, max: 201775 },
+      { rate: 0.32, min: 201775, max: 256225 },
+      { rate: 0.35, min: 256225, max: 384350 },
+      { rate: 0.37, min: 384350, max: null }
+    ]
+  },
+
+  fica: {
+    ssWageBase: 184500,          // SSA, 2026 taxable maximum
+    ssRate: 0.062,
+    medicareRate: 0.0145,
+    addlMedicareRate: 0.009,     // statutory, not indexed since 2013
+    addlMedicareThreshold: { single: 200000, mfj: 250000, hoh: 200000, mfs: 125000 }
+  },
+
+  // Flat supplemental withholding rate employers apply to bonuses under
+  // $1,000,000. IRS Publication 15, section 7.
+  supplementalWithholdingRate: 0.22,
+  exampleBonus: 10000,
+
+  // IRS filing-season statistics, average federal refund. Used only in the
+  // withholding section, and clearly labelled there as an average.
+  averageRefund: 3100,
+
+  /* ---------------------------------------------------------- deductions */
+
+  deductions: [
+    {
+      name: 'Standard deduction',
+      limit: function (s) {
+        return '$' + window.TAX_FEDERAL.standardDeduction[s].toLocaleString('en-US') + ' for your filing status';
+      },
+      applied: true,
+      body: 'Every filer subtracts a flat amount from gross income before any tax is calculated — no receipts, no paperwork. It is already reflected in every number on this page. Itemizing only beats it if your mortgage interest, state taxes and charitable gifts together exceed this figure, which for most W-2 earners they do not.'
+    },
+    {
+      name: '401(k) / 403(b) / 457',
+      limit: 'Up to $24,500 · $32,500 if 50+',
+      amountForSaving: function () { return 24500; },
+      body: 'Traditional pre-tax contributions cut your taxable wages dollar for dollar. The money grows tax-deferred and is taxed on withdrawal, ideally at a lower rate in retirement. Contribute at least enough to capture the full employer match first — that is an immediate 50–100% return before markets do anything at all.'
+    },
+    {
+      name: 'Health Savings Account',
+      limit: 'Up to $4,400 self · $8,750 family',
+      amountForSaving: function () { return 4400; },
+      body: 'The only triple-tax-advantaged account in the code: contributions are pre-tax, growth is tax-free, and qualified medical withdrawals are tax-free. Requires an HSA-eligible high-deductible plan. Balances roll over forever, so many people invest the account and treat it as stealth retirement savings.'
+    },
+    {
+      name: 'Flexible Spending Account',
+      limit: 'Up to $3,400 health · $7,500 dependent care',
+      amountForSaving: function () { return 3400; },
+      body: 'Funded with pre-tax payroll dollars. A health FSA covers copays, prescriptions and glasses. A dependent care FSA covers daycare or elder care and — unusually — escapes FICA as well as income tax. Unlike an HSA most FSA money expires at year end, so estimate conservatively. The $7,500 dependent care limit is new for 2026 and your employer must opt in.'
+    },
+    {
+      name: 'Traditional IRA',
+      limit: 'Up to $7,500 · $8,600 if 50+',
+      amountForSaving: function () { return 7500; },
+      body: 'Deductible in full or in part depending on your income and whether you are covered by a workplace retirement plan. Above roughly $81,000 of income for a covered single filer the deduction phases out, though the account still grows tax-deferred. You have until Tax Day of the following year to contribute for the current year.'
+    },
+    {
+      name: 'Student loan interest',
+      limit: 'Up to $2,500, no itemizing needed',
+      amountForSaving: function () { return 2500; },
+      body: 'An above-the-line deduction, so you claim it whether or not you itemize. It phases out between $85,000 and $100,000 of income for single filers, and $175,000 to $205,000 for joint filers. Married filing separately cannot claim it at all. Your servicer reports the figure on Form 1098-E.'
+    }
+  ],
+
+  /* ------------------------------------------------------------- credits */
+
+  credits: [
+    {
+      name: 'Child Tax Credit',
+      amount: '$2,200 per child under 17',
+      body: 'Comes straight off your tax bill, not your income. Up to $1,700 per child is refundable, meaning it can pay out even if it takes your tax below zero. It begins to phase out above $200,000 of income ($400,000 filing jointly), losing $50 for every $1,000 over the line.'
+    },
+    {
+      name: 'Credit for Other Dependents',
+      amount: '$500 per qualifying dependent',
+      body: 'Covers dependents who do not qualify for the Child Tax Credit — a child aged 17 or older, a college student, or a dependent parent you support. Non-refundable, so it can reduce your tax to zero but not below it. Shares the same income phase-out as the Child Tax Credit.'
+    },
+    {
+      name: 'American Opportunity Credit',
+      amount: 'Up to $2,500 per student, per year',
+      body: 'For the first four years of undergraduate study. Worth 100% of the first $2,000 of qualified expenses plus 25% of the next $2,000, and 40% of it — up to $1,000 — is refundable. Compare that with a deduction of the same size, which would be worth only your marginal rate.'
+    },
+    {
+      name: 'Lifetime Learning Credit',
+      amount: 'Up to $2,000 per return',
+      body: 'Worth 20% of the first $10,000 of qualified education expenses, with no limit on the number of years you can claim it. It covers graduate study and job-skill courses, which the American Opportunity Credit does not. Non-refundable, and you cannot claim both credits for the same student in the same year.'
+    },
+    {
+      name: "Saver's Credit",
+      amount: '10%, 20% or 50% of what you contribute',
+      body: 'A credit on top of the deduction you already get for retirement contributions — the same dollar working twice. It is aimed at low and moderate incomes and the percentage falls in steps as income rises. Widely missed, because people assume the deduction was the whole benefit.'
+    },
+    {
+      name: 'Earned Income Tax Credit',
+      amount: 'Scales with income and children',
+      body: 'Fully refundable and among the largest credits available to working households, but it is also the most commonly unclaimed — the IRS estimates roughly one in five eligible filers never claims it. Worth checking even if you owe no tax at all, because it pays out regardless.'
+    }
+  ]
+};
+
+/* ==========================================================================
+   Historical top federal marginal rate on ordinary income.
+   Source: IRS Statistics of Income, Historical Table 23.
+   Excludes surtaxes; statutory top rate only.
+   ========================================================================== */
+
+window.TAX_HISTORY = [
+  { year: 1955, rate: 91 },
+  { year: 1960, rate: 91 },
+  { year: 1965, rate: 70 },
+  { year: 1970, rate: 70 },
+  { year: 1975, rate: 70 },
+  { year: 1980, rate: 70 },
+  { year: 1982, rate: 50 },
+  { year: 1986, rate: 50 },
+  { year: 1988, rate: 28 },
+  { year: 1991, rate: 31 },
+  { year: 1993, rate: 39.6 },
+  { year: 2000, rate: 39.6 },
+  { year: 2003, rate: 35 },
+  { year: 2012, rate: 35 },
+  { year: 2013, rate: 39.6 },
+  { year: 2017, rate: 39.6 },
+  { year: 2018, rate: 37 },
+  { year: 2026, rate: 37 }
+];
+
+/* ==========================================================================
+   State income tax — populated below by state-data.js contract.
+   ========================================================================== */
+
+window.TAX_STATES = window.TAX_STATES || {};
+
+/* INTERIM STUB — replaced by verified 51-jurisdiction data. */
+window.TAX_STATES = {
+  NC: { name: 'North Carolina', type: 'flat',
+        brackets: { single: [{ rate: 0.0399, min: 0, max: null }] },
+        standardDeduction: { single: 12750, mfj: 25500, hoh: 19125, mfs: 12750 },
+        notes: 'Local income taxes are not included.' },
+  TX: { name: 'Texas', type: 'none' },
+  CA: { name: 'California', type: 'graduated',
+        brackets: { single: [
+          { rate: 0.01, min: 0, max: 10756 }, { rate: 0.02, min: 10756, max: 25499 },
+          { rate: 0.04, min: 25499, max: 40245 }, { rate: 0.06, min: 40245, max: 55866 },
+          { rate: 0.08, min: 55866, max: 70606 }, { rate: 0.093, min: 70606, max: 360659 },
+          { rate: 0.103, min: 360659, max: 432787 }, { rate: 0.113, min: 432787, max: 721314 },
+          { rate: 0.123, min: 721314, max: null } ] },
+        standardDeduction: { single: 5540, mfj: 11080, hoh: 11080, mfs: 5540 },
+        notes: 'Excludes the 1% Mental Health Services surcharge above $1M.' },
+  NY: { name: 'New York', type: 'graduated',
+        brackets: { single: [
+          { rate: 0.04, min: 0, max: 8500 }, { rate: 0.045, min: 8500, max: 11700 },
+          { rate: 0.0525, min: 11700, max: 13900 }, { rate: 0.055, min: 13900, max: 80650 },
+          { rate: 0.06, min: 80650, max: 215400 }, { rate: 0.0685, min: 215400, max: 1077550 },
+          { rate: 0.0965, min: 1077550, max: null } ] },
+        standardDeduction: { single: 8000, mfj: 16050, hoh: 11200, mfs: 8000 },
+        notes: 'New York City and Yonkers local income taxes are not included.' }
+};
