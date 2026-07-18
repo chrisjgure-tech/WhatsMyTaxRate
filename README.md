@@ -13,7 +13,8 @@ states.js       state tax data — 51 jurisdictions
 app.js          calculation engine + rendering
 favicon.svg     tab icon
 og-image.png    1200×630 link-preview card (regenerate from og-image.svg)
-netlify.toml    hosting config: redirects, security headers, caching
+netlify.toml    Netlify config: redirects, security headers, caching
+vercel.json     Vercel config: the same headers and caching rules
 robots.txt / sitemap.xml
 ```
 
@@ -37,7 +38,27 @@ badge into your page.
 5. Netlify provisions the Let's Encrypt certificate automatically. Give it
    a few minutes, then confirm **Force HTTPS** is on.
 
-### Option B — Cloudflare Pages
+### Option B — Vercel (best if you want auto-deploy from GitHub)
+
+No CLI needed. Push the repo to GitHub first, then:
+
+1. <https://vercel.com/new> → **Import Git Repository** → authorise GitHub →
+   pick `whats-my-tax-rate`.
+2. Framework preset: **Other**. Build command: leave empty. Output directory:
+   leave empty (the repo root is the site).
+3. Deploy. Then **Settings → Domains** → add `whatsmytaxrate.com`.
+4. At your registrar, point the domain at Vercel:
+   - `A` record, host `@` → `76.76.21.21`
+   - `CNAME` record, host `www` → `cname.vercel-dns.com`
+5. In **Settings → Domains**, set `whatsmytaxrate.com` as primary and mark
+   `www` as a redirect to it.
+
+`vercel.json` supplies the security headers and cache rules; `netlify.toml`
+is ignored here (and vice versa), so keeping both costs nothing.
+
+After this, every `git push` to `main` redeploys automatically.
+
+### Option C — Cloudflare Pages
 
 ```bash
 npx wrangler pages deploy . --project-name whats-my-tax-rate
@@ -47,11 +68,12 @@ Then add the custom domain under **Workers & Pages → your project → Custom
 domains**. If the domain is already on Cloudflare DNS the record is created for
 you.
 
-### Option C — GitHub Pages
+### Option D — GitHub Pages
 
 Push the folder to a repo, enable Pages on the `main` branch root, and add a
-`CNAME` file containing `whatsmytaxrate.com`. Note that `netlify.toml` is
-ignored here, so the security headers and redirects won't apply.
+`CNAME` file containing `whatsmytaxrate.com`. Note that neither
+`netlify.toml` nor `vercel.json` applies here, so you lose the security
+headers and redirects — prefer Vercel, Netlify or Cloudflare.
 
 ---
 
