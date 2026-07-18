@@ -8,7 +8,8 @@ stylesheet. Open `index.html` and it runs.
 ```
 index.html      markup + metadata
 styles.css      all styling, design tokens at the top
-data.js         tax data — the only file that needs a yearly update
+data.js         federal tax data + explainer copy
+states.js       state tax data — 51 jurisdictions
 app.js          calculation engine + rendering
 favicon.svg     tab icon
 og-image.png    1200×630 link-preview card (regenerate from og-image.svg)
@@ -69,9 +70,12 @@ year ahead), update in this order:
 3. **`fica.ssWageBase`** — from the SSA cost-of-living announcement.
 4. **`limits`** — 401(k), IRA, HSA, FSA figures from the IRS notice.
 5. **`credits`** — Child Tax Credit and phase-outs.
-6. **`TAX_STATES`** — the slowest-moving but most error-prone section. States
-   legislate rate changes throughout the year and many are phased. Check each
-   flat-tax state's current-year rate specifically; several are mid-phasedown.
+6. **`states.js`** — the slowest-moving but most error-prone file. Do not
+   trust a single aggregator: the Tax Foundation's February 2026 report was
+   stale for six states that cut rates *retroactive to 1 January* in spring
+   sessions (AR, GA, UT, WV), added a surcharge (ME), or restructured
+   outright (SC Act 110). Check each state's own revenue department, and
+   check flat-tax states specifically — several are mid-phasedown.
 
 ### The state data contract
 
@@ -92,7 +96,18 @@ NC: {
 ```
 
 `max: null` means "and up". `notes` renders as the amber advisory beneath the
-state selector — use it for local/municipal taxes the calculator does not model.
+state selector — use it for local/municipal taxes the calculator does not
+model. Add `provisional: true` when a state hasn't published final figures;
+the UI appends its own caution sentence automatically.
+
+**The exemption trap.** Around twenty states grant the personal exemption as
+a *deduction* rather than a credit, and ten (IL, IN, MI, NJ, OH, PA, WV, MA,
+CT, UT) have no standard deduction at all. `standardDeduction` here is
+therefore the **effective** subtraction for one filer with no dependents:
+where the exemption is a deduction it is folded in — one exemption for
+single/HOH/MFS, two for MFJ. Miss this and Illinois, Michigan, Ohio, New
+Jersey and West Virginia all over-tax noticeably. True dollar credits go in
+`personalExemptionCredit` instead (CA, DE, IA, NE, OR, AR, UT).
 
 ---
 
