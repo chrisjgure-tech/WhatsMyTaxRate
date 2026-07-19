@@ -13,6 +13,10 @@
   status = 301
   force = true
 
+# style-src needs 'unsafe-inline': the split bar and the bracket fill are sized
+# with inline style attributes, and CSP blocks those without it — they render
+# at zero width otherwise. script-src stays strict, which is the control that
+# actually matters; all rendered output is escaped and there is no user content.
 [[headers]]
   for = "/*"
   [headers.values]
@@ -20,7 +24,7 @@
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
-    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'none'"
+    Content-Security-Policy = "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'none'"
 
 # Fingerprint-free assets, so cache conservatively and let HTML revalidate.
 [[headers]]

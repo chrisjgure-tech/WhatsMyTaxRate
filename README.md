@@ -7,6 +7,7 @@ stylesheet. Open `index.html` and it runs.
 
 ```
 index.html      markup + metadata
+analytics.js    Vercel Analytics bootstrap + URL redaction
 styles.css      all styling, design tokens at the top
 data.js         federal tax data + explainer copy
 states.js       state tax data — 51 jurisdictions
@@ -201,6 +202,25 @@ sips -s format jpeg -s formatOptions 45 og-image.png --out og-image.jpg
 
 ---
 
+## Analytics
+
+Vercel Web Analytics, cookieless, no consent banner required. Two steps:
+enable it in the dashboard (**Project → Analytics → Enable**), and keep the
+two script tags at the bottom of `index.html`. The framework snippet in
+Vercel's docs is for React — it does not apply here; this site has no build
+step and no npm.
+
+**Why `analytics.js` exists.** The page keeps its state in the query string,
+so a real URL looks like `/?income=185000&status=mfj&state=NJ&k401=24500`.
+Sent as-is, that logs strangers' salaries and retirement contributions into
+an analytics dashboard. The `beforeSend` hook strips every financial
+parameter before the beacon leaves the browser; `state` and `status` survive
+because they are useful in aggregate and identify nobody. A malformed URL
+drops the event entirely rather than risk sending it unredacted.
+
+If you add a query parameter that carries anything personal, add its key to
+`SENSITIVE` in that file.
+
 ## Testing
 
 There is no test runner — the checks are standalone HTML files run through
@@ -219,6 +239,15 @@ Before shipping a data change, verify three things:
 3. **The state table**: all 51 present, no bracket gaps or overlaps, no
    decreasing rates, plausible effective rates, and monotonic tax across
    $0–500k in every jurisdiction.
+4. **The Content Security Policy**, by copying the site to a scratch folder
+   and injecting the `vercel.json` policy as a `<meta http-equiv>` tag. This
+   is not optional paranoia: `style-src 'self'` silently rendered the split
+   bar at zero width and flattened the proportional bracket fill to equal
+   segments, and none of it reproduced over `file://` because the headers
+   only exist when a host serves them. `style-src` therefore carries
+   `'unsafe-inline'` — do not remove it without re-running this check.
+   `script-src` stays strict, which is why the analytics bootstrap is a file
+   rather than an inline tag.
 
 Read the rendered numbers, not the HTML placeholders — several result fields
 ship with `$0` and `$1.00` defaults, which look exactly like a correct
