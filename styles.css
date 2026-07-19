@@ -462,6 +462,26 @@ table.brk tfoot td { font-weight: 800; border-bottom: 0; border-top: 2px solid v
 .cmp--real .cmp__big { color: var(--take); }
 .cmp__cap { margin-top: 8px; font-size: 14.5px; color: var(--ink-2); line-height: 1.55; }
 
+/* Bonus: two withholding methods against the truth */
+.bonusbar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.bonusbar__label { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); }
+.bonusbar .chips { margin-top: 0; }
+
+.bonus__intro { font-size: 15.5px; color: var(--ink-2); line-height: 1.6; margin-bottom: 22px; }
+
+.bonus3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+@media (max-width: 900px) { .bonus3 { grid-template-columns: 1fr; gap: 26px; } }
+
+.bonus3__col { padding: 18px; border-radius: var(--radius); background: var(--bg-alt); border: 1px solid var(--line); }
+/* The truth column is the one to land on, so it gets the affirmative colour. */
+.bonus3__col--truth { background: var(--take-bg); border-color: #BFE6D6; }
+.bonus3__col .eyebrow { display: block; margin-bottom: 8px; }
+.bonus3__col--truth .eyebrow { color: var(--take); }
+.bonus3__desc { font-size: 13.5px; line-height: 1.5; color: var(--ink-2); min-height: 60px; }
+@media (max-width: 900px) { .bonus3__desc { min-height: 0; } }
+.bonus3 .ledger { margin-top: 12px; }
+.bonus3 .ledger__row { font-size: 13.5px; }
+
 .ledger { margin-top: 18px; border-top: 1px solid rgba(0,0,0,.09); }
 .ledger__row { display: flex; justify-content: space-between; gap: 12px; padding: 9px 0; font-size: 14.5px; border-bottom: 1px solid rgba(0,0,0,.06); }
 .ledger__row b { font-variant-numeric: tabular-nums; }

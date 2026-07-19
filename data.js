@@ -65,9 +65,20 @@ window.TAX_FEDERAL = {
     addlMedicareThreshold: { single: 200000, mfj: 250000, hoh: 200000, mfs: 125000 }
   },
 
-  // Flat supplemental withholding rate employers apply to bonuses under
-  // $1,000,000. IRS Publication 15, section 7.
+  /* Supplemental wage withholding — IRS Publication 15, section 7.
+     Under the threshold an employer may use the flat percentage method; above
+     it, the top rate is mandatory on the excess. Neither is the tax actually
+     owed, which is the entire point of the bonus section. */
   supplementalWithholdingRate: 0.22,
+  supplementalWithholdingRateHigh: 0.37,
+  supplementalThreshold: 1000000,
+
+  // The aggregate method annualises a combined paycheck, so the assumed number
+  // of pay periods materially changes how punishing it looks. 26 = biweekly,
+  // the most common US payroll cadence.
+  payPeriodsPerYear: 26,
+
+  bonusOptions: [5000, 10000, 25000, 50000],
   exampleBonus: 10000,
 
   // IRS filing-season statistics, average federal refund. Used only in the

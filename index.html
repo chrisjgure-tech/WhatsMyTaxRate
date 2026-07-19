@@ -270,26 +270,48 @@
   <div class="wrap">
     <div class="section__head">
       <h2>"My bonus got destroyed"</h2>
-      <p class="section__lead">It didn't. Bonuses are <em>withheld</em> differently, not <em>taxed</em> differently. The IRS lets employers withhold supplemental wages at a flat 22% — regardless of your actual bracket — and that flat rate is usually wrong for you.</p>
+      <p class="section__lead">It didn't. <strong>Bonuses aren't taxed differently than your salary — they're simply withheld differently.</strong> Because the IRS treats a bonus as <em>supplemental wages</em>, your employer often takes more tax upfront than they would from a regular paycheck. When you file, the bonus is added to the rest of your income and taxed at your normal marginal rate, and anything over-withheld comes back as part of your refund.</p>
+    </div>
+
+    <div class="bonusbar">
+      <span class="bonusbar__label">Bonus amount</span>
+      <div class="chips" id="bonus-amounts" role="group" aria-label="Bonus amount"></div>
     </div>
 
     <div class="card">
-      <div class="compare" style="gap:24px">
-        <div>
-          <span class="eyebrow">On your bonus check</span>
+      <p class="bonus__intro">Employers generally use one of two withholding methods. Neither changes what you actually owe — only what lands in your account on the day.</p>
+
+      <div class="bonus3">
+        <div class="bonus3__col">
+          <span class="eyebrow">Method 1 · Percentage</span>
+          <p class="bonus3__desc">A flat <b id="bonus-flat-rate">22%</b> federal withholding on bonuses under $1 million, whatever your bracket.</p>
           <div class="ledger" id="bonus-withheld"></div>
         </div>
-        <div>
-          <span class="eyebrow">What it's really taxed at</span>
+
+        <div class="bonus3__col">
+          <span class="eyebrow">Method 2 · Aggregate</span>
+          <p class="bonus3__desc">The bonus is lumped into a regular paycheck and withheld as if that giant cheque were your normal wages — every period. This is the one that looks brutal.</p>
+          <div class="ledger" id="bonus-aggregate"></div>
+        </div>
+
+        <div class="bonus3__col bonus3__col--truth">
+          <span class="eyebrow">What you actually owe</span>
+          <p class="bonus3__desc">At filing, the bonus is just ordinary income stacked on your salary and taxed at your marginal rate.</p>
           <div class="ledger" id="bonus-actual"></div>
         </div>
       </div>
-      <p class="fill__cap" id="bonus-verdict" style="margin-top:20px">—</p>
+
+      <p class="fill__cap" id="bonus-verdict">—</p>
     </div>
 
     <div class="callout">
       <h4>The rule to remember</h4>
-      <p>A bonus is ordinary income. It stacks on top of your salary and is taxed at your marginal rate — the same as any other dollar you earn. The flat 22% withholding is just a placeholder. If your marginal rate is below 22%, the difference comes back to you as a refund. If it's above, you'll owe a little more in April.</p>
+      <p>A bonus is ordinary income. It stacks on top of your salary and is taxed at your marginal rate — the same as every other dollar you earn. Both withholding methods are just estimates the payroll system makes on the day. Withhold too much and the difference comes back in your refund; too little and you settle up in April. The aggregate method is the usual culprit behind a bonus that looks like it lost half its value, because it briefly pretends you earn that much <em>every</em> pay period.</p>
+    </div>
+
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
+      <h4>Above $1 million</h4>
+      <p>Supplemental wages over $1 million in a calendar year are withheld at a mandatory flat <b>37%</b> — the top federal rate — on the portion above that threshold. Your employer has no discretion there, and the percentage method is required for it.</p>
     </div>
   </div>
 </section>

@@ -166,7 +166,7 @@
   var QUICKPICKS = [50000, 75000, 100000, 150000, 250000];
   var RAISE_AMOUNTS = [1000, 5000, 10000];
 
-  var ui = { gross: 75000, status: 'single', state: 'NC', raise: 1000, contrib: {} };
+  var ui = { gross: 75000, status: 'single', state: 'NC', raise: 1000, bonus: 10000, contrib: {} };
 
   /* FIX #9 — the whole state of the page lives in the URL, so any result is
      a shareable link. */
@@ -224,6 +224,12 @@
       return '<option value="' + c + '">' + esc(S[c].name) + '</option>';
     }).join('');
 
+    // Bonus amounts
+    el.bonusAmounts.innerHTML = F.bonusOptions.map(function (v) {
+      return '<button type="button" class="chip" data-bonus="' + v + '" aria-pressed="false">'
+        + money(v) + '</button>';
+    }).join('');
+
     // Raise amounts
     el.raiseAmts.innerHTML = RAISE_AMOUNTS.map(function (v) {
       return '<button type="button" class="raise__amt" data-raise="' + v
@@ -244,6 +250,9 @@
     el.state.value = ui.state;
     Array.prototype.forEach.call(el.raiseAmts.children, function (b) {
       b.setAttribute('aria-pressed', String(+b.dataset.raise === ui.raise));
+    });
+    Array.prototype.forEach.call(el.bonusAmounts.children, function (b) {
+      b.setAttribute('aria-pressed', String(+b.dataset.bonus === ui.bonus));
     });
   }
 
@@ -387,55 +396,92 @@
       + 'owe; it changes when you get it.';
   }
 
+  /* Percentage method: flat rate on the bonus, with the mandatory top rate
+     applying to any portion above the $1M supplemental threshold. */
+  function percentageMethodWithholding(bonus) {
+    var low = Math.min(bonus, F.supplementalThreshold);
+    var high = Math.max(0, bonus - F.supplementalThreshold);
+    return low * F.supplementalWithholdingRate + high * F.supplementalWithholdingRateHigh;
+  }
+
+  /* Aggregate method, per the IRS annualised procedure: add the bonus to one
+     regular paycheck, annualise that combined cheque as though every period
+     looked like it, work out the withholding for the period, then subtract
+     what the regular paycheck alone would have had withheld. The remainder is
+     taken from the bonus — and because annualising briefly pretends you earn a
+     six-figure multiple of your salary, it can land far above 22%. */
+  function aggregateMethodWithholding(gross, bonus, status) {
+    var periods = F.payPeriodsPerYear;
+    var annualisedCombined = gross + bonus * periods;
+    var taxCombined = federal(annualisedCombined, status).tax;
+    var taxNormal = federal(gross, status).tax;
+    return Math.max(0, (taxCombined - taxNormal) / periods);
+  }
+
   function renderBonus(r) {
-    var bonus = F.exampleBonus;
+    var bonus = ui.bonus;
 
-    // FICA and state are withheld the same way in both columns — the only
-    // thing that differs is the FEDERAL treatment, so that is what the
-    // verdict compares.
-    var ficaOnBonus = bonus * r.fica.marginal;
-    var stateOnBonus = bonus * r.state.marginal;
-    var fedWithheld = bonus * F.supplementalWithholdingRate;
-    var fedActual = bonus * (r.fedMarginal / 100);
+    /* The true cost of the bonus is incremental, not the marginal rate times
+       the amount: a big bonus can span brackets, and it can also push you past
+       the Social Security wage base so the FICA on it drops. Computing the
+       whole return with and without the bonus handles both correctly. */
+    var withBonus = compute(r.gross + bonus, ui.status, ui.state, ui.contrib);
+    var fedActual = withBonus.federal.tax - r.federal.tax;
+    var ficaOnBonus = withBonus.fica.tax - r.fica.tax;
+    var stateOnBonus = withBonus.state.tax - r.state.tax;
 
-    var landsIn = bonus - fedWithheld - ficaOnBonus - stateOnBonus;
-    var reallyYours = bonus - fedActual - ficaOnBonus - stateOnBonus;
+    var fedPct = percentageMethodWithholding(bonus);
+    var fedAgg = aggregateMethodWithholding(r.gross, bonus, ui.status);
 
-    var stateRow = r.state.none ? '' : row('State @ ' + pct(r.state.marginal * 100), '−' + money(stateOnBonus));
+    var rateOf = function (n) { return pct(bonus > 0 ? n / bonus * 100 : 0); };
+    var stateRow = r.state.none ? ''
+      : row(r.state.name + ' · ' + rateOf(stateOnBonus), '−' + money(stateOnBonus));
+
+    el.bonusFlatRate.textContent = pct(F.supplementalWithholdingRate * 100, 0);
 
     el.bonusWithheld.innerHTML =
         row('Bonus', money(bonus))
-      + row('Federal @ ' + pct(F.supplementalWithholdingRate * 100, 0) + ' flat supplemental rate', '−' + money(fedWithheld))
+      + row('Federal withheld · ' + rateOf(fedPct), '−' + money(fedPct))
       + row('FICA', '−' + money(ficaOnBonus))
       + stateRow
-      + row('Lands in your account', money(landsIn), true);
+      + row('Lands in your account', money(bonus - fedPct - ficaOnBonus - stateOnBonus), true);
+
+    el.bonusAggregate.innerHTML =
+        row('Bonus', money(bonus))
+      + row('Federal withheld · ' + rateOf(fedAgg), '−' + money(fedAgg))
+      + row('FICA', '−' + money(ficaOnBonus))
+      + stateRow
+      + row('Lands in your account', money(bonus - fedAgg - ficaOnBonus - stateOnBonus), true);
 
     el.bonusActual.innerHTML =
         row('Bonus', money(bonus))
-      + row('Federal @ your ' + pct(r.fedMarginal, 0) + ' marginal rate', '−' + money(fedActual))
+      + row('Federal · ' + rateOf(fedActual), '−' + money(fedActual))
       + row('FICA', '−' + money(ficaOnBonus))
       + stateRow
-      + row('Actually yours', money(reallyYours), true);
+      + row('Actually yours', money(bonus - fedActual - ficaOnBonus - stateOnBonus), true);
 
-    var diff = fedWithheld - fedActual;   // positive = over-withheld
+    // The verdict compares the WORST-LOOKING method against the truth, because
+    // that gap is what people actually experience and misread as extra tax.
+    var worst = Math.max(fedPct, fedAgg);
+    var worstName = fedAgg > fedPct ? 'aggregate' : 'percentage';
+    var over = worst - fedActual;
+
     var verdict;
-    if (Math.abs(diff) < 25) {
-      verdict = 'Your federal marginal rate is ' + pct(r.fedMarginal, 0) + ', so the flat '
-        + pct(F.supplementalWithholdingRate * 100, 0) + ' supplemental rate lands almost exactly right '
-        + 'for you. Nothing meaningful to true up in April — but note that the bonus was never taxed at '
-        + 'a special rate. It is ordinary income like any other dollar.';
-    } else if (diff > 0) {
-      verdict = 'Your federal marginal rate is only ' + pct(r.fedMarginal, 0) + ', so your employer '
-        + 'withheld about <b>' + money(diff) + ' more federal tax than this bonus actually costs you</b>. '
-        + 'The bonus was not taxed at a punitive rate — it was over-withheld, and the difference comes '
-        + 'back to you as part of your refund.';
+    if (over > 25) {
+      verdict = 'Under the ' + worstName + ' method your employer would hold back <b>'
+        + money(worst) + '</b> in federal tax, but this bonus only really costs you <b>'
+        + money(fedActual) + '</b> in federal tax — ' + rateOf(fedActual) + ' of it. That is <b>'
+        + money(over) + ' of your own money</b> sitting with the Treasury until you file — not tax, '
+        + 'just timing.';
+    } else if (over < -25) {
+      verdict = 'Both methods withhold <em>less</em> than this bonus actually costs you, because it is '
+        + 'taxed at ' + rateOf(fedActual) + ' — above the flat supplemental rate. Expect to '
+        + 'owe roughly <b>' + money(-over) + '</b> more when you file — worth setting aside now.';
     } else {
-      verdict = 'Your federal marginal rate is ' + pct(r.fedMarginal, 0) + ', above the flat '
-        + pct(F.supplementalWithholdingRate * 100, 0) + ' supplemental rate — so withholding falls about '
-        + '<b>' + money(-diff) + ' short</b> of what this bonus really costs you. It looks generous on '
-        + 'the day it lands, but set that difference aside rather than being surprised when you file.';
+      verdict = 'At your income the withholding lands close to what the bonus actually costs, so there '
+        + 'is little to true up. The bonus was never taxed at a special rate — it is ordinary income.';
     }
-    el.bonusVerdict.innerHTML = verdict + ' Illustrated on a ' + money(bonus) + ' bonus.';
+    el.bonusVerdict.innerHTML = verdict;
 
     function row(label, val, sum) {
       return '<div class="ledger__row' + (sum ? ' ledger__row--sum' : '') + '"><span>'
@@ -811,7 +857,9 @@
       fillTrack: $('fill-track'), fillMax: $('fill-max'), fillCap: $('fill-cap'),
       brkBody: $('brk-body'), brkTotal: $('brk-total'), brkSource: $('brk-source'),
       whFeels: $('wh-feels'), whReal: $('wh-real'), whRefund: $('wh-refund'),
-      bonusWithheld: $('bonus-withheld'), bonusActual: $('bonus-actual'), bonusVerdict: $('bonus-verdict'),
+      bonusWithheld: $('bonus-withheld'), bonusAggregate: $('bonus-aggregate'),
+      bonusActual: $('bonus-actual'), bonusVerdict: $('bonus-verdict'),
+      bonusAmounts: $('bonus-amounts'), bonusFlatRate: $('bonus-flat-rate'),
       shelterControls: $('shelter-controls'), shContrib: $('sh-contrib'), shSaved: $('sh-saved'),
       shCost: $('sh-cost'), shPerDollar: $('sh-perdollar'), shVerdict: $('sh-verdict'),
       shRateBefore: $('sh-rate-before'), shRateAfter: $('sh-rate-after'), shFine: $('sh-fine'),
@@ -864,6 +912,11 @@
     });
 
     el.state.addEventListener('change', function () { ui.state = el.state.value; render(); });
+
+    el.bonusAmounts.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-bonus]'); if (!b) return;
+      ui.bonus = +b.dataset.bonus; syncControls(); render();
+    });
 
     el.raiseAmts.addEventListener('click', function (e) {
       var b = e.target.closest('[data-raise]'); if (!b) return;
