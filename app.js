@@ -64,6 +64,25 @@
     };
   }
 
+  /* Split contributions into the two buckets that behave differently:
+     everything reduces income-taxable wages, but only cafeteria-plan money
+     also reduces the wage base FICA is charged on. */
+  function shelterTotals(contrib, code) {
+    var st = S[code] || {};
+    var conf = st.pretaxConformity || {};
+    var incomeFed = 0, incomeState = 0, ficaExempt = 0;
+    F.shelters.forEach(function (s) {
+      var amt = Math.max(0, contrib[s.key] || 0);
+      if (!amt) return;
+      incomeFed += amt;
+      // A handful of states tax contributions the federal system exempts.
+      if (conf[s.key] === false) { /* no state benefit */ } else { incomeState += amt; }
+      if (s.savesFica) ficaExempt += amt;
+    });
+    return { incomeFed: incomeFed, incomeState: incomeState, ficaExempt: ficaExempt,
+             total: incomeFed };
+  }
+
   // FIX #17 — wage-base cap, and the Additional Medicare Tax above the
   // filing-status threshold, are both modelled explicitly.
   function fica(gross, status) {
@@ -108,18 +127,27 @@
     };
   }
 
-  function compute(gross, status, code) {
-    var f = federal(gross, status);
-    var c = fica(gross, status);
-    var s = state(gross, status, code);
+  function compute(gross, status, code, contrib) {
+    var sh = shelterTotals(contrib || {}, code);
+
+    var f = federal(Math.max(0, gross - sh.incomeFed), status);
+    var c = fica(Math.max(0, gross - sh.ficaExempt), status);
+    var s = state(Math.max(0, gross - sh.incomeState), status, code);
+
     var total = f.tax + c.tax + s.tax;
     return {
       gross: gross,
+      contributed: sh.total,
+      shelter: sh,
       federal: f,
       fica: c,
       state: s,
       totalTax: total,
-      takeHome: gross - total,
+      // Cash that reaches your bank account — contributions have left it, but
+      // they are still your money, sitting in your own accounts.
+      takeHome: gross - total - sh.total,
+      // Effective rates are always quoted against GROSS, so sheltering income
+      // visibly moves them. That is the whole point of the panel.
       fedEffective: gross > 0 ? (f.tax / gross) * 100 : 0,
       fedMarginal: f.marginal * 100,
       allInEffective: gross > 0 ? (total / gross) * 100 : 0,
@@ -138,7 +166,7 @@
   var QUICKPICKS = [50000, 75000, 100000, 150000, 250000];
   var RAISE_AMOUNTS = [1000, 5000, 10000];
 
-  var ui = { gross: 75000, status: 'single', state: 'NC', raise: 1000 };
+  var ui = { gross: 75000, status: 'single', state: 'NC', raise: 1000, contrib: {} };
 
   /* FIX #9 — the whole state of the page lives in the URL, so any result is
      a shareable link. */
@@ -150,6 +178,12 @@
     if (st && F.standardDeduction[st] !== undefined) ui.status = st;
     var stt = (p.get('state') || '').toUpperCase();
     if (stt && S[stt]) ui.state = stt;
+    // Contributions travel in the link too, so a shared result keeps the
+    // scenario the sender actually built.
+    F.shelters.forEach(function (s) {
+      var v = parseInt(p.get(s.key), 10);
+      if (isFinite(v) && v > 0) ui.contrib[s.key] = clamp(v, 0, shelterMax(s));
+    });
   }
 
   function writeURL() {
@@ -157,6 +191,10 @@
     p.set('income', String(ui.gross));
     p.set('status', ui.status);
     p.set('state', ui.state);
+    F.shelters.forEach(function (s) {
+      var v = ui.contrib[s.key] || 0;
+      if (v > 0) p.set(s.key, String(v));
+    });
     history.replaceState(null, '', location.pathname + '?' + p.toString());
   }
 
@@ -315,7 +353,7 @@
 
   function renderRaise(r) {
     var amt = ui.raise;
-    var after = compute(r.gross + amt, ui.status, ui.state);
+    var after = compute(r.gross + amt, ui.status, ui.state, ui.contrib);
     var extraTax = after.totalTax - r.totalTax;
     var keep = amt - extraTax;
     var effRate = amt > 0 ? (extraTax / amt) * 100 : 0;
@@ -405,6 +443,102 @@
     }
   }
 
+  /* ------------------------------------------- interactive shelter panel */
+
+  function shelterMax(s) {
+    return s.max;   // headline (non-catch-up, self-only) limit
+  }
+
+  function buildShelter() {
+    el.shelterControls.innerHTML = F.shelters.map(function (s) {
+      var max = shelterMax(s);
+      return '<div class="sh">'
+        + '<div class="sh__top">'
+        +   '<span class="sh__name">' + esc(s.name) + '</span>'
+        +   (s.savesFica ? '<span class="sh__fica">skips FICA too</span>' : '')
+        +   '<span class="sh__val num" id="shv-' + s.key + '">$0</span>'
+        + '</div>'
+        + '<p class="sh__blurb">' + esc(s.blurb) + '</p>'
+        + '<input type="range" class="sh__slider" id="shs-' + s.key + '"'
+        +   ' min="0" max="' + max + '" step="100" value="0"'
+        +   ' aria-label="' + esc(s.name) + ' annual contribution"'
+        +   ' aria-valuetext="$0 of $' + max.toLocaleString('en-US') + '">'
+        + '<div class="sh__scale"><span>$0</span>'
+        +   '<span class="sh__saves" id="shx-' + s.key + '"></span>'
+        +   '<span>' + money(max) + (s.maxAlt ? ' self' : '') + '</span></div>'
+        + '</div>';
+    }).join('');
+
+    F.shelters.forEach(function (s) {
+      $('shs-' + s.key).addEventListener('input', function (e) {
+        ui.contrib[s.key] = +e.target.value;
+        render();
+      });
+    });
+  }
+
+  function syncShelterSliders() {
+    F.shelters.forEach(function (s) {
+      var input = $('shs-' + s.key);
+      if (input) input.value = ui.contrib[s.key] || 0;
+    });
+  }
+
+  function renderShelter(r) {
+    var base = compute(ui.gross, ui.status, ui.state, {});   // nothing sheltered
+    var contributed = r.contributed;
+    var taxSaved = base.totalTax - r.totalTax;
+    var cost = contributed - taxSaved;                        // real hit to cash
+    var perDollar = contributed > 0 ? cost / contributed : 1;
+
+    el.shContrib.textContent = money(contributed);
+    el.shSaved.textContent = money(taxSaved);   // label already says "falls by"
+    el.shCost.textContent = money(cost);
+    el.shPerDollar.textContent = '$' + perDollar.toFixed(2);
+    el.shRateBefore.textContent = pct(base.allInEffective);
+    el.shRateAfter.textContent = pct(r.allInEffective);
+
+    // Per-slider readout: current amount, and what that slider alone saves.
+    F.shelters.forEach(function (s) {
+      var amt = ui.contrib[s.key] || 0;
+      $('shv-' + s.key).textContent = money(amt);
+      var slider = $('shs-' + s.key);
+      slider.setAttribute('aria-valuetext', money(amt) + ' of ' + money(shelterMax(s)));
+      // Marginal value of this vehicle: income-tax rate, plus FICA if it qualifies.
+      var rate = (r.fedMarginal / 100) + r.state.marginal + (s.savesFica ? r.fica.marginal : 0);
+      $('shx-' + s.key).textContent = amt > 0
+        ? 'saves ' + money(amt * rate)
+        : pct(rate * 100, 0) + ' back on every dollar';
+    });
+
+    if (contributed <= 0) {
+      el.shVerdict.innerHTML = 'Drag a slider and watch the two numbers above move apart. '
+        + 'The gap between them is the point.';
+    } else {
+      var bracketDrop = r.fedMarginal < base.fedMarginal;
+      el.shVerdict.innerHTML = 'You would move <b>' + money(contributed) + '</b> into your own '
+        + 'accounts, and it would cost you only <b>' + money(cost) + '</b> of spending money. '
+        + 'The other <b>' + money(taxSaved) + '</b> is tax you simply do not pay.'
+        + (bracketDrop
+            ? ' This also drops your top federal bracket from ' + pct(base.fedMarginal, 0)
+              + ' to <b>' + pct(r.fedMarginal, 0) + '</b>.'
+            : '');
+    }
+
+    // Honest disclosure of what the panel assumes.
+    var stMeta = S[ui.state] || {};
+    var conf = stMeta.pretaxConformity || {};
+    var nonConforming = F.shelters.filter(function (s) { return conf[s.key] === false; });
+    el.shFine.innerHTML = 'Limits are 2026 figures for a filer under 50 and, for the HSA, '
+      + 'self-only coverage. Catch-up contributions, employer matches, IRA deduction '
+      + 'phase-outs and eligibility rules are not modelled.'
+      + (nonConforming.length
+          ? ' <b style="color:#F0B27A">' + esc(stMeta.name) + ' taxes '
+            + nonConforming.map(function (s) { return esc(s.short); }).join(' and ')
+            + ' contributions anyway</b>, so the state saving is excluded above.'
+          : '');
+  }
+
   function renderLevers(r) {
     var marg = r.fedMarginal / 100;
     var margAll = marg + r.state.marginal; // deductions cut state tax too
@@ -425,25 +559,22 @@
     el.chrVal.textContent = money(1000 * margAll);
 
     // Deduction cards
+    /* No savings figures here — the slider panel above owns those, and it
+       accounts for FICA on cafeteria-plan money. Quoting a second, income-tax-
+       only number down here would contradict it. These cards are the rulebook. */
     el.deductionCards.innerHTML = F.deductions.map(function (d) {
       var cap = typeof d.limit === 'function' ? d.limit(ui.status) : d.limit;
-      var save = d.amountForSaving ? d.amountForSaving(ui.status) : 0;
-      var savings = save * margAll;
       return '<div class="lv">'
         + '<div class="lv__h">' + esc(d.name) + '</div>'
         + '<div class="lv__cap">' + esc(cap) + '</div>'
         + (d.applied ? '<span class="lv__badge">Already in your numbers</span>' : '')
         + '<p class="lv__body">' + d.body + '</p>'
-        + (savings > 0
-            ? '<p class="lv__save">Max out and you cut your tax by about <b>' + money(savings)
-              + '</b> this year.</p>'
-            : '')
         + '</div>';
     }).join('');
 
-    el.dedSource.innerHTML = 'Contribution limits are for the 2026 tax year. Phase-outs and eligibility '
-      + 'vary with income and filing status. Estimated savings apply your combined federal + state marginal '
-      + 'rate of ' + pct(margAll * 100) + ' and assume you remain in the same bracket.';
+    el.dedSource.innerHTML = 'Contribution limits are for the 2026 tax year and assume a filer under 50. '
+      + 'Catch-up amounts, phase-outs and eligibility vary with income and filing status — '
+      + '<a href="#shelter">use the sliders above</a> to see what any of these is worth to you.';
 
     // Credit cards
     el.creditCards.innerHTML = F.credits.map(function (c) {
@@ -525,7 +656,7 @@
     var pts = [];
     for (var i = 0; i <= 60; i++) {
       var inc = lo + (hi - lo) * (i / 60);
-      pts.push({ x: inc, y: compute(inc, ui.status, ui.state).allInEffective });
+      pts.push({ x: inc, y: compute(inc, ui.status, ui.state, {}).allInEffective });
     }
 
     /* FIX #2 — the axis maximum is a rounded, sane number derived from the
@@ -590,7 +721,7 @@
 
   function share() {
     writeURL();
-    var r = compute(ui.gross, ui.status, ui.state);
+    var r = compute(ui.gross, ui.status, ui.state, ui.contrib);
     var text = 'I earn ' + money(ui.gross) + ' and my real federal tax rate is '
       + pct(r.fedEffective) + ' — not the ' + pct(r.fedMarginal, 0) + ' bracket everyone quotes.';
     var url = location.href;
@@ -607,7 +738,7 @@
   /* --------------------------------------------------------------- wire up */
 
   function render() {
-    var r = compute(ui.gross, ui.status, ui.state);
+    var r = compute(ui.gross, ui.status, ui.state, ui.contrib);
 
     renderHeadline(r);
     renderBreakdown(r);
@@ -615,6 +746,7 @@
     renderRaise(r);
     renderWithholding(r);
     renderBonus(r);
+    renderShelter(r);
     renderLevers(r);
     renderHistory(r);
     renderCurve(r);
@@ -674,6 +806,9 @@
       brkBody: $('brk-body'), brkTotal: $('brk-total'), brkSource: $('brk-source'),
       whFeels: $('wh-feels'), whReal: $('wh-real'), whRefund: $('wh-refund'),
       bonusWithheld: $('bonus-withheld'), bonusActual: $('bonus-actual'), bonusVerdict: $('bonus-verdict'),
+      shelterControls: $('shelter-controls'), shContrib: $('sh-contrib'), shSaved: $('sh-saved'),
+      shCost: $('sh-cost'), shPerDollar: $('sh-perdollar'), shVerdict: $('sh-verdict'),
+      shRateBefore: $('sh-rate-before'), shRateAfter: $('sh-rate-after'), shFine: $('sh-fine'),
       dedRateInline: $('ded-rate-inline'), dedSource: $('ded-source'), deductionCards: $('deduction-cards'),
       dcRate: $('dc-rate'), dcDedBar: $('dc-ded-bar'), dcCredBar: $('dc-cred-bar'), dcDedNote: $('dc-ded-note'),
       creditCards: $('credit-cards'), chrStd: $('chr-std'), chrVal: $('chr-val'),
@@ -682,10 +817,21 @@
       toast: $('toast')
     };
 
+    buildShelter();      // must exist before readURL clamps against slider maxima
     readURL();
     buildControls();
     syncControls();
+    syncShelterSliders();
     render();
+
+    $('sh-max').addEventListener('click', function () {
+      F.shelters.forEach(function (s) { ui.contrib[s.key] = shelterMax(s); });
+      syncShelterSliders(); render();
+    });
+    $('sh-reset').addEventListener('click', function () {
+      ui.contrib = {};
+      syncShelterSliders(); render();
+    });
 
     // Inputs
     el.income.addEventListener('input', setIncomeFromInput);

@@ -74,6 +74,46 @@ window.TAX_FEDERAL = {
   // withholding section, and clearly labelled there as an average.
   averageRefund: 3100,
 
+  /* ------------------------------------------------------------ shelters
+     The interactive "what if I contribute more" panel.
+
+     `savesFica` is the distinction almost every calculator gets wrong.
+     Elective deferrals to a 401(k)/403(b)/457 are exempt from income tax but
+     are STILL subject to Social Security and Medicare — they come out of the
+     paycheck after FICA. Section 125 cafeteria-plan money (health FSA,
+     dependent care FSA, and HSA contributed through payroll) escapes FICA as
+     well, which makes it quietly worth ~7.65% more per dollar. A Traditional
+     IRA is an above-the-line deduction you take at filing, so it never
+     touches FICA either.                                                    */
+
+  shelters: [
+    {
+      key: 'k401', name: '401(k) / 403(b) / 457', short: '401(k)',
+      max: 24500, catchUp: 32500, savesFica: false,
+      blurb: 'Pre-tax salary deferral. Cuts income tax, not FICA.'
+    },
+    {
+      key: 'hsa', name: 'Health Savings Account', short: 'HSA',
+      max: 4400, maxAlt: 8750, altLabel: 'family', savesFica: true,
+      blurb: 'Funded through payroll it dodges income tax AND FICA — the best dollar-for-dollar shelter a W-2 earner has. Fund it yourself from your bank account instead and you lose the FICA saving, because that money was already taxed as wages. Needs an HSA-eligible high-deductible plan.'
+    },
+    {
+      key: 'fsa', name: 'Health FSA', short: 'Health FSA',
+      max: 3400, savesFica: true,
+      blurb: 'Pre-tax payroll money for copays, prescriptions and glasses. Also dodges FICA. Mostly expires at year end, so estimate low.'
+    },
+    {
+      key: 'dcfsa', name: 'Dependent Care FSA', short: 'Dependent care',
+      max: 7500, savesFica: true,
+      blurb: 'Daycare and elder care, pre-tax and FICA-free. The $7,500 limit is new for 2026 and your employer has to opt in.'
+    },
+    {
+      key: 'ira', name: 'Traditional IRA', short: 'Trad. IRA',
+      max: 7500, catchUp: 8600, savesFica: false,
+      blurb: 'Claimed at filing rather than through payroll, so no FICA saving. The deduction phases out at higher incomes if you also have a workplace plan.'
+    }
+  ],
+
   /* ---------------------------------------------------------- deductions */
 
   deductions: [

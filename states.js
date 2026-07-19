@@ -108,7 +108,8 @@ window.TAX_STATES = {
   PA: { name: 'Pennsylvania', type: 'flat',
         brackets: { single: [{ rate: 0.0307, min: 0, max: null }] },
         standardDeduction: { single: 0, mfj: 0, hoh: 0, mfs: 0 },
-        notes: 'Pennsylvania has no standard deduction and no personal exemption. Nearly every municipality levies a local earned income tax — commonly 1%, and about 3.75% in Philadelphia — which is not included.' },
+        pretaxConformity: { k401: false, ira: false },
+        notes: 'Pennsylvania taxes 401(k), 403(b) and 457 contributions when you make them — you get no state break for deferring, though withdrawals after 59½ are then PA-tax-free. It allows no IRA deduction either. It has no standard deduction and no personal exemption. Nearly every municipality levies a local earned income tax — commonly 1%, and about 3.75% in Philadelphia — which is not included.' },
 
   UT: { name: 'Utah', type: 'flat',
         brackets: { single: [{ rate: 0.0445, min: 0, max: null }] },
@@ -152,8 +153,9 @@ window.TAX_STATES = {
                    { rate: 0.123, min: 500000, max: 742953 }, { rate: 0.133, min: 742953, max: null }] },
         standardDeduction: { single: 5706, mfj: 11412, hoh: 11412, mfs: 5706 },
         personalExemptionCredit: { single: 153, mfj: 306, hoh: 153, mfs: 153 },
+        pretaxConformity: { hsa: false },
         provisional: true,
-        notes: 'Top rates include the 1% Mental Health Services surtax. Excludes the State Disability Insurance payroll tax, which has no wage ceiling and adds over 1% to the effective rate on wages. The Franchise Tax Board has not yet published final 2026 indexed amounts.' },
+        notes: 'California has never conformed to federal HSA rules, so HSA contributions get no state deduction and the account’s earnings are taxable each year. Top rates include the 1% Mental Health Services surtax. Excludes the State Disability Insurance payroll tax, which has no wage ceiling and adds over 1% to the effective rate on wages. The Franchise Tax Board has not yet published final 2026 indexed amounts.' },
 
   CT: { name: 'Connecticut', type: 'graduated',
         brackets: {
@@ -248,7 +250,8 @@ window.TAX_STATES = {
   MA: { name: 'Massachusetts', type: 'graduated',
         brackets: { single: [{ rate: 0.05, min: 0, max: 1083150 }, { rate: 0.09, min: 1083150, max: null }] },
         standardDeduction: { single: 4400, mfj: 8800, hoh: 6800, mfs: 4400 },
-        notes: 'Flat 5% plus a 4% surtax on income above $1,083,150, the same threshold for every filing status. Massachusetts has no standard deduction; the figure used is the personal exemption.' },
+        pretaxConformity: { ira: false },
+        notes: 'Massachusetts allows no deduction for traditional IRA contributions. Flat 5% plus a 4% surtax on income above $1,083,150, the same threshold for every filing status. Massachusetts has no standard deduction; the figure used is the personal exemption.' },
 
   MN: { name: 'Minnesota', type: 'graduated',
         brackets: {
@@ -301,7 +304,8 @@ window.TAX_STATES = {
                    { rate: 0.05525, min: 40000, max: 75000 }, { rate: 0.0637, min: 75000, max: 500000 },
                    { rate: 0.0897, min: 500000, max: 1000000 }, { rate: 0.1075, min: 1000000, max: null }] },
         standardDeduction: { single: 1000, mfj: 2000, hoh: 1000, mfs: 1000 },
-        notes: 'Head of household uses the joint schedule. New Jersey has no standard deduction; the figure used is the personal exemption.' },
+        pretaxConformity: { hsa: false, fsa: false, dcfsa: false, ira: false },
+        notes: 'New Jersey never adopted the federal cafeteria-plan rules, so HSA, health FSA and dependent care FSA money is fully taxable New Jersey wages, and there is no IRA deduction. It does exclude 401(k) contributions — but not 403(b) or 457. Head of household uses the joint schedule; the deduction figure shown is the personal exemption.' },
 
   NM: { name: 'New Mexico', type: 'graduated',
         brackets: {

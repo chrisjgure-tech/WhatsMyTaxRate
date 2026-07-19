@@ -48,6 +48,7 @@
       <a href="#withholding">Withholding</a>
       <a href="#bonuses">Bonuses</a>
       <a href="#history">History</a>
+      <a href="#shelter">Save more</a>
       <a href="#deductions">Deductions</a>
       <a href="#credits">Credits</a>
     </nav>
@@ -337,13 +338,74 @@
 </section>
 
 <!-- ======================================================================
+     Interactive shelter panel — turn the dials, watch the bill move
+     ====================================================================== -->
+<section class="section" id="shelter">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>What if you sheltered more?</h2>
+      <p class="section__lead">Move the sliders. Every dollar you put into these accounts comes off your taxable income — so the money leaves your paycheck, but <em>far less than a dollar of it</em> actually costs you. It is the difference between saving money and spending it, and almost nobody sees it in numbers.</p>
+    </div>
+
+    <div class="shelter">
+      <div class="shelter__controls" id="shelter-controls"></div>
+
+      <div class="shelter__result">
+        <div class="shelter__headline">
+          <span class="eyebrow">You'd put away</span>
+          <span class="shelter__big num" id="sh-contrib">$0</span>
+        </div>
+
+        <div class="shelter__flow">
+          <div class="shelter__row">
+            <span>Your tax bill falls by</span>
+            <b class="num shelter__good" id="sh-saved">$0</b>
+          </div>
+          <div class="shelter__row">
+            <span>So your take-home only falls by</span>
+            <b class="num" id="sh-cost">$0</b>
+          </div>
+          <div class="shelter__row shelter__row--rule">
+            <span>Every $1 saved really costs you</span>
+            <b class="num" id="sh-perdollar">$1.00</b>
+          </div>
+        </div>
+
+        <p class="shelter__verdict" id="sh-verdict">Drag a slider to see the effect.</p>
+
+        <div class="shelter__compare">
+          <div class="shelter__col">
+            <span class="eyebrow">Now</span>
+            <b class="num" id="sh-rate-before">—</b>
+            <span class="shelter__sub">all-in effective rate</span>
+          </div>
+          <div class="shelter__arrow" aria-hidden="true">→</div>
+          <div class="shelter__col shelter__col--after">
+            <span class="eyebrow">After</span>
+            <b class="num" id="sh-rate-after">—</b>
+            <span class="shelter__sub">all-in effective rate</span>
+          </div>
+        </div>
+
+        <div class="shelter__actions">
+          <button class="btn btn--primary" type="button" id="sh-max">Max everything out</button>
+          <button class="btn btn--outline" type="button" id="sh-reset">Reset to zero</button>
+        </div>
+
+        <p class="shelter__fine" id="sh-fine">—</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
      Deductions  (FIX #7 — always visible, never collapsed)
      ====================================================================== -->
 <section class="section" id="deductions">
   <div class="wrap">
     <div class="section__head">
-      <h2>Deductions: lower the income you're taxed on</h2>
-      <p class="section__lead">A deduction comes off your income before tax is calculated, so it's worth your <em>marginal</em> rate — <span id="ded-rate-inline">—</span> for you. Shelter a dollar, keep that share of it.</p>
+      <h2>The rules behind each account</h2>
+      <p class="section__lead">The sliders show you what these are worth. This is what you need to qualify for them. Each one is a <em>deduction</em> — it comes off your income before tax is calculated, so a dollar sheltered is worth your marginal rate of <span id="ded-rate-inline">—</span>.</p>
     </div>
     <div class="lever" id="deduction-cards"></div>
     <p class="source" id="ded-source">—</p>
