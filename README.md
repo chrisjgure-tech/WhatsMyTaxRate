@@ -48,10 +48,20 @@ No CLI needed. Push the repo to GitHub first, then:
 2. Framework preset: **Other**. Build command: leave empty. Output directory:
    leave empty (the repo root is the site).
 3. Deploy. Then **Settings → Domains** → add `whatsmytaxrate.com`.
-4. At your registrar, point the domain at Vercel:
-   - `A` record, host `@` → `76.76.21.21`
+4. At your registrar, point the domain at Vercel. Use whatever Vercel's
+   Domains panel shows you rather than a value from any guide, this one
+   included — Vercel is expanding its IP range and the panel is authoritative.
+   Currently:
+   - `A` record, host `@` → `216.198.79.1` (the older `76.76.21.21` still
+     works but is no longer what Vercel recommends)
    - `CNAME` record, host `www` → `cname.vercel-dns.com`
-5. In **Settings → Domains**, set `whatsmytaxrate.com` as primary and mark
+5. **Delete any record the registrar added on signup.** Namecheap in
+   particular parks new domains on `192.64.119.225` and adds a `www` CNAME to
+   `parkingpage.namecheap.com`. Leaving the parking A record in place gives
+   the apex two A records, DNS round-robins between them, and roughly half
+   your visitors get the parking page — Vercel reports "Invalid
+   Configuration" and the TLS certificate never provisions.
+6. In **Settings → Domains**, set `whatsmytaxrate.com` as primary and mark
    `www` as a redirect to it.
 
 `vercel.json` supplies the security headers and cache rules; `netlify.toml`
