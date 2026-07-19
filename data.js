@@ -125,34 +125,32 @@ window.TAX_FEDERAL = {
       applied: true,
       body: 'Every filer subtracts a flat amount from gross income before any tax is calculated — no receipts, no paperwork. It is already reflected in every number on this page. Itemizing only beats it if your mortgage interest, state taxes and charitable gifts together exceed this figure, which for most W-2 earners they do not.'
     },
+    /* The four cards below take their dollar figures from `shelters` via
+       capFrom(), so a limit is written down exactly once. Editing a number in
+       two places and missing one is how a page ends up contradicting itself. */
     {
       name: '401(k) / 403(b) / 457',
-      limit: 'Up to $24,500 · $32,500 if 50+',
-      amountForSaving: function () { return 24500; },
+      capFrom: function (sh, m) { return 'Up to ' + m(sh.k401.max) + ' · ' + m(sh.k401.catchUp) + ' if 50+'; },
       body: 'Traditional pre-tax contributions cut your taxable wages dollar for dollar. The money grows tax-deferred and is taxed on withdrawal, ideally at a lower rate in retirement. Contribute at least enough to capture the full employer match first — that is an immediate 50–100% return before markets do anything at all.'
     },
     {
       name: 'Health Savings Account',
-      limit: 'Up to $4,400 self · $8,750 family',
-      amountForSaving: function () { return 4400; },
+      capFrom: function (sh, m) { return 'Up to ' + m(sh.hsa.max) + ' self · ' + m(sh.hsa.maxAlt) + ' family'; },
       body: 'The only triple-tax-advantaged account in the code: contributions are pre-tax, growth is tax-free, and qualified medical withdrawals are tax-free. Requires an HSA-eligible high-deductible plan. Balances roll over forever, so many people invest the account and treat it as stealth retirement savings.'
     },
     {
       name: 'Flexible Spending Account',
-      limit: 'Up to $3,400 health · $7,500 dependent care',
-      amountForSaving: function () { return 3400; },
-      body: 'Funded with pre-tax payroll dollars. A health FSA covers copays, prescriptions and glasses. A dependent care FSA covers daycare or elder care and — unusually — escapes FICA as well as income tax. Unlike an HSA most FSA money expires at year end, so estimate conservatively. The $7,500 dependent care limit is new for 2026 and your employer must opt in.'
+      capFrom: function (sh, m) { return 'Up to ' + m(sh.fsa.max) + ' health · ' + m(sh.dcfsa.max) + ' dependent care'; },
+      body: 'Funded with pre-tax payroll dollars. A health FSA covers copays, prescriptions and glasses. A dependent care FSA covers daycare or elder care and — unusually — escapes FICA as well as income tax. Unlike an HSA most FSA money expires at year end, so estimate conservatively. The higher dependent care limit is new for 2026 and your employer must opt in.'
     },
     {
       name: 'Traditional IRA',
-      limit: 'Up to $7,500 · $8,600 if 50+',
-      amountForSaving: function () { return 7500; },
+      capFrom: function (sh, m) { return 'Up to ' + m(sh.ira.max) + ' · ' + m(sh.ira.catchUp) + ' if 50+'; },
       body: 'Deductible in full or in part depending on your income and whether you are covered by a workplace retirement plan. Above roughly $81,000 of income for a covered single filer the deduction phases out, though the account still grows tax-deferred. You have until Tax Day of the following year to contribute for the current year.'
     },
     {
       name: 'Student loan interest',
       limit: 'Up to $2,500, no itemizing needed',
-      amountForSaving: function () { return 2500; },
       body: 'An above-the-line deduction, so you claim it whether or not you itemize. It phases out between $85,000 and $100,000 of income for single filers, and $175,000 to $205,000 for joint filers. Married filing separately cannot claim it at all. Your servicer reports the figure on Form 1098-E.'
     }
   ],

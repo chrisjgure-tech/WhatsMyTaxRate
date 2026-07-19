@@ -562,8 +562,14 @@
     /* No savings figures here — the slider panel above owns those, and it
        accounts for FICA on cafeteria-plan money. Quoting a second, income-tax-
        only number down here would contradict it. These cards are the rulebook. */
+    // Index shelters by key so the cards can quote the same numbers the
+    // sliders use, rather than a second hardcoded copy.
+    var shByKey = {};
+    F.shelters.forEach(function (s) { shByKey[s.key] = s; });
+
     el.deductionCards.innerHTML = F.deductions.map(function (d) {
-      var cap = typeof d.limit === 'function' ? d.limit(ui.status) : d.limit;
+      var cap = d.capFrom ? d.capFrom(shByKey, money)
+              : (typeof d.limit === 'function' ? d.limit(ui.status) : d.limit);
       return '<div class="lv">'
         + '<div class="lv__h">' + esc(d.name) + '</div>'
         + '<div class="lv__cap">' + esc(cap) + '</div>'

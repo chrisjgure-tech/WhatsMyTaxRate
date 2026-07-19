@@ -90,7 +90,10 @@ year ahead), update in this order:
    *first* so the page never claims to be fresher than it is.
 2. **`standardDeduction`** and **`brackets`** — from the new Rev. Proc.
 3. **`fica.ssWageBase`** — from the SSA cost-of-living announcement.
-4. **`limits`** — 401(k), IRA, HSA, FSA figures from the IRS notice.
+4. **`shelters`** — the 401(k), HSA, FSA and IRA contribution caps, from the
+   IRS notice. These drive the sliders in the "What if you sheltered more?"
+   panel **and** the limit line on each card further down, so each figure is
+   written once. Do not add a second copy anywhere.
 5. **`credits`** — Child Tax Credit and phase-outs.
 6. **`states.js`** — the slowest-moving but most error-prone file. Do not
    trust a single aggregator: the Tax Foundation's February 2026 report was
@@ -113,6 +116,8 @@ NC: {
   },
   standardDeduction: { single: 12750, mfj: 25500, hoh: 19125, mfs: 12750 },
   personalExemptionCredit: { ... }, // dollar credit, not a deduction; 0 if none
+  pretaxConformity: { k401: false }, // optional; see below. Omit if the state
+                                     // follows federal treatment (most do)
   notes: 'Local income taxes are not included.'   // shown under the picker
 }
 ```
@@ -121,6 +126,16 @@ NC: {
 state selector — use it for local/municipal taxes the calculator does not
 model. Add `provisional: true` when a state hasn't published final figures;
 the UI appends its own caution sentence automatically.
+
+**Pre-tax conformity.** Four states tax contributions the federal system
+exempts, so the shelter panel must not credit a state saving there. Set
+`pretaxConformity` with `false` for each vehicle the state taxes anyway —
+keys match `TAX_FEDERAL.shelters` (`k401`, `hsa`, `fsa`, `dcfsa`, `ira`).
+Currently: **PA** taxes all elective deferrals and allows no IRA deduction;
+**NJ** never adopted IRC 125, so HSA and both FSAs are taxable wages, plus no
+IRA deduction; **CA** has never conformed on HSAs; **MA** allows no IRA
+deduction. Alabama is often miscited as a third HSA non-conformer — it has
+conformed since 2018, so leave it out.
 
 **The exemption trap.** Around twenty states grant the personal exemption as
 a *deduction* rather than a credit, and ten (IL, IN, MI, NJ, OH, PA, WV, MA,
@@ -140,6 +155,14 @@ ordinary-income brackets, Social Security up to the wage base, Medicare, the
 Additional Medicare Tax, and state income tax computed on **state** taxable
 income (gross minus that state's own standard deduction, then its own brackets,
 then any personal-exemption credit).
+
+Also in scope, via the shelter panel: pre-tax contributions, with the
+distinction that makes the panel worth having. Elective deferrals to a
+401(k)/403(b)/457 reduce income tax but **remain in the FICA wage base**.
+Section 125 money — health FSA, dependent care FSA, and an HSA funded through
+payroll — escapes FICA as well, worth an extra 7.65% below the wage base. A
+Traditional IRA is claimed at filing, so it never touches FICA. That is the
+`savesFica` flag on each shelter; changing it changes real numbers.
 
 Deliberately out of scope, and disclosed in the footer: local and municipal
 income taxes, AMT, the Net Investment Income Tax, capital gains and qualified
@@ -172,6 +195,34 @@ sips -s format jpeg -s formatOptions 45 og-image.png --out og-image.jpg
 - Bracket fill colours pair dark text with pale fills and white text with dark
   fills; every combination clears WCAG AA.
 - `prefers-reduced-motion` disables transitions and smooth scrolling.
+- Contribution sliders are native `<input type="range">`, so they work with
+  arrow keys and screen readers; each carries a live `aria-valuetext` giving
+  the dollar amount rather than a bare number.
+
+---
+
+## Testing
+
+There is no test runner — the checks are standalone HTML files run through
+headless Chrome, because the app has no build step and no Node dependency.
+
+Before shipping a data change, verify three things:
+
+1. **Syntax.** Load each of `data.js`, `states.js` and `app.js` in a page with
+   an `window.onerror` handler. A stray apostrophe inside a single-quoted
+   string silently undefines `TAX_STATES` and kills the whole site — this has
+   happened once already, and the page still renders enough to look fine.
+2. **The federal engine**, against hand-computed values: all four filing
+   statuses, the FICA wage-base cap, the Additional Medicare threshold,
+   bracket continuity, and a monotonicity sweep proving take-home never falls
+   as income rises.
+3. **The state table**: all 51 present, no bracket gaps or overlaps, no
+   decreasing rates, plausible effective rates, and monotonic tax across
+   $0–500k in every jurisdiction.
+
+Read the rendered numbers, not the HTML placeholders — several result fields
+ship with `$0` and `$1.00` defaults, which look exactly like a correct
+zero-contribution result.
 
 ## Licence
 
