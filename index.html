@@ -525,9 +525,19 @@
 <script src="states.js"></script>
 <script src="app.js"></script>
 
-<!-- Vercel Web Analytics — cookieless, no consent banner needed.
-     analytics.js redacts income and contribution amounts from the URL before
-     any beacon is sent. See that file for why. -->
+<!-- Vercel Analytics Setup (cookieless, no consent banner required):
+     
+     analytics.js: Initializes window.va and window.si for Web Analytics and Speed Insights.
+     Includes beforeSend hook to redact sensitive financial parameters (income, contributions)
+     from URLs before sending any beacons. This privacy layer is critical for this project.
+     
+     The script below handles both Web Analytics (visitor tracking/page views) and Speed
+     Insights (performance/Core Web Vitals) depending on what's enabled in your dashboard:
+     
+     To enable Web Analytics: Vercel Dashboard → Project → Analytics → Enable Web Analytics
+     To enable Speed Insights: Vercel Dashboard → Project → Speed Insights → Enable
+     
+     Both work through the same script with dynamic endpoint discovery. -->
 <script src="analytics.js"></script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
