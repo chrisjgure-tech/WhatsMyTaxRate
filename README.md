@@ -204,22 +204,40 @@ sips -s format jpeg -s formatOptions 45 og-image.png --out og-image.jpg
 
 ## Analytics
 
-Vercel Web Analytics, cookieless, no consent banner required. Two steps:
-enable it in the dashboard (**Project → Analytics → Enable**), and keep the
-two script tags at the bottom of `index.html`. The framework snippet in
-Vercel's docs is for React — it does not apply here; this site has no build
-step and no npm.
+This project is configured for **Vercel Web Analytics** and **Vercel Speed Insights**,
+both cookieless and requiring no consent banner.
+
+### Setup
+
+The implementation is already complete in `analytics.js` and `index.html`. To enable:
+
+1. **Web Analytics** (visitor tracking, page views, custom events):
+   - Vercel Dashboard → Your Project → Analytics → Enable Web Analytics
+   
+2. **Speed Insights** (performance metrics, Core Web Vitals):
+   - Vercel Dashboard → Your Project → Speed Insights → Enable
+
+Both products work through the same `/_vercel/insights/script.js` endpoint with
+dynamic endpoint discovery. The initialization code in `analytics.js` supports both
+`window.va` (Web Analytics) and `window.si` (Speed Insights).
+
+**Note:** Vercel's documentation often shows React/Next.js examples using the
+`@vercel/analytics` and `@vercel/speed-insights` npm packages. Those do NOT apply
+here — this is a vanilla HTML/JavaScript site with no build step and no npm.
+
+### Privacy Implementation
 
 **Why `analytics.js` exists.** The page keeps its state in the query string,
 so a real URL looks like `/?income=185000&status=mfj&state=NJ&k401=24500`.
-Sent as-is, that logs strangers' salaries and retirement contributions into
-an analytics dashboard. The `beforeSend` hook strips every financial
-parameter before the beacon leaves the browser; `state` and `status` survive
-because they are useful in aggregate and identify nobody. A malformed URL
-drops the event entirely rather than risk sending it unredacted.
+Sent as-is, that would log strangers' salaries and retirement contributions.
 
-If you add a query parameter that carries anything personal, add its key to
-`SENSITIVE` in that file.
+The `beforeSend` hooks in `analytics.js` strip every financial parameter before
+the beacon leaves the browser; only `state` and `status` survive because they
+are useful in aggregate and identify nobody. A malformed URL drops the event
+entirely rather than risk sending it unredacted.
+
+**If you add a query parameter that carries anything personal, add its key to
+the `SENSITIVE` array in `analytics.js`.**
 
 ## Testing
 
