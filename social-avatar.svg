@@ -1,0 +1,23 @@
+<!-- Square social avatar, 1024×1024. Safe inside a circle crop (all platforms).
+     Bars sit within the central 62% so nothing clips when cropped round. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="0.42" y2="1">
+      <stop offset="0" stop-color="#3D1C56"/>
+      <stop offset="1" stop-color="#1F0B2E"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.72" cy="0.14" r="0.9">
+      <stop offset="0" stop-color="#4E2470" stop-opacity="0.75"/>
+      <stop offset="1" stop-color="#4E2470" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" fill="url(#tile)"/>
+  <rect width="1024" height="1024" fill="url(#glow)"/>
+  <!-- bars, scaled from the 96-grid: ×10.667, centred -->
+  <g transform="translate(163,185) scale(7.35)">
+    <rect x="20" y="56" width="12" height="20" rx="3" fill="#C4B5FD"/>
+    <rect x="37" y="44" width="12" height="32" rx="3" fill="#A78BE6"/>
+    <rect x="54" y="30" width="12" height="46" rx="3" fill="#8B5CF6"/>
+    <rect x="71" y="18" width="5"  height="58" rx="2.5" fill="#4ADE80"/>
+  </g>
+</svg>

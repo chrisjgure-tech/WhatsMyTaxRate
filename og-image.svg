@@ -13,14 +13,17 @@
   <rect width="1200" height="630" fill="url(#bg)"/>
   <rect width="1200" height="630" fill="url(#glow)"/>
 
-  <!-- wordmark -->
-  <g transform="translate(72,64)">
-    <path d="M2 15 L16 7 L30 15" fill="none" stroke="#C4B5FD" stroke-width="2.8" stroke-linejoin="round"/>
-    <path d="M6 18v11M12.7 18v11M19.3 18v11M26 18v11" stroke="#C4B5FD" stroke-width="2.8" stroke-linecap="round"/>
-    <path d="M3.5 32.5h25" stroke="#C4B5FD" stroke-width="2.8" stroke-linecap="round"/>
-    <text x="46" y="27" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+  <!-- wordmark: bracket mark + name -->
+  <g transform="translate(72,58)">
+    <g transform="translate(0,2) scale(0.44)">
+      <rect x="20" y="56" width="12" height="20" rx="3" fill="#C4B5FD"/>
+      <rect x="37" y="44" width="12" height="32" rx="3" fill="#A78BE6"/>
+      <rect x="54" y="30" width="12" height="46" rx="3" fill="#8B5CF6"/>
+      <rect x="71" y="18" width="5"  height="58" rx="2.5" fill="#4ADE80"/>
+    </g>
+    <text x="52" y="30" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
           font-size="25" font-weight="700" fill="#FFFFFF" letter-spacing="-0.6">What's My</text>
-    <text x="185" y="27" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
+    <text x="191" y="30" font-family="Helvetica Neue, Helvetica, Arial, sans-serif"
           font-size="25" font-weight="700" fill="#C4B5FD" letter-spacing="-0.6">Tax Rate</text>
   </g>
 

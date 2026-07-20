@@ -12,7 +12,12 @@ styles.css      all styling, design tokens at the top
 data.js         federal tax data + explainer copy
 states.js       state tax data — 51 jurisdictions
 app.js          calculation engine + rendering
-favicon.svg     tab icon
+favicon.svg     tab icon (rounded tile + bracket mark)
+logo-mark.svg   the mark alone, transparent — for any background
+social-avatar.svg   1024² social profile source (bars on gradient tile)
+apple-touch-icon.png / icon-192 / icon-512 / favicon-32 · favicon-48
+social-avatar-512.png / -1024.png   ready-to-upload profile images
+site.webmanifest    PWA/home-screen metadata
 og-image.jpg    1200×630 link-preview card (regenerate from og-image.svg)
 netlify.toml    Netlify config: redirects, security headers, caching
 vercel.json     Vercel config: the same headers and caching rules
@@ -181,6 +186,22 @@ dividends, self-employment tax, itemized deductions, and all credits other than
 the illustrative ones described in the Credits section.
 
 ---
+
+## The logo
+
+The mark is four ascending bars — the tax brackets your income climbs — with a
+thin green bar for your effective rate, echoing the site's own bracket-fill
+chart. Brand purples `#C4B5FD → #A78BE6 → #8B5CF6`, green `#4ADE80` (or the
+deeper `#22C55E` on white, as in the header).
+
+`logo-mark.svg` is the source of truth. To re-render the raster assets after
+editing it, load a size-wrapped copy in headless Chrome — the pattern is in
+the git history for this commit. All PNGs are regenerated from SVG, so nothing
+here is hand-drawn pixels.
+
+For social profiles upload `social-avatar-512.png` (or `-1024` where allowed).
+The bars sit inside the central 62% so nothing clips when a platform crops the
+avatar to a circle.
 
 ## Regenerating the link-preview image
 
