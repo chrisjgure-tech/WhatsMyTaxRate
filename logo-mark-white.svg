@@ -1,0 +1,9 @@
+<!-- What's My Tax Rate — mark for DARK backgrounds (transparent).
+     Same bracket mark, light bars + gold dot. For light backgrounds use logo-mark.svg. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -2 48 48" role="img" aria-label="What's My Tax Rate">
+  <rect x="6" y="30" width="6" height="12" rx="2" fill="#6D5A93"/>
+  <rect x="16" y="24" width="6" height="18" rx="2" fill="#9B7BD4"/>
+  <rect x="26" y="17" width="6" height="25" rx="2" fill="#B79BEA"/>
+  <rect x="36" y="9" width="6" height="33" rx="2" fill="#FFFFFF"/>
+  <circle cx="39" cy="5" r="3.4" fill="#F2B347"/>
+</svg>

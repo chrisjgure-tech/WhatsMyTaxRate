@@ -1,10 +1,11 @@
-<!-- What's My Tax Rate — logo mark, transparent background.
-     The four ascending bars are the tax brackets; the thin green bar is your
-     effective rate. Use on any background. For a dark background, swap the
-     three purple bars for #C4B5FD (see logo-mark-dark.svg). -->
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="What's My Tax Rate">
-  <rect x="20" y="56" width="12" height="20" rx="3" fill="#C4B5FD"/>
-  <rect x="37" y="44" width="12" height="32" rx="3" fill="#A78BE6"/>
-  <rect x="54" y="30" width="12" height="46" rx="3" fill="#8B5CF6"/>
-  <rect x="71" y="18" width="5"  height="58" rx="2.5" fill="#4ADE80"/>
+<!-- What's My Tax Rate — mark for LIGHT backgrounds (transparent).
+     Four ascending bars = the tax brackets; the gold dot crowning the tallest
+     bar is your effective rate / "you are here". Palette: #4A1D6A #7C3AED #F2B347.
+     For dark backgrounds use logo-mark-white.svg. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -2 48 48" role="img" aria-label="What's My Tax Rate">
+  <rect x="6" y="30" width="6" height="12" rx="2" fill="#C9B8EC"/>
+  <rect x="16" y="24" width="6" height="18" rx="2" fill="#9B7BD4"/>
+  <rect x="26" y="17" width="6" height="25" rx="2" fill="#7C3AED"/>
+  <rect x="36" y="9" width="6" height="33" rx="2" fill="#4A1D6A"/>
+  <circle cx="39" cy="5" r="3.4" fill="#F2B347"/>
 </svg>

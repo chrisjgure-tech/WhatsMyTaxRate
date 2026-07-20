@@ -4,7 +4,7 @@
   "description": "See your real federal, state and FICA tax rate — not the bracket you land in.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#2E1140",
+  "background_color": "#4A1D6A",
   "theme_color": "#2E1140",
   "icons": [
     { "src": "favicon-32.png", "sizes": "32x32", "type": "image/png" },

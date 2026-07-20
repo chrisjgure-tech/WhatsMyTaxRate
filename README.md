@@ -189,10 +189,18 @@ the illustrative ones described in the Credits section.
 
 ## The logo
 
-The mark is four ascending bars — the tax brackets your income climbs — with a
-thin green bar for your effective rate, echoing the site's own bracket-fill
-chart. Brand purples `#C4B5FD → #A78BE6 → #8B5CF6`, green `#4ADE80` (or the
-deeper `#22C55E` on white, as in the header).
+The mark is four ascending bars — the tax brackets your income climbs — crowned
+by a gold dot on the tallest bar (which reads as an "i", a person, "you are
+here"). Brand palette: deep purple `#4A1D6A`, violet `#7C3AED`, gold `#F2B347`,
+with a light purple ramp `#C9B8EC → #9B7BD4` for the shorter bars.
+
+Two source variants: `logo-mark.svg` for light backgrounds (dark top bar),
+`logo-mark-white.svg` for dark (white top bar). `favicon.svg` and
+`social-avatar.svg` put the light mark on the purple gradient tile.
+
+Note the site keeps **green** as its data colour (take-home, effective rate,
+"you are here" on the charts) and uses **gold** only as the logo's brand
+accent — two roles, so they don't compete. Don't recolour the charts to gold.
 
 `logo-mark.svg` is the source of truth. To re-render the raster assets after
 editing it, load a size-wrapped copy in headless Chrome — the pattern is in
