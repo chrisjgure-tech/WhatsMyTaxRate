@@ -211,6 +211,15 @@ For social profiles upload `social-avatar-512.png` (or `-1024` where allowed).
 The bars sit inside the central 62% so nothing clips when a platform crops the
 avatar to a circle.
 
+Channel banners are pre-sized per platform:
+- `banner-x-1500x500.png` — X / Twitter header
+- `banner-linkedin-1584x396.png` — LinkedIn personal banner
+- `banner-youtube-2560x1440.png` — YouTube (content sits in the 1546×423
+  centre safe area so it survives every device crop)
+- `banner-facebook-1640x856.png` — Facebook page cover
+TikTok has no banner — it uses the avatar only. Regenerate all four from
+`gen-banners.py` in the session scratchpad if the tagline or sizes change.
+
 ## Regenerating the link-preview image
 
 `og-image.svg` is the source. To re-render the PNG after editing it:
