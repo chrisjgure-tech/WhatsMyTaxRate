@@ -145,13 +145,20 @@ the UI appends its own caution sentence automatically.
 
 **Shelter variant toggles.** A shelter may carry a `variants` block that adds
 a small toggle to its slider row and switches the contribution ceiling. Two
-exist: HSA `hsacov` (self-only $4,400 / family $8,750) and 401(k) `k401mode`
-(just me $24,500 / both spouses $49,000). A variant may set `mfjOnly: true`
-so it only appears for joint filers — the 401(k) doubling does, because the
-deferral limit is per person. Leaving MFJ hides the toggle, resets it, and
-clamps any over-limit contribution. The chosen option rides in the share URL
-under its `param`. Both HSA coverage and IRA are per-person too; only 401(k)
-and HSA expose a toggle today.
+exist: HSA `hsacov` (self-only / family) and the both-spouses doubling on
+401(k) `k401mode` and IRA `iramode`. A variant with `mfjOnly: true` only
+appears for joint filers — the doublings do, because those limits are per
+person. Leaving MFJ hides the toggle, resets it, and clamps any over-limit
+contribution.
+
+**Age-band catch-ups.** A single global control (`age` in the URL:
+`u50` / `a50` / `a55`) raises the catch-up-eligible ceilings. The thresholds
+differ by account and the engine honours each: 401(k) and IRA catch-ups begin
+at **50**, the HSA's $1,000 add-on at **55** — so someone 50–54 correctly sees
+the higher 401(k)/IRA limits but the base HSA. `shelterMax()` composes three
+independent facts — age band, HSA coverage, and spouse count — so e.g. MFJ +
+both + 55+ gives a 401(k) ceiling of 2 × $32,500 = $65,000. The 60–63 "super
+catch-up" is deliberately not modelled (noted in the panel's fine print).
 
 **Pre-tax conformity.** Four states tax contributions the federal system
 exempts, so the shelter panel must not credit a state saving there. Set

@@ -97,29 +97,36 @@ window.TAX_FEDERAL = {
      IRA is an above-the-line deduction you take at filing, so it never
      touches FICA either.                                                    */
 
+  /* Per-account limit fields the engine composes:
+       max        base limit (under catch-up age, self-only / one filer)
+       maxAlt     HSA family base
+       catchUp    limit once at/above catchUpAge (retirement) OR the flat +$1,000
+                  add-on (HSA); the engine reads catchUpAge to know which
+       catchUpAge age at which the catch-up begins (50 for 401k/IRA, 55 for HSA)
+       perSpouse  true if a joint household with two of these can double it
+     `variants` drives the toggle on the slider row (HSA coverage, or the
+     both-spouses doubling on 401(k)/IRA). Age is a single global control. */
   shelters: [
     {
       key: 'k401', name: '401(k) / 403(b) / 457', short: '401(k)',
-      max: 24500, catchUp: 32500, savesFica: false,
-      // The deferral limit is per person, so a couple filing jointly with two
-      // workplace plans can defer up to double. Only offered when MFJ.
+      max: 24500, catchUp: 32500, catchUpAge: 50, perSpouse: true, savesFica: false,
       variants: {
         param: 'k401mode', mfjOnly: true,
         opts: [
-          { key: 'one',  label: 'Just me',      max: 24500, suffix: '' },
-          { key: 'both', label: 'Both spouses', max: 49000, suffix: 'combined' }
+          { key: 'one',  label: 'Just me' },
+          { key: 'both', label: 'Both spouses', suffix: 'combined' }
         ]
       },
       blurb: 'Pre-tax salary deferral. Cuts income tax, not FICA.'
     },
     {
       key: 'hsa', name: 'Health Savings Account', short: 'HSA',
-      max: 4400, maxAlt: 8750, altLabel: 'family', savesFica: true,
+      max: 4400, maxAlt: 8750, catchUp: 1000, catchUpAge: 55, savesFica: true,
       variants: {
         param: 'hsacov',
         opts: [
-          { key: 'self',   label: 'Self-only', max: 4400, suffix: 'self' },
-          { key: 'family', label: 'Family',    max: 8750, suffix: 'family' }
+          { key: 'self',   label: 'Self-only', suffix: 'self' },
+          { key: 'family', label: 'Family',    suffix: 'family' }
         ]
       },
       blurb: 'Funded through payroll it dodges income tax AND FICA — the best dollar-for-dollar shelter a W-2 earner has. Fund it yourself from your bank account instead and you lose the FICA saving, because that money was already taxed as wages. Needs an HSA-eligible high-deductible plan.'
@@ -136,9 +143,23 @@ window.TAX_FEDERAL = {
     },
     {
       key: 'ira', name: 'Traditional IRA', short: 'Trad. IRA',
-      max: 7500, catchUp: 8600, savesFica: false,
-      blurb: 'Claimed at filing rather than through payroll, so no FICA saving. The deduction phases out at higher incomes if you also have a workplace plan.'
+      max: 7500, catchUp: 8600, catchUpAge: 50, perSpouse: true, savesFica: false,
+      variants: {
+        param: 'iramode', mfjOnly: true,
+        opts: [
+          { key: 'one',  label: 'Just me' },
+          { key: 'both', label: 'Both spouses', suffix: 'combined' }
+        ]
+      },
+      blurb: 'Claimed at filing rather than through payroll, so no FICA saving. Both spouses can each contribute on a joint return. The deduction phases out at higher incomes if you also have a workplace plan.'
     }
+  ],
+
+  // Age bands for catch-up contributions. HSA catch-up starts at 55, not 50.
+  ageBands: [
+    { key: 'u50', label: 'Under 50', min: 0 },
+    { key: 'a50', label: '50–54',    min: 50 },
+    { key: 'a55', label: '55+',      min: 55 }
   ],
 
   /* ---------------------------------------------------------- deductions */

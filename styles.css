@@ -538,6 +538,14 @@ table.brk tfoot td { font-weight: 800; border-bottom: 0; border-top: 2px solid v
 /* HSA self-only / family coverage toggle */
 .sh__cov { display: inline-flex; gap: 4px; margin: 0 0 14px; padding: 3px; background: var(--bg-alt); border-radius: 10px; }
 .sh__cov[hidden] { display: none; }   /* beats the display:inline-flex above */
+
+/* Global age-band control at the top of the shelter panel */
+.sh__age {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 4px 0 16px; margin-bottom: 6px; border-bottom: 1px solid var(--line);
+}
+.sh__age .sh__cov { margin: 0; }
+.sh__agelabel { font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
 .sh__covbtn {
   min-height: 32px; padding: 0 13px; border: 0; border-radius: 8px; cursor: pointer;
   background: transparent; color: var(--ink-2);

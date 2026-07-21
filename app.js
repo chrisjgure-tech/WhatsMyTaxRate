@@ -167,7 +167,7 @@
   var RAISE_AMOUNTS = [1000, 5000, 10000];
 
   var ui = { gross: 75000, status: 'single', state: 'NC', raise: 1000, bonus: 10000,
-             variant: {}, contrib: {} };
+             ageBand: 'u50', variant: {}, contrib: {} };
 
   /* FIX #9 — the whole state of the page lives in the URL, so any result is
      a shareable link. */
@@ -179,6 +179,8 @@
     if (st && F.standardDeduction[st] !== undefined) ui.status = st;
     var stt = (p.get('state') || '').toUpperCase();
     if (stt && S[stt]) ui.state = stt;
+    var age = p.get('age');
+    for (var a = 0; a < F.ageBands.length; a++) if (F.ageBands[a].key === age) ui.ageBand = age;
     // Read variant toggles BEFORE contributions — the clamp below depends on
     // them (family HSA / both-spouse 401(k) raise the ceiling). Status is
     // already read above, which mfjOnly variants gate on.
@@ -211,6 +213,7 @@
         if (cur.key !== s.variants.opts[0].key) p.set(s.variants.param, cur.key);
       }
     });
+    if (ui.ageBand !== 'u50') p.set('age', ui.ageBand);
     history.replaceState(null, '', location.pathname + '?' + p.toString());
   }
 
@@ -507,10 +510,9 @@
 
   /* ------------------------------------------- interactive shelter panel */
 
-  /* A shelter may offer a variant toggle (HSA self/family, 401(k) one/both
-     spouses). Some variants only apply to certain filing statuses. */
+  /* A shelter may offer a variant toggle (HSA self/family, 401(k) & IRA
+     one/both spouses). Some variants only apply to certain filing statuses. */
   function variantActive(s) {
-    // Is the toggle available at all right now?
     return s.variants && (!s.variants.mfjOnly || ui.status === 'mfj');
   }
   function currentVariant(s) {
@@ -522,9 +524,27 @@
     }
     return s.variants.opts[0];
   }
+  function isBothSpouses(s) {
+    return s.perSpouse && variantActive(s) && currentVariant(s).key === 'both';
+  }
+  function ageMin() {
+    for (var i = 0; i < F.ageBands.length; i++) {
+      if (F.ageBands[i].key === ui.ageBand) return F.ageBands[i].min;
+    }
+    return 0;
+  }
+
+  /* Compose the ceiling from three independent facts: the age band (catch-up
+     starts at 50 for retirement accounts, 55 for the HSA), whether it's an HSA
+     family plan, and whether both spouses contribute (retirement only). */
   function shelterMax(s) {
-    var v = currentVariant(s);
-    return v ? v.max : s.max;
+    if (s.key === 'hsa') {
+      var base = ui.variant.hsa === 'family' ? s.maxAlt : s.max;
+      return base + (ageMin() >= s.catchUpAge ? s.catchUp : 0);   // +$1,000 at 55
+    }
+    // 401(k) / IRA: catch-up raises the per-person cap; both spouses double it.
+    var perPerson = (s.catchUpAge && ageMin() >= s.catchUpAge) ? s.catchUp : s.max;
+    return perPerson * (isBothSpouses(s) ? 2 : 1);
   }
   function maxLabel(s) {
     var v = currentVariant(s);
@@ -532,7 +552,18 @@
   }
 
   function buildShelter() {
-    el.shelterControls.innerHTML = F.shelters.map(function (s) {
+    // Global age-band control — catch-up contributions raise several limits at
+    // once (401k/IRA at 50, HSA at 55).
+    var ageCtl = '<div class="sh__age">'
+      + '<span class="sh__agelabel">Contributor age</span>'
+      + '<div class="sh__cov" id="sh-age" role="group" aria-label="Contributor age band">'
+      + F.ageBands.map(function (a) {
+          return '<button type="button" class="sh__covbtn" data-age="' + a.key + '"'
+            + ' aria-pressed="' + (a.key === ui.ageBand) + '">' + esc(a.label) + '</button>';
+        }).join('')
+      + '</div></div>';
+
+    el.shelterControls.innerHTML = ageCtl + F.shelters.map(function (s) {
       var max = shelterMax(s);
       var toggle = s.variants
         ? '<div class="sh__cov" id="shvar-' + s.key + '" role="group" aria-label="' + esc(s.name) + ' option">'
@@ -576,31 +607,49 @@
         render();
       });
     });
+
+    $('sh-age').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-age]'); if (!b) return;
+      ui.ageBand = b.dataset.age;
+      Array.prototype.forEach.call(this.children, function (x) {
+        x.setAttribute('aria-pressed', String(x.dataset.age === ui.ageBand));
+      });
+      updateShelterToggles();   // catch-ups change several ceilings at once
+      render();
+    });
   }
 
-  // Keep every variant slider's ceiling, label, buttons and visibility in sync.
+  // Keep every slider's ceiling and label in sync, plus variant toggle state.
+  // Runs whenever anything that moves a ceiling changes — a variant, the age
+  // band, or filing status. Age affects non-variant maths too, so this touches
+  // every slider, not only the ones with toggles.
   function updateShelterToggles() {
     F.shelters.forEach(function (s) {
-      if (!s.variants) return;
-      var active = variantActive(s);
-      var grp = $('shvar-' + s.key);
-      if (grp) grp.hidden = !active;
-      // A hidden toggle (e.g. "both spouses" when not MFJ) must not keep a
-      // stale higher setting — reset it to the base option.
-      if (!active) ui.variant[s.key] = s.variants.opts[0].key;
-
+      if (s.variants) {
+        var active = variantActive(s);
+        var grp = $('shvar-' + s.key);
+        if (grp) grp.hidden = !active;
+        // A hidden toggle (e.g. "both spouses" when not MFJ) must not keep a
+        // stale higher setting — reset it to the base option.
+        if (!active) ui.variant[s.key] = s.variants.opts[0].key;
+        if (grp) {
+          var cur = currentVariant(s).key;
+          Array.prototype.forEach.call(grp.children, function (b) {
+            b.setAttribute('aria-pressed', String(b.dataset.opt === cur));
+          });
+        }
+      }
       var max = shelterMax(s);
       if ((ui.contrib[s.key] || 0) > max) ui.contrib[s.key] = max;   // clamp overshoot
       var slider = $('shs-' + s.key);
       if (slider) { slider.max = max; slider.value = ui.contrib[s.key] || 0; }
       var lbl = $('shmax-' + s.key);
       if (lbl) lbl.textContent = maxLabel(s);
-      if (grp) {
-        var cur = currentVariant(s).key;
-        Array.prototype.forEach.call(grp.children, function (b) {
-          b.setAttribute('aria-pressed', String(b.dataset.opt === cur));
-        });
-      }
+    });
+    // Keep the age buttons in step too (e.g. hydrated from a shared link).
+    var ageGrp = $('sh-age');
+    if (ageGrp) Array.prototype.forEach.call(ageGrp.children, function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.age === ui.ageBand));
     });
   }
 
@@ -656,9 +705,10 @@
     var stMeta = S[ui.state] || {};
     var conf = stMeta.pretaxConformity || {};
     var nonConforming = F.shelters.filter(function (s) { return conf[s.key] === false; });
-    el.shFine.innerHTML = 'Limits are 2026 figures for a filer under 50 and, for the HSA, '
-      + 'self-only coverage. Catch-up contributions, employer matches, IRA deduction '
-      + 'phase-outs and eligibility rules are not modelled.'
+    el.shFine.innerHTML = '2026 limits, including age-50 catch-ups (age 55 for the HSA). '
+      + 'Not modelled: the larger 401(k) “super catch-up” for ages 60–63, employer matches, '
+      + 'IRA deduction phase-outs, and eligibility rules. For a couple, each spouse’s HSA '
+      + 'catch-up must go in their own account.'
       + (nonConforming.length
           ? ' <b style="color:#F0B27A">' + esc(stMeta.name) + ' taxes '
             + nonConforming.map(function (s) { return esc(s.short); }).join(' and ')
