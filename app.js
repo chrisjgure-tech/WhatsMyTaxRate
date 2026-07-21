@@ -166,7 +166,8 @@
   var QUICKPICKS = [50000, 75000, 100000, 150000, 250000];
   var RAISE_AMOUNTS = [1000, 5000, 10000];
 
-  var ui = { gross: 75000, status: 'single', state: 'NC', raise: 1000, bonus: 10000, contrib: {} };
+  var ui = { gross: 75000, status: 'single', state: 'NC', raise: 1000, bonus: 10000,
+             hsaCoverage: 'self', contrib: {} };
 
   /* FIX #9 — the whole state of the page lives in the URL, so any result is
      a shareable link. */
@@ -178,6 +179,9 @@
     if (st && F.standardDeduction[st] !== undefined) ui.status = st;
     var stt = (p.get('state') || '').toUpperCase();
     if (stt && S[stt]) ui.state = stt;
+    // Set HSA coverage BEFORE reading contributions — the clamp below depends
+    // on it (family raises the ceiling).
+    if (p.get('hsacov') === 'family') ui.hsaCoverage = 'family';
     // Contributions travel in the link too, so a shared result keeps the
     // scenario the sender actually built.
     F.shelters.forEach(function (s) {
@@ -195,6 +199,7 @@
       var v = ui.contrib[s.key] || 0;
       if (v > 0) p.set(s.key, String(v));
     });
+    if (ui.hsaCoverage === 'family') p.set('hsacov', 'family');
     history.replaceState(null, '', location.pathname + '?' + p.toString());
   }
 
@@ -492,12 +497,27 @@
   /* ------------------------------------------- interactive shelter panel */
 
   function shelterMax(s) {
+    // The HSA limit follows the health plan, not the filer: family HDHP
+    // coverage allows the higher amount. Everything else uses its flat cap.
+    if (s.key === 'hsa' && ui.hsaCoverage === 'family') return s.maxAlt;
     return s.max;   // headline (non-catch-up, self-only) limit
+  }
+
+  function maxLabel(s) {
+    if (s.key === 'hsa') return money(shelterMax(s)) + (ui.hsaCoverage === 'family' ? ' family' : ' self');
+    return money(s.max);
   }
 
   function buildShelter() {
     el.shelterControls.innerHTML = F.shelters.map(function (s) {
       var max = shelterMax(s);
+      // Coverage toggle, HSA only — self-only vs family HDHP.
+      var cover = s.key === 'hsa'
+        ? '<div class="sh__cov" id="sh-cov" role="group" aria-label="HSA coverage type">'
+          + '<button type="button" class="sh__covbtn" data-cov="self" aria-pressed="true">Self-only</button>'
+          + '<button type="button" class="sh__covbtn" data-cov="family" aria-pressed="false">Family</button>'
+          + '</div>'
+        : '';
       return '<div class="sh">'
         + '<div class="sh__top">'
         +   '<span class="sh__name">' + esc(s.name) + '</span>'
@@ -505,13 +525,16 @@
         +   '<span class="sh__val num" id="shv-' + s.key + '">$0</span>'
         + '</div>'
         + '<p class="sh__blurb">' + esc(s.blurb) + '</p>'
+        + cover
+        // step 50, not 100, so every limit (incl. the $8,750 family HSA) is
+        // exactly reachable by dragging.
         + '<input type="range" class="sh__slider" id="shs-' + s.key + '"'
-        +   ' min="0" max="' + max + '" step="100" value="0"'
+        +   ' min="0" max="' + max + '" step="50" value="0"'
         +   ' aria-label="' + esc(s.name) + ' annual contribution"'
-        +   ' aria-valuetext="$0 of $' + max.toLocaleString('en-US') + '">'
+        +   ' aria-valuetext="$0 of ' + money(max) + '">'
         + '<div class="sh__scale"><span>$0</span>'
         +   '<span class="sh__saves" id="shx-' + s.key + '"></span>'
-        +   '<span>' + money(max) + (s.maxAlt ? ' self' : '') + '</span></div>'
+        +   '<span id="shmax-' + s.key + '">' + maxLabel(s) + '</span></div>'
         + '</div>';
     }).join('');
 
@@ -520,6 +543,32 @@
         ui.contrib[s.key] = +e.target.value;
         render();
       });
+    });
+
+    // HSA coverage toggle
+    var cov = $('sh-cov');
+    if (cov) cov.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-cov]'); if (!b) return;
+      ui.hsaCoverage = b.dataset.cov;
+      updateHsaCoverageUI();   // clamps and resizes the slider
+      render();
+    });
+  }
+
+  // Keep the HSA slider's ceiling, label and toggle in sync with coverage.
+  function updateHsaCoverageUI() {
+    var hsa = null;
+    F.shelters.forEach(function (s) { if (s.key === 'hsa') hsa = s; });
+    if (!hsa) return;
+    var max = shelterMax(hsa);
+    if ((ui.contrib.hsa || 0) > max) ui.contrib.hsa = max;   // family→self can overshoot
+    var slider = $('shs-hsa');
+    if (slider) { slider.max = max; slider.value = ui.contrib.hsa || 0; }
+    var lbl = $('shmax-hsa');
+    if (lbl) lbl.textContent = maxLabel(hsa);
+    var grp = $('sh-cov');
+    if (grp) Array.prototype.forEach.call(grp.children, function (b) {
+      b.setAttribute('aria-pressed', String(b.dataset.cov === ui.hsaCoverage));
     });
   }
 
@@ -876,15 +925,16 @@
     buildControls();
     syncControls();
     syncShelterSliders();
+    updateHsaCoverageUI();   // reflect a family-coverage link on load
     render();
 
     $('sh-max').addEventListener('click', function () {
       F.shelters.forEach(function (s) { ui.contrib[s.key] = shelterMax(s); });
-      syncShelterSliders(); render();
+      syncShelterSliders(); updateHsaCoverageUI(); render();
     });
     $('sh-reset').addEventListener('click', function () {
       ui.contrib = {};
-      syncShelterSliders(); render();
+      syncShelterSliders(); updateHsaCoverageUI(); render();
     });
 
     // Inputs

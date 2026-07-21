@@ -535,6 +535,17 @@ table.brk tfoot td { font-weight: 800; border-bottom: 0; border-top: 2px solid v
 }
 .sh__blurb { font-size: 13px; color: var(--ink-3); line-height: 1.5; margin-bottom: 12px; }
 
+/* HSA self-only / family coverage toggle */
+.sh__cov { display: inline-flex; gap: 4px; margin: 0 0 14px; padding: 3px; background: var(--bg-alt); border-radius: 10px; }
+.sh__covbtn {
+  min-height: 32px; padding: 0 13px; border: 0; border-radius: 8px; cursor: pointer;
+  background: transparent; color: var(--ink-2);
+  font-family: var(--sans); font-size: 12.5px; font-weight: 700;
+  transition: .13s;
+}
+.sh__covbtn[aria-pressed="true"] { background: #fff; color: var(--brand-700); box-shadow: 0 1px 2px rgba(26,21,35,.12); }
+.sh__covbtn:hover:not([aria-pressed="true"]) { color: var(--brand-700); }
+
 /* Range input — styled consistently across engines, 44px hit area */
 .sh__slider { width: 100%; height: 44px; margin: 0; background: transparent; -webkit-appearance: none; appearance: none; cursor: pointer; display: block; }
 .sh__slider:focus { outline: none; }
