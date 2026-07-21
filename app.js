@@ -167,7 +167,7 @@
   var RAISE_AMOUNTS = [1000, 5000, 10000];
 
   var ui = { gross: 75000, status: 'single', state: 'NC', raise: 1000, bonus: 10000,
-             hsaCoverage: 'self', contrib: {} };
+             variant: {}, contrib: {} };
 
   /* FIX #9 — the whole state of the page lives in the URL, so any result is
      a shareable link. */
@@ -179,9 +179,16 @@
     if (st && F.standardDeduction[st] !== undefined) ui.status = st;
     var stt = (p.get('state') || '').toUpperCase();
     if (stt && S[stt]) ui.state = stt;
-    // Set HSA coverage BEFORE reading contributions — the clamp below depends
-    // on it (family raises the ceiling).
-    if (p.get('hsacov') === 'family') ui.hsaCoverage = 'family';
+    // Read variant toggles BEFORE contributions — the clamp below depends on
+    // them (family HSA / both-spouse 401(k) raise the ceiling). Status is
+    // already read above, which mfjOnly variants gate on.
+    F.shelters.forEach(function (s) {
+      if (!s.variants) return;
+      var val = p.get(s.variants.param);
+      for (var i = 0; i < s.variants.opts.length; i++) {
+        if (s.variants.opts[i].key === val) ui.variant[s.key] = val;
+      }
+    });
     // Contributions travel in the link too, so a shared result keeps the
     // scenario the sender actually built.
     F.shelters.forEach(function (s) {
@@ -198,8 +205,12 @@
     F.shelters.forEach(function (s) {
       var v = ui.contrib[s.key] || 0;
       if (v > 0) p.set(s.key, String(v));
+      // Persist a non-default variant only when it's actually in effect.
+      if (s.variants && variantActive(s)) {
+        var cur = currentVariant(s);
+        if (cur.key !== s.variants.opts[0].key) p.set(s.variants.param, cur.key);
+      }
     });
-    if (ui.hsaCoverage === 'family') p.set('hsacov', 'family');
     history.replaceState(null, '', location.pathname + '?' + p.toString());
   }
 
@@ -496,26 +507,40 @@
 
   /* ------------------------------------------- interactive shelter panel */
 
-  function shelterMax(s) {
-    // The HSA limit follows the health plan, not the filer: family HDHP
-    // coverage allows the higher amount. Everything else uses its flat cap.
-    if (s.key === 'hsa' && ui.hsaCoverage === 'family') return s.maxAlt;
-    return s.max;   // headline (non-catch-up, self-only) limit
+  /* A shelter may offer a variant toggle (HSA self/family, 401(k) one/both
+     spouses). Some variants only apply to certain filing statuses. */
+  function variantActive(s) {
+    // Is the toggle available at all right now?
+    return s.variants && (!s.variants.mfjOnly || ui.status === 'mfj');
   }
-
+  function currentVariant(s) {
+    if (!s.variants) return null;
+    if (!variantActive(s)) return s.variants.opts[0];   // forced to the base option
+    var key = ui.variant[s.key] || s.variants.opts[0].key;
+    for (var i = 0; i < s.variants.opts.length; i++) {
+      if (s.variants.opts[i].key === key) return s.variants.opts[i];
+    }
+    return s.variants.opts[0];
+  }
+  function shelterMax(s) {
+    var v = currentVariant(s);
+    return v ? v.max : s.max;
+  }
   function maxLabel(s) {
-    if (s.key === 'hsa') return money(shelterMax(s)) + (ui.hsaCoverage === 'family' ? ' family' : ' self');
-    return money(s.max);
+    var v = currentVariant(s);
+    return money(shelterMax(s)) + (v && v.suffix ? ' ' + v.suffix : '');
   }
 
   function buildShelter() {
     el.shelterControls.innerHTML = F.shelters.map(function (s) {
       var max = shelterMax(s);
-      // Coverage toggle, HSA only — self-only vs family HDHP.
-      var cover = s.key === 'hsa'
-        ? '<div class="sh__cov" id="sh-cov" role="group" aria-label="HSA coverage type">'
-          + '<button type="button" class="sh__covbtn" data-cov="self" aria-pressed="true">Self-only</button>'
-          + '<button type="button" class="sh__covbtn" data-cov="family" aria-pressed="false">Family</button>'
+      var toggle = s.variants
+        ? '<div class="sh__cov" id="shvar-' + s.key + '" role="group" aria-label="' + esc(s.name) + ' option">'
+          + s.variants.opts.map(function (o) {
+              return '<button type="button" class="sh__covbtn" data-opt="' + o.key + '"'
+                + ' aria-pressed="' + (o.key === (ui.variant[s.key] || s.variants.opts[0].key)) + '">'
+                + esc(o.label) + '</button>';
+            }).join('')
           + '</div>'
         : '';
       return '<div class="sh">'
@@ -525,7 +550,7 @@
         +   '<span class="sh__val num" id="shv-' + s.key + '">$0</span>'
         + '</div>'
         + '<p class="sh__blurb">' + esc(s.blurb) + '</p>'
-        + cover
+        + toggle
         // step 50, not 100, so every limit (incl. the $8,750 family HSA) is
         // exactly reachable by dragging.
         + '<input type="range" class="sh__slider" id="shs-' + s.key + '"'
@@ -543,32 +568,39 @@
         ui.contrib[s.key] = +e.target.value;
         render();
       });
-    });
-
-    // HSA coverage toggle
-    var cov = $('sh-cov');
-    if (cov) cov.addEventListener('click', function (e) {
-      var b = e.target.closest('[data-cov]'); if (!b) return;
-      ui.hsaCoverage = b.dataset.cov;
-      updateHsaCoverageUI();   // clamps and resizes the slider
-      render();
+      if (!s.variants) return;
+      $('shvar-' + s.key).addEventListener('click', function (e) {
+        var b = e.target.closest('[data-opt]'); if (!b) return;
+        ui.variant[s.key] = b.dataset.opt;
+        updateShelterToggles();   // clamps and resizes the slider
+        render();
+      });
     });
   }
 
-  // Keep the HSA slider's ceiling, label and toggle in sync with coverage.
-  function updateHsaCoverageUI() {
-    var hsa = null;
-    F.shelters.forEach(function (s) { if (s.key === 'hsa') hsa = s; });
-    if (!hsa) return;
-    var max = shelterMax(hsa);
-    if ((ui.contrib.hsa || 0) > max) ui.contrib.hsa = max;   // family→self can overshoot
-    var slider = $('shs-hsa');
-    if (slider) { slider.max = max; slider.value = ui.contrib.hsa || 0; }
-    var lbl = $('shmax-hsa');
-    if (lbl) lbl.textContent = maxLabel(hsa);
-    var grp = $('sh-cov');
-    if (grp) Array.prototype.forEach.call(grp.children, function (b) {
-      b.setAttribute('aria-pressed', String(b.dataset.cov === ui.hsaCoverage));
+  // Keep every variant slider's ceiling, label, buttons and visibility in sync.
+  function updateShelterToggles() {
+    F.shelters.forEach(function (s) {
+      if (!s.variants) return;
+      var active = variantActive(s);
+      var grp = $('shvar-' + s.key);
+      if (grp) grp.hidden = !active;
+      // A hidden toggle (e.g. "both spouses" when not MFJ) must not keep a
+      // stale higher setting — reset it to the base option.
+      if (!active) ui.variant[s.key] = s.variants.opts[0].key;
+
+      var max = shelterMax(s);
+      if ((ui.contrib[s.key] || 0) > max) ui.contrib[s.key] = max;   // clamp overshoot
+      var slider = $('shs-' + s.key);
+      if (slider) { slider.max = max; slider.value = ui.contrib[s.key] || 0; }
+      var lbl = $('shmax-' + s.key);
+      if (lbl) lbl.textContent = maxLabel(s);
+      if (grp) {
+        var cur = currentVariant(s).key;
+        Array.prototype.forEach.call(grp.children, function (b) {
+          b.setAttribute('aria-pressed', String(b.dataset.opt === cur));
+        });
+      }
     });
   }
 
@@ -925,16 +957,16 @@
     buildControls();
     syncControls();
     syncShelterSliders();
-    updateHsaCoverageUI();   // reflect a family-coverage link on load
+    updateShelterToggles();   // reflect a family-coverage link on load
     render();
 
     $('sh-max').addEventListener('click', function () {
       F.shelters.forEach(function (s) { ui.contrib[s.key] = shelterMax(s); });
-      syncShelterSliders(); updateHsaCoverageUI(); render();
+      syncShelterSliders(); updateShelterToggles(); render();
     });
     $('sh-reset').addEventListener('click', function () {
       ui.contrib = {};
-      syncShelterSliders(); updateHsaCoverageUI(); render();
+      syncShelterSliders(); updateShelterToggles(); render();
     });
 
     // Inputs
@@ -948,7 +980,7 @@
 
     el.status.addEventListener('click', function (e) {
       var b = e.target.closest('[data-status]'); if (!b) return;
-      ui.status = b.dataset.status; syncControls(); render();
+      ui.status = b.dataset.status; syncControls(); updateShelterToggles(); render();
     });
     // Arrow-key support for the radiogroup
     el.status.addEventListener('keydown', function (e) {
@@ -957,7 +989,7 @@
       var i = STATUSES.findIndex(function (s) { return s.key === ui.status; });
       var d = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : -1;
       ui.status = STATUSES[(i + d + STATUSES.length) % STATUSES.length].key;
-      syncControls(); render();
+      syncControls(); updateShelterToggles(); render();
       el.status.querySelector('[aria-checked="true"]').focus();
     });
 

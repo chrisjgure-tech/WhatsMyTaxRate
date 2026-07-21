@@ -101,11 +101,27 @@ window.TAX_FEDERAL = {
     {
       key: 'k401', name: '401(k) / 403(b) / 457', short: '401(k)',
       max: 24500, catchUp: 32500, savesFica: false,
+      // The deferral limit is per person, so a couple filing jointly with two
+      // workplace plans can defer up to double. Only offered when MFJ.
+      variants: {
+        param: 'k401mode', mfjOnly: true,
+        opts: [
+          { key: 'one',  label: 'Just me',      max: 24500, suffix: '' },
+          { key: 'both', label: 'Both spouses', max: 49000, suffix: 'combined' }
+        ]
+      },
       blurb: 'Pre-tax salary deferral. Cuts income tax, not FICA.'
     },
     {
       key: 'hsa', name: 'Health Savings Account', short: 'HSA',
       max: 4400, maxAlt: 8750, altLabel: 'family', savesFica: true,
+      variants: {
+        param: 'hsacov',
+        opts: [
+          { key: 'self',   label: 'Self-only', max: 4400, suffix: 'self' },
+          { key: 'family', label: 'Family',    max: 8750, suffix: 'family' }
+        ]
+      },
       blurb: 'Funded through payroll it dodges income tax AND FICA — the best dollar-for-dollar shelter a W-2 earner has. Fund it yourself from your bank account instead and you lose the FICA saving, because that money was already taxed as wages. Needs an HSA-eligible high-deductible plan.'
     },
     {

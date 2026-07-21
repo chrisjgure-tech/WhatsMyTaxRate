@@ -143,6 +143,16 @@ state selector — use it for local/municipal taxes the calculator does not
 model. Add `provisional: true` when a state hasn't published final figures;
 the UI appends its own caution sentence automatically.
 
+**Shelter variant toggles.** A shelter may carry a `variants` block that adds
+a small toggle to its slider row and switches the contribution ceiling. Two
+exist: HSA `hsacov` (self-only $4,400 / family $8,750) and 401(k) `k401mode`
+(just me $24,500 / both spouses $49,000). A variant may set `mfjOnly: true`
+so it only appears for joint filers — the 401(k) doubling does, because the
+deferral limit is per person. Leaving MFJ hides the toggle, resets it, and
+clamps any over-limit contribution. The chosen option rides in the share URL
+under its `param`. Both HSA coverage and IRA are per-person too; only 401(k)
+and HSA expose a toggle today.
+
 **Pre-tax conformity.** Four states tax contributions the federal system
 exempts, so the shelter panel must not credit a state saving there. Set
 `pretaxConformity` with `false` for each vehicle the state taxes anyway —

@@ -537,6 +537,7 @@ table.brk tfoot td { font-weight: 800; border-bottom: 0; border-top: 2px solid v
 
 /* HSA self-only / family coverage toggle */
 .sh__cov { display: inline-flex; gap: 4px; margin: 0 0 14px; padding: 3px; background: var(--bg-alt); border-radius: 10px; }
+.sh__cov[hidden] { display: none; }   /* beats the display:inline-flex above */
 .sh__covbtn {
   min-height: 32px; padding: 0 13px; border: 0; border-radius: 8px; cursor: pointer;
   background: transparent; color: var(--ink-2);
