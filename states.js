@@ -39,6 +39,26 @@ window.TAX_STATES = {
   WA: { name: 'Washington', type: 'none',
         notes: 'No tax on wages. Washington does levy a capital gains excise tax on large long-term gains, which this calculator does not model.' },
 
+  /* ---- US territory: special federal treatment ------------------------ */
+
+  // Puerto Rico. `federalExcluded` zeroes US federal income tax (IRC §933 —
+  // a bona fide resident's PR-source wages never hit the federal return). The
+  // brackets here are Puerto Rico's own regular individual income tax, which
+  // is what actually applies to a salary. FICA is unaffected (handled by the
+  // federal engine). Personal exemptions stand in for a standard deduction —
+  // PR has none. The 5% "gradual adjustment" surtax above $500k of taxable
+  // income is not modelled (it is capped); see notes.
+  PR: { name: 'Puerto Rico', type: 'graduated', federalExcluded: true, provisional: true,
+        brackets: { single: [
+          { rate: 0,    min: 0,     max: 9000 },
+          { rate: 0.07, min: 9000,  max: 25000 },
+          { rate: 0.14, min: 25000, max: 41500 },
+          { rate: 0.25, min: 41500, max: 61500 },
+          { rate: 0.33, min: 61500, max: null }
+        ] },
+        standardDeduction: { single: 3500, mfj: 7000, hoh: 3500, mfs: 3500 },
+        notes: 'As a bona fide Puerto Rico resident, your PR-source wages are excluded from US federal income tax (IRC §933) — your federal rate is 0%. The rate shown is Puerto Rico’s own income tax on those wages, and FICA still applies. Act 60’s 0% (investment income) and 4% (export-services business) rates do NOT apply to salary — see the Act 60 section below. A 5% surtax above $500,000 of taxable income and PR’s own retirement-account rules are not modelled.' },
+
   /* ---- Flat-rate states ----------------------------------------------- */
 
   AZ: { name: 'Arizona', type: 'flat',

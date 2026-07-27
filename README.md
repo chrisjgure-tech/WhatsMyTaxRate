@@ -160,6 +160,16 @@ independent facts — age band, HSA coverage, and spouse count — so e.g. MFJ +
 both + 55+ gives a 401(k) ceiling of 2 × $32,500 = $65,000. The 60–63 "super
 catch-up" is deliberately not modelled (noted in the panel's fine print).
 
+**Puerto Rico / federal exclusion.** A jurisdiction may set `federalExcluded:
+true` (only Puerto Rico today). It zeroes US federal income tax — a bona fide
+PR resident's PR-source wages are excluded under IRC §933 — while FICA and the
+jurisdiction's own brackets still apply. When selected, the page reveals the
+Act 60 explainer section and hides the two US-federal-withholding sections
+(#withholding, #bonuses) via setSectionVisible(), and the federal bracket table
+is swapped for the §933 note. PR's "standard deduction" holds its personal
+exemption (it has no standard deduction); the 5% surtax above $500k is not
+modelled.
+
 **Pre-tax conformity.** Four states tax contributions the federal system
 exempts, so the shelter panel must not credit a state saving there. Set
 `pretaxConformity` with `false` for each vehicle the state taxes anyway —

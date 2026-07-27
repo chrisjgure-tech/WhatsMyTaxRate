@@ -134,6 +134,13 @@
     var c = fica(Math.max(0, gross - sh.ficaExempt), status);
     var s = state(Math.max(0, gross - sh.incomeState), status, code);
 
+    // Puerto Rico: a bona fide resident's PR-source wages are excluded from US
+    // federal income tax under IRC §933, so federal income tax is zero. FICA
+    // still applies; PR taxes the wages through the "state" slot.
+    if ((S[code] || {}).federalExcluded) {
+      f = { standardDeduction: 0, taxable: 0, tax: 0, marginal: 0, rows: [], excluded: true };
+    }
+
     var total = f.tax + c.tax + s.tax;
     return {
       gross: gross,
@@ -283,7 +290,11 @@
     el.allIn.textContent = pct(r.allInEffective);
 
     var gap = r.fedMarginal - r.fedEffective;
-    if (r.gross <= 0) {
+    if (r.federal.excluded) {
+      el.gapnote.innerHTML = 'Your federal rate is <b>0%</b> because, as a bona fide Puerto Rico '
+        + 'resident, your PR-source wages are excluded from US federal income tax (IRC §933). '
+        + 'Puerto Rico taxes them instead — that’s your all-in rate below — and FICA still applies.';
+    } else if (r.gross <= 0) {
       el.gapnote.innerHTML = 'Enter an income above to see your rates.';
     } else if (gap < 0.5) {
       el.gapnote.innerHTML = 'At this income your effective and marginal federal rates are close, '
@@ -316,7 +327,8 @@
   function renderBreakdown(r) {
     var g = r.gross || 1;
     var cards = [
-      { cls: 'bd--federal', name: 'Federal income tax', sub: 'Progressive brackets', amt: r.federal.tax },
+      { cls: 'bd--federal', name: 'Federal income tax',
+        sub: r.federal.excluded ? 'Excluded — IRC §933' : 'Progressive brackets', amt: r.federal.tax },
       { cls: 'bd--fica',    name: 'FICA', sub: 'Social Security + Medicare', amt: r.fica.tax },
       { cls: 'bd--state',   name: (r.state.none ? 'State income tax' : r.state.name + ' tax'),
         sub: r.state.none ? 'No state income tax' : 'State income tax', amt: r.state.tax },
@@ -341,6 +353,12 @@
                  0.24: '#FFFFFF', 0.32: '#FFFFFF', 0.35: '#FFFFFF', 0.37: '#FFFFFF' };
 
   function renderBrackets(r) {
+    // Puerto Rico: no US federal tax, so the federal bracket table would be a
+    // misleading row of zeros. Swap in the §933 explanation instead.
+    if (el.brkPr) el.brkPr.hidden = !r.federal.excluded;
+    if (el.brkCard) el.brkCard.hidden = !!r.federal.excluded;
+    if (r.federal.excluded) return;
+
     var rows = r.federal.rows;
     var used = rows.filter(function (b) { return b.amount > 0; });
     var taxable = r.federal.taxable;
@@ -948,6 +966,14 @@
       el.localnote.hidden = true;
     }
 
+    /* Puerto Rico reshapes the page: reveal the Act 60 explainer, and hide the
+       two sections that are specifically about US federal withholding — which
+       PR-source wages are excluded from, so they'd only mislead. */
+    var fedExcluded = !!stMeta.federalExcluded;
+    setSectionVisible('act60', fedExcluded);
+    setSectionVisible('withholding', !fedExcluded);
+    setSectionVisible('bonuses', !fedExcluded);
+
     // Sticky mini bar
     el.miniCtx.textContent = money(ui.gross) + ' · ' + statusLabel(ui.status) + ' · ' + stMeta.name;
     el.miniEff.textContent = pct(r.fedEffective);
@@ -960,6 +986,18 @@
   function statusLabel(k) {
     for (var i = 0; i < STATUSES.length; i++) if (STATUSES[i].key === k) return STATUSES[i].label;
     return k;
+  }
+
+  // Show/hide a whole section and its jump-nav link together, so the nav never
+  // points at something that isn't there.
+  function setSectionVisible(id, visible) {
+    var sec = $(id);
+    if (sec) sec.hidden = !visible;
+    var links = document.querySelectorAll('.jump a[href="#' + id + '"], .footer a[href="#' + id + '"]');
+    Array.prototype.forEach.call(links, function (a) {
+      if (a.parentNode.tagName === 'LI') a.parentNode.hidden = !visible;
+      else a.hidden = !visible;
+    });
   }
 
   function setIncomeFromInput() {
@@ -987,6 +1025,7 @@
       breakdownCards: $('breakdown-cards'),
       fillTrack: $('fill-track'), fillMax: $('fill-max'), fillCap: $('fill-cap'),
       brkBody: $('brk-body'), brkTotal: $('brk-total'), brkSource: $('brk-source'),
+      brkPr: $('brk-pr'), brkCard: $('brk-card'),
       whFeels: $('wh-feels'), whReal: $('wh-real'), whRefund: $('wh-refund'),
       bonusWithheld: $('bonus-withheld'), bonusAggregate: $('bonus-aggregate'),
       bonusActual: $('bonus-actual'), bonusVerdict: $('bonus-verdict'),

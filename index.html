@@ -202,7 +202,13 @@
       <p class="section__lead">Your income fills the low brackets first. Only the money above each threshold is taxed at the higher rate — which is why landing in the 22% bracket does not mean paying 22%.</p>
     </div>
 
-    <div class="card">
+    <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
+    <div class="card prcard" id="brk-pr" hidden>
+      <h3 class="prcard__h">Your federal income tax here is $0.</h3>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+    </div>
+
+    <div class="card" id="brk-card">
       <!-- FIX #15 — segment widths are strictly proportional to dollars taxed -->
       <div class="fill">
         <div class="fill__track" id="fill-track" role="img" aria-label="Proportional view of your taxable income across federal brackets"></div>
@@ -232,6 +238,54 @@
       </div>
       <p class="source" id="brk-source">—</p>
     </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Puerto Rico / Act 60 — shown only when Puerto Rico is selected
+     ====================================================================== -->
+<section class="section section--tint" id="act60" hidden>
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
+      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+    </div>
+
+    <div class="a60grid">
+      <div class="a60card">
+        <span class="a60card__tag">Your salary</span>
+        <div class="a60card__rate">0–33%</div>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+      </div>
+      <div class="a60card a60card--good">
+        <span class="a60card__tag">Investment income</span>
+        <div class="a60card__rate">0%</div>
+        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+      </div>
+      <div class="a60card a60card--good">
+        <span class="a60card__tag">Export-services business</span>
+        <div class="a60card__rate">4%</div>
+        <p class="a60card__p">The famous 4% is a <b>corporate</b> rate (Chapter 3, formerly Act 20) on profit from services sold to clients outside Puerto Rico. If you run one, the law requires you to pay yourself a <b>reasonable salary — taxed at those ordinary 0–33% rates.</b> Only the leftover business profit gets the 4%.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h4>So the myth, plainly</h4>
+      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+    </div>
+
+    <div class="a60two">
+      <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
+        <h4>It hinges on being a bona fide resident</h4>
+        <p>The benefits require genuinely living there (IRC §937): roughly <b>183 days a year in Puerto Rico</b>, your main home and work there, and closer ties to the island than anywhere else. The investor decree also asks for an annual charitable donation, buying a home within two years, and filing fees. The IRS has an active enforcement campaign focused on people who claim residency without the substance — so this is about actually moving, not paperwork.</p>
+      </div>
+      <div class="callout" style="background:var(--bg-alt);border-left-color:var(--warn)">
+        <h4>The 0% window is closing for new investors</h4>
+        <p>New individual-investor decrees filed on or after <b>January 1, 2027</b> are set to face a <b>4% tax on investment income instead of 0%</b>. Applications filed by the end of 2026 can still lock in the current 0%. The details of the reform are still settling — a reason to confirm current law before acting.</p>
+      </div>
+    </div>
+
+    <p class="source">For educational purposes only — not tax or legal advice. Puerto Rico income tax uses the 2018-reform brackets, the latest published; a 2026-specific schedule was not available. Act 60 residency, sourcing, and decree rules are complex and enforced on their substance; talk to a qualified Puerto Rico tax professional before relying on any of this.</p>
   </div>
 </section>
 
