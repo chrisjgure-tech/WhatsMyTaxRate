@@ -85,6 +85,27 @@ window.TAX_FEDERAL = {
   // withholding section, and clearly labelled there as an average.
   averageRefund: 3100,
 
+  /* ------------------------------------------ itemize-vs-standard (2026)
+     OBBBA (H.R.1, 2025) reshaped this for 2026:
+       - SALT cap jumped to $40,400 (from $10,000), phasing back down 30¢ per
+         $1 of MAGI over $505,000, never below $10,000. MFS is half throughout.
+       - Charitable gifts now have a 0.5%-of-AGI floor for itemizers: only the
+         amount above 0.5% of AGI is deductible.
+       - Non-itemizers get a NEW above-the-line charitable deduction: $1,000
+         single / $2,000 joint, cash only.
+       - Medical keeps its 7.5%-of-AGI floor. Mortgage interest limited to
+         $750k of acquisition debt (permanent) — not enforced here, just noted.  */
+  itemize: {
+    saltCap:        { single: 40400, mfj: 40400, hoh: 40400, mfs: 20200 },
+    saltThreshold:  { single: 505000, mfj: 505000, hoh: 505000, mfs: 252500 },
+    saltReduction:  0.30,
+    saltFloor:      { single: 10000, mfj: 10000, hoh: 10000, mfs: 5000 },
+    charitableFloorRate: 0.005,   // 0.5% of AGI, itemizers
+    medicalFloorRate:    0.075,   // 7.5% of AGI
+    charitableNonItemizer: { single: 1000, mfj: 2000, hoh: 1000, mfs: 1000 },
+    mortgageDebtCap: 750000
+  },
+
   /* ------------------------------------------------------------ shelters
      The interactive "what if I contribute more" panel.
 

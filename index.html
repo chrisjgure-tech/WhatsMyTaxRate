@@ -56,6 +56,7 @@
       <a href="#bonuses">Bonuses</a>
       <a href="#history">History</a>
       <a href="#shelter">Save more</a>
+      <a href="#itemize">Itemize?</a>
       <a href="#deductions">Deductions</a>
       <a href="#credits">Credits</a>
     </nav>
@@ -476,6 +477,58 @@
         </div>
 
         <p class="shelter__fine" id="sh-fine">—</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Should you itemize?  (SALT + charitable, 2026 rules)
+     ====================================================================== -->
+<section class="section section--tint" id="itemize">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Should you itemize?</h2>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+    </div>
+
+    <div class="itemize">
+      <div class="itemize__inputs">
+        <p class="itemize__prefill" id="itm-prefill">—</p>
+        <div class="itemize__field">
+          <label for="itm-salt-prop">Property tax</label>
+          <div class="minput"><span>$</span><input id="itm-salt-prop" type="text" inputmode="numeric" autocomplete="off" value="0"></div>
+        </div>
+        <div class="itemize__field">
+          <label for="itm-mortgage">Mortgage interest</label>
+          <div class="minput"><span>$</span><input id="itm-mortgage" type="text" inputmode="numeric" autocomplete="off" value="0"></div>
+        </div>
+        <div class="itemize__field">
+          <label for="itm-charity">Charitable gifts <span class="itemize__hint">cash</span></label>
+          <div class="minput"><span>$</span><input id="itm-charity" type="text" inputmode="numeric" autocomplete="off" value="0"></div>
+        </div>
+        <div class="itemize__field">
+          <label for="itm-medical">Medical expenses</label>
+          <div class="minput"><span>$</span><input id="itm-medical" type="text" inputmode="numeric" autocomplete="off" value="0"></div>
+        </div>
+      </div>
+
+      <div class="itemize__result">
+        <div class="itemize__verdict" id="itm-verdict">—</div>
+        <div class="itemize__vs">
+          <div class="itemize__col" id="itm-col-std">
+            <span class="eyebrow">Standard deduction</span>
+            <b class="num" id="itm-std">—</b>
+            <span class="itemize__sub">free, no receipts</span>
+          </div>
+          <div class="itemize__col" id="itm-col-item">
+            <span class="eyebrow">Your itemized</span>
+            <b class="num" id="itm-total">—</b>
+            <span class="itemize__sub">sum of the rows below</span>
+          </div>
+        </div>
+        <ul class="itemize__ledger" id="itm-ledger"></ul>
+        <p class="itemize__note" id="itm-note">—</p>
       </div>
     </div>
   </div>

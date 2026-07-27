@@ -174,7 +174,8 @@
   var RAISE_AMOUNTS = [1000, 5000, 10000];
 
   var ui = { gross: 75000, status: 'single', state: 'NC', raise: 1000, bonus: 10000,
-             ageBand: 'u50', variant: {}, contrib: {} };
+             ageBand: 'u50', variant: {}, contrib: {},
+             itm: { prop: 0, mortgage: 0, charity: 0, medical: 0 } };
 
   /* FIX #9 — the whole state of the page lives in the URL, so any result is
      a shareable link. */
@@ -188,6 +189,10 @@
     if (stt && S[stt]) ui.state = stt;
     var age = p.get('age');
     for (var a = 0; a < F.ageBands.length; a++) if (F.ageBands[a].key === age) ui.ageBand = age;
+    Object.keys(ITM_KEYS).forEach(function (k) {
+      var v = parseInt(p.get(ITM_KEYS[k]), 10);
+      if (isFinite(v) && v > 0) ui.itm[k] = clamp(v, 0, F.maxIncome);
+    });
     // Read variant toggles BEFORE contributions — the clamp below depends on
     // them (family HSA / both-spouse 401(k) raise the ceiling). Status is
     // already read above, which mfjOnly variants gate on.
@@ -221,6 +226,9 @@
       }
     });
     if (ui.ageBand !== 'u50') p.set('age', ui.ageBand);
+    Object.keys(ITM_KEYS).forEach(function (k) {
+      if (ui.itm[k] > 0) p.set(ITM_KEYS[k], String(ui.itm[k]));
+    });
     history.replaceState(null, '', location.pathname + '?' + p.toString());
   }
 
@@ -734,6 +742,102 @@
           : '');
   }
 
+  /* ------------------------------------------- should-you-itemize tool */
+
+  var ITM_KEYS = { prop: 'pt', mortgage: 'mi', charity: 'ch', medical: 'med' };
+
+  function renderItemize(r) {
+    // The standard-vs-itemized choice is a US federal one; a Puerto Rico
+    // resident's PR-source wages aren't on a federal return, so hide it.
+    setSectionVisible('itemize', !r.federal.excluded);
+    if (r.federal.excluded) return;
+
+    var I = F.itemize, status = ui.status;
+    var agi = Math.max(0, r.gross - r.shelter.incomeFed);   // approx AGI (after pre-tax)
+    var stateIncomeTax = r.state.tax;
+    var it = ui.itm;
+
+    // SALT = state/local income tax (from the calculator) + property tax, capped.
+    var saltPaid = stateIncomeTax + it.prop;
+    var cap = I.saltCap[status];
+    if (agi > I.saltThreshold[status]) {
+      cap = Math.max(I.saltFloor[status], cap - I.saltReduction * (agi - I.saltThreshold[status]));
+    }
+    var salt = Math.min(saltPaid, cap);
+    var saltCapped = saltPaid > cap + 0.5;
+
+    // Charitable: only gifts above 0.5% of AGI are deductible (new for 2026).
+    var charFloor = I.charitableFloorRate * agi;
+    var charDed = Math.max(0, it.charity - charFloor);
+    // Medical: only above 7.5% of AGI.
+    var medFloor = I.medicalFloorRate * agi;
+    var medDed = Math.max(0, it.medical - medFloor);
+
+    var itemized = salt + it.mortgage + charDed + medDed;
+    var standard = F.standardDeduction[status];
+    var marg = r.fedMarginal / 100;
+    var useItem = itemized > standard;
+    var benefit = Math.max(0, itemized - standard) * marg;
+
+    // Non-itemizers get an above-the-line charitable deduction (cash).
+    var nonItemMax = I.charitableNonItemizer[status];
+    var nonItemCharity = useItem ? 0 : Math.min(it.charity, nonItemMax);
+    var nonItemBenefit = nonItemCharity * marg;
+
+    // Prefill line — makes the integration visible.
+    if (stateIncomeTax > 0) {
+      el.itmPrefill.innerHTML = 'From the calculator above, your estimated <b>' + esc(r.state.name)
+        + ' income tax is ' + money(stateIncomeTax) + '</b> — already counted in your state-and-local '
+        + 'taxes (SALT) below. Add the rest of your deductible expenses:';
+    } else {
+      el.itmPrefill.innerHTML = 'You’re in a state with no income tax, so your SALT is just property tax '
+        + '(you could instead deduct sales tax, which this tool doesn’t estimate). Add your expenses:';
+    }
+
+    el.itmStd.textContent = money(standard);
+    el.itmTotal.textContent = money(itemized);
+    el.itmColStd.classList.toggle('itemize__col--win', !useItem);
+    el.itmColItem.classList.toggle('itemize__col--win', useItem);
+
+    if (itemized <= 0) {
+      el.itmVerdict.innerHTML = '<span class="itemize__badge">Take the standard deduction</span>';
+    } else if (useItem) {
+      el.itmVerdict.innerHTML = '<span class="itemize__badge itemize__badge--go">Itemize</span> '
+        + 'Your <b>' + money(itemized) + '</b> in itemized deductions beats the <b>' + money(standard)
+        + '</b> standard by ' + money(itemized - standard) + ' — worth about <b>' + money(benefit)
+        + '</b> off your tax at your ' + pct(r.fedMarginal, 0) + ' marginal rate.';
+    } else {
+      el.itmVerdict.innerHTML = '<span class="itemize__badge">Take the standard deduction</span> '
+        + 'Your itemized total (<b>' + money(itemized) + '</b>) is below the <b>' + money(standard)
+        + '</b> standard, so the standard gives you more — and no receipts to keep.';
+    }
+
+    // Ledger: how the itemized total is built.
+    var rows = [
+      { label: 'State &amp; local taxes (SALT)' + (saltCapped ? ' — capped at ' + money(cap) : ''), v: salt },
+      { label: 'Mortgage interest', v: it.mortgage },
+      { label: 'Charitable gifts' + (it.charity > 0 && charFloor > 0 ? ' — after the ' + money(charFloor) + ' floor' : ''), v: charDed },
+      { label: 'Medical' + (it.medical > 0 && medDed < it.medical ? ' — after the ' + money(medFloor) + ' floor' : ''), v: medDed }
+    ];
+    el.itmLedger.innerHTML = rows.map(function (x) {
+      return '<li><span>' + x.label + '</span><b class="num">' + money(x.v) + '</b></li>';
+    }).join('');
+
+    // The one honest nudge: even non-itemizers can deduct some cash charity now.
+    if (!useItem && nonItemCharity > 0) {
+      el.itmNote.innerHTML = '<b>Even taking the standard deduction, you can still deduct ' + money(nonItemCharity)
+        + '</b> of your cash gifts to charity — a new 2026 above-the-line deduction (up to '
+        + money(nonItemMax) + '), worth about ' + money(nonItemBenefit) + ' to you. Everything here assumes '
+        + '2026 rules; SALT is capped and phased down at high incomes, and the charitable and medical floors '
+        + 'come off before anything is deductible.';
+    } else {
+      el.itmNote.innerHTML = 'Assumes 2026 rules. Your SALT cap is ' + money(cap) + ' ('
+        + 'it phases down above ' + money(I.saltThreshold[status]) + ' of income). The first 0.5% of your '
+        + 'income in charitable gifts and the first 7.5% in medical expenses aren’t deductible. Mortgage '
+        + 'interest assumes debt within the $750,000 limit.';
+    }
+  }
+
   function renderLevers(r) {
     var marg = r.fedMarginal / 100;
     var margAll = marg + r.state.marginal; // deductions cut state tax too
@@ -948,6 +1052,7 @@
     renderWithholding(r);
     renderBonus(r);
     renderShelter(r);
+    renderItemize(r);
     renderLevers(r);
     renderHistory(r);
     renderCurve(r);
@@ -1033,6 +1138,10 @@
       shelterControls: $('shelter-controls'), shContrib: $('sh-contrib'), shSaved: $('sh-saved'),
       shCost: $('sh-cost'), shPerDollar: $('sh-perdollar'), shVerdict: $('sh-verdict'),
       shRateBefore: $('sh-rate-before'), shRateAfter: $('sh-rate-after'), shFine: $('sh-fine'),
+      itmPrefill: $('itm-prefill'), itmStd: $('itm-std'), itmTotal: $('itm-total'),
+      itmVerdict: $('itm-verdict'), itmLedger: $('itm-ledger'), itmNote: $('itm-note'),
+      itmColStd: $('itm-col-std'), itmColItem: $('itm-col-item'),
+      itmProp: $('itm-salt-prop'), itmMortgage: $('itm-mortgage'), itmCharity: $('itm-charity'), itmMedical: $('itm-medical'),
       dedRateInline: $('ded-rate-inline'), dedSource: $('ded-source'), deductionCards: $('deduction-cards'),
       dcRate: $('dc-rate'), dcDedBar: $('dc-ded-bar'), dcCredBar: $('dc-cred-bar'), dcDedNote: $('dc-ded-note'),
       creditCards: $('credit-cards'), chrStd: $('chr-std'), chrVal: $('chr-val'),
@@ -1047,6 +1156,9 @@
     syncControls();
     syncShelterSliders();
     updateShelterToggles();   // reflect a family-coverage link on load
+    // Reflect any itemize inputs hydrated from the URL.
+    [['prop', el.itmProp], ['mortgage', el.itmMortgage], ['charity', el.itmCharity], ['medical', el.itmMedical]]
+      .forEach(function (pair) { pair[1].value = ui.itm[pair[0]] ? ui.itm[pair[0]].toLocaleString('en-US') : ''; });
     render();
 
     $('sh-max').addEventListener('click', function () {
@@ -1083,6 +1195,23 @@
     });
 
     el.state.addEventListener('change', function () { ui.state = el.state.value; render(); });
+
+    // Itemize inputs — comma-formatted numeric fields.
+    [['prop', el.itmProp], ['mortgage', el.itmMortgage], ['charity', el.itmCharity], ['medical', el.itmMedical]]
+      .forEach(function (pair) {
+        var key = pair[0], input = pair[1];
+        input.addEventListener('input', function () {
+          var raw = input.value.replace(/[^0-9]/g, '');
+          var n = raw === '' ? 0 : parseInt(raw, 10);
+          ui.itm[key] = clamp(isFinite(n) ? n : 0, 0, F.maxIncome);
+          var caret = input.selectionStart, before = input.value.length;
+          input.value = ui.itm[key] ? ui.itm[key].toLocaleString('en-US') : '';
+          var after = input.value.length;
+          try { input.setSelectionRange(caret + (after - before), caret + (after - before)); } catch (e) {}
+          render();
+        });
+        input.addEventListener('focus', function () { input.select(); });
+      });
 
     el.bonusAmounts.addEventListener('click', function (e) {
       var b = e.target.closest('[data-bonus]'); if (!b) return;

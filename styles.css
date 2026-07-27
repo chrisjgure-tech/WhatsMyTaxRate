@@ -442,6 +442,43 @@ table.brk tfoot td { font-weight: 800; border-bottom: 0; border-top: 2px solid v
 .source a { color: inherit; }
 
 /* --------------------------------------------------------------------------
+   Should you itemize?
+   -------------------------------------------------------------------------- */
+
+.itemize { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 24px; align-items: start; }
+@media (max-width: 900px) { .itemize { grid-template-columns: 1fr; } }
+
+.itemize__inputs { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px 24px; }
+.itemize__prefill { font-size: 13.5px; line-height: 1.55; color: var(--ink-2); margin-bottom: 16px; }
+.itemize__field + .itemize__field { margin-top: 14px; }
+.itemize__field > label { display: block; font-size: 12px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 7px; }
+.itemize__hint { font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--ink-3); background: var(--bg-alt); padding: 1px 6px; border-radius: 6px; }
+.minput { display: flex; align-items: center; gap: 4px; background: var(--bg-alt); border: 2px solid transparent; border-radius: 12px; padding: 10px 14px; transition: .15s; }
+.minput:focus-within { border-color: var(--brand-500); background: #fff; }
+.minput span { font-size: 18px; font-weight: 700; color: var(--ink-3); }
+.minput input { flex: 1; min-width: 0; min-height: 28px; border: 0; background: transparent; outline: none; font-family: var(--sans); font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: -0.02em; font-variant-numeric: tabular-nums lining-nums; padding: 0; }
+
+.itemize__result { background: var(--brand-950); color: #fff; border-radius: var(--radius); padding: 24px; }
+.itemize__verdict { font-size: 15.5px; line-height: 1.55; color: #D9CFE8; padding-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,.14); }
+.itemize__verdict b { color: #fff; }
+.itemize__badge { display: inline-block; margin-right: 6px; padding: 3px 10px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .04em; }
+.itemize__badge--go { background: var(--take); color: #06281B; }
+
+.itemize__vs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 18px 0 16px; }
+.itemize__col { text-align: center; padding: 14px 10px; border-radius: 12px; background: rgba(255,255,255,.06); border: 1px solid transparent; }
+.itemize__col--win { background: rgba(74,222,128,.13); border-color: rgba(74,222,128,.4); }
+.itemize__col .eyebrow { color: #9C90AC; display: block; margin-bottom: 5px; }
+.itemize__col b { font-size: 27px; font-weight: 800; letter-spacing: -0.03em; display: block; }
+.itemize__col--win b { color: #4ADE80; }
+.itemize__sub { font-size: 11.5px; color: #9C90AC; }
+
+.itemize__ledger { list-style: none; padding: 0; margin: 0; }
+.itemize__ledger li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; font-size: 13.5px; color: #C9BCD9; border-bottom: 1px solid rgba(255,255,255,.08); }
+.itemize__ledger li b { color: #fff; }
+.itemize__note { margin-top: 14px; font-size: 12.5px; line-height: 1.55; color: #9C90AC; }
+.itemize__note b { color: #C4B5FD; }
+
+/* --------------------------------------------------------------------------
    Puerto Rico / Act 60
    -------------------------------------------------------------------------- */
 
