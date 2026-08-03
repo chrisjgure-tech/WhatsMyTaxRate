@@ -59,6 +59,7 @@
       <a href="#itemize">Itemize?</a>
       <a href="#deductions">Deductions</a>
       <a href="#credits">Credits</a>
+      <a href="#retirement">Retirement</a>
     </nav>
   </div>
 </header>
@@ -582,6 +583,48 @@
     <div class="callout">
       <h4>Where charitable giving actually fits</h4>
       <p>Charitable donations are a <strong>deduction</strong>, not a credit — and an <em>itemized</em> one, which means they only help if all your itemized deductions together beat the standard deduction of <b id="chr-std">—</b>. For most W-2 earners they don't, so the donation costs full price. When itemizing does make sense, the deduction is worth your marginal rate: a $1,000 gift reduces your tax by about <b id="chr-val">—</b>. It's the cleanest illustration of the rule that a deduction's value scales with your bracket, while a credit's never does.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Retirement — how your Social Security is taxed & where to retire
+     ====================================================================== -->
+<section class="section section--tint" id="retirement">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>How your Social Security is taxed</h2>
+      <p class="section__lead">Two questions decide it. First, how much of your benefit the <em>federal</em> government taxes — which depends on your <b>other</b> income, through a formula almost nobody knows. Second, whether your <em>state</em> taxes it — and here the news is better than most people expect. Enter your numbers and see both.</p>
+    </div>
+
+    <div class="ret">
+      <div class="ret__inputs">
+        <div class="itemize__field">
+          <label for="ret-ss">Annual Social Security benefit</label>
+          <div class="minput"><span>$</span><input id="ret-ss" type="text" inputmode="numeric" autocomplete="off" value="30,000"></div>
+        </div>
+        <div class="itemize__field">
+          <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
+          <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
+        </div>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+      </div>
+
+      <div class="ret__result">
+        <div class="ret__headline">
+          <span class="eyebrow">Federally taxable portion of your benefit</span>
+          <div class="ret__big"><b class="num" id="ret-taxable">—</b><span class="num" id="ret-taxable-pct">—</span></div>
+        </div>
+        <p class="ret__tier" id="ret-tier">—</p>
+        <p class="ret__torpedo" id="ret-torpedo">—</p>
+      </div>
+    </div>
+
+    <div class="ret__states">
+      <h3 class="ret__stateshead">Where you retire: only 8 states tax Social Security</h3>
+      <p class="ret__statessub" id="ret-statessub">—</p>
+      <div class="ret__grid" id="ret-grid"></div>
+      <p class="source" id="ret-source">—</p>
     </div>
   </div>
 </section>

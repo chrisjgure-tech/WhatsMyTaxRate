@@ -85,6 +85,31 @@ window.TAX_FEDERAL = {
   // withholding section, and clearly labelled there as an average.
   averageRefund: 3100,
 
+  /* -------------------------------------- Social Security taxation (2026)
+     The federal "provisional income" test decides how much of a benefit is
+     taxable. Thresholds are statutory and NEVER inflation-indexed — set in
+     1984 (50% tier) and 1994 (85% tier) and unchanged since, which is why an
+     ever-larger share of retirees crosses them. MFS-lived-with-spouse uses 0.
+     Only 8 states still tax Social Security in 2026; each exempts it below an
+     income threshold, so most retirees owe nothing even there. */
+  socialSecurity: {
+    base1: { single: 25000, mfj: 32000, hoh: 25000, mfs: 0 },
+    base2: { single: 34000, mfj: 44000, hoh: 34000, mfs: 0 },
+    // Where YOUR Social Security is taxed. `exemptBelow` = income at/below which
+    // your benefit is exempt in that state; above it, the federally-taxable
+    // portion is taxed. hoh maps to single, mfs to single.
+    taxingStates: {
+      CO: { kind: 'age65', note: 'Fully exempt at 65+. Under 65, exempt below $75,000 (single) / $95,000 (joint) of income.' },
+      CT: { exemptBelow: { single: 75000, mfj: 100000 }, note: 'Below the threshold, fully exempt; above it, at most 25% of your federally-taxable benefit is taxed.' },
+      MN: { exemptBelow: { single: 86410, mfj: 110780 }, note: 'Full subtraction below the threshold; it phases out above.' },
+      MT: { kind: 'federalConform', note: 'Montana taxes the same portion the IRS does — so if none is taxable federally, none is taxed here.' },
+      NM: { exemptBelow: { single: 100000, mfj: 150000 }, note: 'A hard cliff: fully exempt at or below the threshold, taxed above it.' },
+      RI: { exemptBelow: { single: 104200, mfj: 130250 }, note: 'Exempt once you reach full retirement age and are below the threshold.' },
+      UT: { exemptBelow: { single: 54000, mfj: 90000 }, note: 'A state credit cancels the tax below the threshold, phasing out above.' },
+      VT: { exemptBelow: { single: 55000, mfj: 70000 }, note: 'Fully exempt below the threshold; phased out by $65,000 (single) / $80,000 (joint).' }
+    }
+  },
+
   /* ------------------------------------------ itemize-vs-standard (2026)
      OBBBA (H.R.1, 2025) reshaped this for 2026:
        - SALT cap jumped to $40,400 (from $10,000), phasing back down 30¢ per

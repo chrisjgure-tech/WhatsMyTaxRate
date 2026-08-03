@@ -160,6 +160,17 @@ independent facts — age band, HSA coverage, and spouse count — so e.g. MFJ +
 both + 55+ gives a 401(k) ceiling of 2 × $32,500 = $65,000. The 60–63 "super
 catch-up" is deliberately not modelled (noted in the panel's fine print).
 
+**Social Security taxation.** `TAX_FEDERAL.socialSecurity` holds the federal
+provisional-income worksheet thresholds (base1/base2 by status — statutory,
+never inflation-indexed) and `taxingStates`: the 8 states that still tax
+Social Security in 2026 (CO, CT, MN, MT, NM, RI, UT, VT), each with the income
+`exemptBelow` which YOUR benefit is exempt, or a `kind` of `age65` (Colorado)
+/ `federalConform` (Montana). A state can only tax the federally-taxable
+portion and only above its own threshold, so `ssTaxedForYou()` returns false
+whenever nothing is federally taxable. West Virginia finished phasing out for
+2026; Missouri/Nebraska/Kansas already stopped — recheck this list yearly, and
+the indexing states' thresholds (MN, RI especially).
+
 **Puerto Rico / federal exclusion.** A jurisdiction may set `federalExcluded:
 true` (only Puerto Rico today). It zeroes US federal income tax — a bona fide
 PR resident's PR-source wages are excluded under IRC §933 — while FICA and the

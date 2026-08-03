@@ -479,6 +479,42 @@ table.brk tfoot td { font-weight: 800; border-bottom: 0; border-top: 2px solid v
 .itemize__note b { color: #C4B5FD; }
 
 /* --------------------------------------------------------------------------
+   Retirement / Social Security
+   -------------------------------------------------------------------------- */
+
+.ret { display: grid; grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 24px; align-items: start; margin-bottom: 34px; }
+@media (max-width: 900px) { .ret { grid-template-columns: 1fr; } }
+
+.ret__inputs { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 22px 24px; }
+.ret__hint { font-size: 13px; line-height: 1.55; color: var(--ink-3); margin-top: 14px; }
+.ret__hint b { color: var(--ink-2); }
+
+.ret__result { background: var(--brand-950); color: #fff; border-radius: var(--radius); padding: 26px; }
+.ret__headline .eyebrow { color: #9C90AC; display: block; margin-bottom: 8px; }
+.ret__big { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.ret__big b { font-size: 44px; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+.ret__big span { font-size: 14px; color: #9C90AC; font-weight: 650; }
+.ret__tier { margin-top: 16px; font-size: 14.5px; line-height: 1.6; color: #D9CFE8; }
+.ret__tier b { color: #fff; }
+.ret__badge { display: inline-block; margin-right: 6px; padding: 3px 10px; border-radius: 999px; background: rgba(255,255,255,.14); color: #fff; font-size: 12px; font-weight: 800; letter-spacing: .04em; }
+.ret__badge--go { background: var(--take); color: #06281B; }
+.ret__torpedo { margin-top: 16px; padding: 13px 15px; border-radius: 12px; background: rgba(240,178,122,.13); border-left: 3px solid #F0B27A; font-size: 13.5px; line-height: 1.55; color: #EEDFce; }
+.ret__torpedo b { color: #fff; }
+
+.ret__stateshead { font-size: clamp(20px, 2.4vw, 24px); letter-spacing: -0.02em; margin-bottom: 8px; }
+.ret__statessub { font-size: 16px; line-height: 1.55; color: var(--ink-2); max-width: 70ch; margin-bottom: 22px; }
+.ret__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+@media (max-width: 900px) { .ret__grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 520px) { .ret__grid { grid-template-columns: 1fr; } }
+.retst { padding: 14px 16px; border-radius: 12px; border: 1px solid var(--line); background: var(--card); border-left: 3px solid var(--take); }
+.retst--tax { border-left-color: #E0894B; background: #FDF6EF; }
+.retst__top { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.retst__top b { font-size: 14.5px; font-weight: 750; }
+.retst__badge { font-size: 10px; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; background: var(--take-bg); color: var(--take); white-space: nowrap; }
+.retst--tax .retst__badge { background: #F7E3D0; color: #A85A22; }
+.retst__note { font-size: 12px; line-height: 1.45; color: var(--ink-3); }
+
+/* --------------------------------------------------------------------------
    Puerto Rico / Act 60
    -------------------------------------------------------------------------- */
 

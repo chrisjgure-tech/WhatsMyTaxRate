@@ -175,7 +175,8 @@
 
   var ui = { gross: 75000, status: 'single', state: 'NC', raise: 1000, bonus: 10000,
              ageBand: 'u50', variant: {}, contrib: {},
-             itm: { prop: 0, mortgage: 0, charity: 0, medical: 0 } };
+             itm: { prop: 0, mortgage: 0, charity: 0, medical: 0 },
+             ret: { ss: 30000, other: 40000 } };
 
   /* FIX #9 — the whole state of the page lives in the URL, so any result is
      a shareable link. */
@@ -193,6 +194,8 @@
       var v = parseInt(p.get(ITM_KEYS[k]), 10);
       if (isFinite(v) && v > 0) ui.itm[k] = clamp(v, 0, F.maxIncome);
     });
+    var ssv = parseInt(p.get('ss'), 10); if (isFinite(ssv) && ssv >= 0) ui.ret.ss = clamp(ssv, 0, F.maxIncome);
+    var oiv = parseInt(p.get('oi'), 10); if (isFinite(oiv) && oiv >= 0) ui.ret.other = clamp(oiv, 0, F.maxIncome);
     // Read variant toggles BEFORE contributions — the clamp below depends on
     // them (family HSA / both-spouse 401(k) raise the ceiling). Status is
     // already read above, which mfjOnly variants gate on.
@@ -229,6 +232,8 @@
     Object.keys(ITM_KEYS).forEach(function (k) {
       if (ui.itm[k] > 0) p.set(ITM_KEYS[k], String(ui.itm[k]));
     });
+    if (ui.ret.ss !== 30000) p.set('ss', String(ui.ret.ss));
+    if (ui.ret.other !== 40000) p.set('oi', String(ui.ret.other));
     history.replaceState(null, '', location.pathname + '?' + p.toString());
   }
 
@@ -742,6 +747,107 @@
           : '');
   }
 
+  /* --------------------------------------- Social Security / retirement */
+
+  // The IRS provisional-income worksheet: how much of a benefit is taxable.
+  function taxableSocialSecurity(ss, otherIncome, status) {
+    var SS = F.socialSecurity;
+    var base1 = SS.base1[status], base2 = SS.base2[status];
+    var pi = otherIncome + 0.5 * ss;              // provisional income (muni interest omitted)
+    var halfGap = 0.5 * (base2 - base1);
+    var taxable;
+    if (pi <= base1) taxable = 0;
+    else if (pi <= base2) taxable = Math.min(0.5 * ss, 0.5 * (pi - base1));
+    else taxable = Math.min(0.85 * ss, 0.85 * (pi - base2) + Math.min(0.5 * ss, halfGap));
+    return clamp(taxable, 0, 0.85 * ss);
+  }
+
+  // Would a given state tax YOUR Social Security, given your income? A state can
+  // only tax the portion the IRS already taxes, and only above its own income
+  // threshold — so if nothing is federally taxable, nowhere taxes it.
+  function ssTaxedForYou(code, agi, status, federallyTaxable) {
+    var rule = F.socialSecurity.taxingStates[code];
+    if (!rule || federallyTaxable <= 0) return false;
+    if (rule.kind === 'age65') return false;              // assume a 65+ retiree → exempt
+    if (rule.kind === 'federalConform') return true;      // taxes whatever the IRS taxes
+    var key = (status === 'mfj') ? 'mfj' : 'single';      // hoh/mfs use the single threshold
+    return agi > rule.exemptBelow[key];
+  }
+
+  function renderRetirement() {
+    var status = ui.status;
+    var ss = ui.ret.ss, other = ui.ret.other;
+    var taxable = taxableSocialSecurity(ss, other, status);
+    var pct = ss > 0 ? taxable / ss * 100 : 0;
+    var agi = other + taxable;                            // federal AGI incl. taxable SS
+
+    el.retStatus.textContent = statusLabel(status);
+    el.retTaxable.textContent = money(taxable);
+    el.retTaxablePct.textContent = ss > 0 ? pct.toFixed(0) + '% of your benefit' : '';
+
+    // Which tier, in plain terms.
+    if (taxable <= 0) {
+      el.retTier.innerHTML = '<span class="ret__badge ret__badge--go">None of it is taxed</span> '
+        + 'Your income is low enough that Social Security is entirely tax-free federally. At most '
+        + '<b>85%</b> of a benefit is ever taxable — never the whole thing.';
+    } else if (pct < 84.9) {
+      el.retTier.innerHTML = '<span class="ret__badge">Partly taxed</span> '
+        + '<b>' + money(taxable) + '</b> of your <b>' + money(ss) + '</b> benefit counts as taxable '
+        + 'income — the rest is tax-free. The taxable share climbs with your other income, capping at 85%.';
+    } else {
+      el.retTier.innerHTML = '<span class="ret__badge">At the 85% cap</span> '
+        + 'You’re above the top threshold, so the most that can ever be taxed — <b>85%</b>, or '
+        + money(taxable) + ' — is taxable. The other 15% stays tax-free no matter how high your income goes.';
+    }
+
+    // The "tax torpedo" — an extra dollar of income can make more SS taxable.
+    var bump = taxableSocialSecurity(ss, other + 1000, status) - taxable;
+    if (bump > 1 && taxable < 0.849 * ss) {
+      el.retTorpedo.hidden = false;
+      el.retTorpedo.innerHTML = 'Watch the “tax torpedo”: taking <b>$1,000</b> more from a retirement '
+        + 'account here makes <b>' + money(bump) + '</b> more of your Social Security taxable too — so that '
+        + '$1,000 is taxed as if it were about <b>' + money(1000 + bump) + '</b>. It’s why the order you tap '
+        + 'accounts in retirement matters.';
+    } else {
+      el.retTorpedo.hidden = true;
+    }
+
+    // State panel — the "where to retire" view.
+    var taxing = F.socialSecurity.taxingStates;
+    var codes = Object.keys(taxing);
+    var hitsYou = 0;
+    el.retGrid.innerHTML = codes.map(function (c) {
+      var taxed = ssTaxedForYou(c, agi, status, taxable);
+      if (taxed) hitsYou++;
+      return '<div class="retst ' + (taxed ? 'retst--tax' : 'retst--safe') + '">'
+        + '<div class="retst__top"><b>' + esc(S[c].name) + '</b>'
+        + '<span class="retst__badge">' + (taxed ? 'taxes yours' : 'you’re exempt') + '</span></div>'
+        + '<p class="retst__note">' + esc(taxing[c].note) + '</p>'
+        + '</div>';
+    }).join('');
+
+    var yourState = S[ui.state] || {};
+    var yourStateTaxes = !!taxing[ui.state];
+    // Name the current state only when it's a real US state/DC (not Puerto Rico).
+    var namePart = (ui.state !== 'PR' && yourState.name) ? ', including your current state, ' + esc(yourState.name) : '';
+    if (taxable <= 0) {
+      el.retStatessub.innerHTML = 'Since none of your benefit is taxable federally, <b>no state taxes it either</b> — '
+        + 'there’s nothing to tax. The 8 states below only tax the federally-taxable portion.';
+    } else if (hitsYou === 0) {
+      el.retStatessub.innerHTML = 'At your income, <b>none of these 8 would tax your Social Security</b> — you fall under '
+        + 'each one’s exemption. And the other 42 states plus DC never tax it at all' + namePart + '.';
+    } else {
+      el.retStatessub.innerHTML = 'At your income, <b>' + hitsYou + ' of these 8</b> would tax part of your '
+        + 'Social Security (shown in amber). The other 42 states plus DC never tax it'
+        + (yourStateTaxes ? ' — but your current state, ' + esc(yourState.name) + ', is one that can.' : namePart + '.');
+    }
+
+    el.retSource.innerHTML = 'Federal tiers per the IRS Social Security Benefits Worksheet (Pub. 915) — thresholds '
+      + 'unchanged since the 1980s–90s and not inflation-indexed. State treatment reflects 2026 law; several taxing '
+      + 'states index their thresholds yearly, so check your state’s revenue department before relying on a close call. '
+      + 'Assumes you’re at full retirement age; excludes tax-exempt interest and the 2026 senior deduction.';
+  }
+
   /* ------------------------------------------- should-you-itemize tool */
 
   var ITM_KEYS = { prop: 'pt', mortgage: 'mi', charity: 'ch', medical: 'med' };
@@ -1053,6 +1159,7 @@
     renderBonus(r);
     renderShelter(r);
     renderItemize(r);
+    renderRetirement();
     renderLevers(r);
     renderHistory(r);
     renderCurve(r);
@@ -1142,6 +1249,9 @@
       itmVerdict: $('itm-verdict'), itmLedger: $('itm-ledger'), itmNote: $('itm-note'),
       itmColStd: $('itm-col-std'), itmColItem: $('itm-col-item'),
       itmProp: $('itm-salt-prop'), itmMortgage: $('itm-mortgage'), itmCharity: $('itm-charity'), itmMedical: $('itm-medical'),
+      retSs: $('ret-ss'), retOther: $('ret-other'), retStatus: $('ret-status'),
+      retTaxable: $('ret-taxable'), retTaxablePct: $('ret-taxable-pct'), retTier: $('ret-tier'),
+      retTorpedo: $('ret-torpedo'), retGrid: $('ret-grid'), retStatessub: $('ret-statessub'), retSource: $('ret-source'),
       dedRateInline: $('ded-rate-inline'), dedSource: $('ded-source'), deductionCards: $('deduction-cards'),
       dcRate: $('dc-rate'), dcDedBar: $('dc-ded-bar'), dcCredBar: $('dc-cred-bar'), dcDedNote: $('dc-ded-note'),
       creditCards: $('credit-cards'), chrStd: $('chr-std'), chrVal: $('chr-val'),
@@ -1156,9 +1266,11 @@
     syncControls();
     syncShelterSliders();
     updateShelterToggles();   // reflect a family-coverage link on load
-    // Reflect any itemize inputs hydrated from the URL.
+    // Reflect any itemize / retirement inputs hydrated from the URL.
     [['prop', el.itmProp], ['mortgage', el.itmMortgage], ['charity', el.itmCharity], ['medical', el.itmMedical]]
       .forEach(function (pair) { pair[1].value = ui.itm[pair[0]] ? ui.itm[pair[0]].toLocaleString('en-US') : ''; });
+    el.retSs.value = ui.ret.ss ? ui.ret.ss.toLocaleString('en-US') : '';
+    el.retOther.value = ui.ret.other ? ui.ret.other.toLocaleString('en-US') : '';
     render();
 
     $('sh-max').addEventListener('click', function () {
@@ -1196,22 +1308,27 @@
 
     el.state.addEventListener('change', function () { ui.state = el.state.value; render(); });
 
-    // Itemize inputs — comma-formatted numeric fields.
+    // Numeric $-field wiring shared by the itemize and retirement inputs.
+    function wireMoneyInput(input, get, set) {
+      input.addEventListener('input', function () {
+        var raw = input.value.replace(/[^0-9]/g, '');
+        var n = raw === '' ? 0 : parseInt(raw, 10);
+        set(clamp(isFinite(n) ? n : 0, 0, F.maxIncome));
+        var caret = input.selectionStart, before = input.value.length;
+        input.value = get() ? get().toLocaleString('en-US') : '';
+        var after = input.value.length;
+        try { input.setSelectionRange(caret + (after - before), caret + (after - before)); } catch (e) {}
+        render();
+      });
+      input.addEventListener('focus', function () { input.select(); });
+    }
     [['prop', el.itmProp], ['mortgage', el.itmMortgage], ['charity', el.itmCharity], ['medical', el.itmMedical]]
       .forEach(function (pair) {
-        var key = pair[0], input = pair[1];
-        input.addEventListener('input', function () {
-          var raw = input.value.replace(/[^0-9]/g, '');
-          var n = raw === '' ? 0 : parseInt(raw, 10);
-          ui.itm[key] = clamp(isFinite(n) ? n : 0, 0, F.maxIncome);
-          var caret = input.selectionStart, before = input.value.length;
-          input.value = ui.itm[key] ? ui.itm[key].toLocaleString('en-US') : '';
-          var after = input.value.length;
-          try { input.setSelectionRange(caret + (after - before), caret + (after - before)); } catch (e) {}
-          render();
-        });
-        input.addEventListener('focus', function () { input.select(); });
+        var key = pair[0];
+        wireMoneyInput(pair[1], function () { return ui.itm[key]; }, function (v) { ui.itm[key] = v; });
       });
+    wireMoneyInput(el.retSs, function () { return ui.ret.ss; }, function (v) { ui.ret.ss = v; });
+    wireMoneyInput(el.retOther, function () { return ui.ret.other; }, function (v) { ui.ret.other = v; });
 
     el.bonusAmounts.addEventListener('click', function (e) {
       var b = e.target.closest('[data-bonus]'); if (!b) return;
