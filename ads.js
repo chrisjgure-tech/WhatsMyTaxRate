@@ -17,7 +17,9 @@
    ========================================================================== */
 (function () {
   'use strict';
-  if (location.hostname !== 'whatsmytaxrate.com') return;
+  // Production only — but accept www too (it still serves the site until the
+  // www→apex redirect is set), so no conversions are missed.
+  if (location.hostname !== 'whatsmytaxrate.com' && location.hostname !== 'www.whatsmytaxrate.com') return;
 
   var SENSITIVE = ['income', 'ss', 'oi', 'k401', 'hsa', 'fsa', 'dcfsa', 'ira', 'pt', 'mi', 'ch', 'med'];
 
