@@ -25,6 +25,10 @@
 <meta name="theme-color" content="#2E1140">
 
 <!-- ?v=3 forces browsers to drop the aggressively-cached old favicon -->
+<!-- Google Ads (gtag). ads.js loads the tag only on the production domain and
+     redacts income from what's tracked; kept external so script-src stays strict. -->
+<script src="ads.js"></script>
+
 <link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
 <link rel="icon" href="favicon.ico?v=3" sizes="any">
 <link rel="icon" href="favicon-32.png?v=3" sizes="32x32" type="image/png">
@@ -671,6 +675,7 @@
     <div class="footer__legal">
       <p><strong>For educational purposes only. This is not tax or financial advice.</strong></p>
       <p style="margin-top:9px">Calculations assume wage (W-2) income only and the standard deduction, for the <span id="foot-year">2026</span> tax year. They exclude local and municipal income taxes, the Alternative Minimum Tax, the Net Investment Income Tax, capital gains and qualified dividend rates, self-employment tax, itemized deductions, and most credits. Your actual liability will differ. Consult a qualified tax professional before acting on anything here.</p>
+      <p style="margin-top:9px">This site uses privacy-preserving analytics and Google Ads measurement. The income and contribution figures you enter stay in your browser — they are never sent to our analytics or advertising tags, which only ever see your state and filing status.</p>
       <p style="margin-top:9px">State rates and deductions verified <span id="foot-updated">July 2026</span>. © <span id="foot-copy">2026</span> whatsmytaxrate.com</p>
     </div>
   </div>
