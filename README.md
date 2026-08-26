@@ -19,6 +19,9 @@ apple-touch-icon.png / icon-192 / icon-512 / favicon-32 · favicon-48
 social-avatar-512.png / -1024.png   ready-to-upload profile images
 site.webmanifest    PWA/home-screen metadata
 og-image.jpg    1200×630 link-preview card (regenerate from og-image.svg)
+tax-glossary.html   /tax-glossary — 31-term SEO/GEO glossary (generated)
+tax-glossary.gen.py one-shot generator: edit TERMS, run, commit the .html
+ads.js          Google Ads gtag bootstrap + URL redaction
 netlify.toml    Netlify config: redirects, security headers, caching
 vercel.json     Vercel config: the same headers and caching rules
 robots.txt / sitemap.xml

@@ -479,6 +479,37 @@ table.brk tfoot td { font-weight: 800; border-bottom: 0; border-top: 2px solid v
 .itemize__note b { color: #C4B5FD; }
 
 /* --------------------------------------------------------------------------
+   Glossary page
+   -------------------------------------------------------------------------- */
+
+.gloss-hero { background: linear-gradient(178deg, var(--brand-900), var(--brand-950)); color: #fff; padding: 54px 0 44px; }
+.gloss-hero h1 { font-size: clamp(30px, 5vw, 48px); letter-spacing: -0.035em; max-width: 20ch; }
+.gloss-hero p { margin-top: 16px; font-size: clamp(16px, 2vw, 19px); color: #D9CFE8; max-width: 66ch; line-height: 1.6; }
+.gloss-hero .btn { margin-top: 24px; }
+
+.az { display: flex; flex-wrap: wrap; gap: 6px; padding: 22px 0; border-bottom: 1px solid var(--line); position: sticky; top: 60px; background: rgba(250,250,247,.92); backdrop-filter: saturate(180%) blur(8px); z-index: 40; }
+.az a { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; min-height: 34px; padding: 0 6px; border-radius: 9px; font-size: 13px; font-weight: 800; color: var(--brand-700); text-decoration: none; background: var(--brand-50); }
+.az a:hover { background: var(--brand-600); color: #fff; }
+
+.gloss { padding: 40px 0 20px; }
+.gloss__group { margin-bottom: 34px; scroll-margin-top: 120px; }
+.gloss__letter { font-size: 13px; font-weight: 800; letter-spacing: .18em; color: var(--brand-500); border-bottom: 2px solid var(--line-2); padding-bottom: 8px; margin-bottom: 18px; }
+.term { padding: 20px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 120px; }
+.term:last-child { border-bottom: 0; }
+.term h3 { font-size: 20px; letter-spacing: -0.02em; margin-bottom: 8px; }
+.term__abbr { font-size: 14px; font-weight: 650; color: var(--ink-3); }
+.term p { font-size: 16px; line-height: 1.65; color: var(--ink-2); max-width: 74ch; }
+.term__link { display: inline-block; margin-top: 10px; font-size: 14.5px; font-weight: 750; color: var(--brand-600); text-decoration: none; }
+.term__link:hover { text-decoration: underline; }
+.term__src { margin-top: 10px; font-size: 12.5px; color: var(--ink-3); }
+.term__src a { color: var(--ink-3); }
+
+.gloss-sources { background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px 28px; margin: 20px 0 10px; }
+.gloss-sources h2 { font-size: 22px; letter-spacing: -0.02em; margin-bottom: 12px; }
+.gloss-sources p { font-size: 15px; line-height: 1.6; color: var(--ink-2); margin-bottom: 12px; max-width: 76ch; }
+.gloss-sources li { font-size: 15px; line-height: 1.6; color: var(--ink-2); margin-bottom: 8px; }
+
+/* --------------------------------------------------------------------------
    Retirement / Social Security
    -------------------------------------------------------------------------- */
 
