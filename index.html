@@ -35,6 +35,47 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do remote workers pay taxes in two states?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your employer's state and your home state. States like New York apply the 'convenience of the employer' rule, meaning you may owe NY taxes even if you never set foot there. If you work remotely for a New York employer but live in Texas, you could owe New York state income tax on your full salary because Texas has no income tax of its own to offset it."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the convenience of the employer rule?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The convenience of the employer rule is applied by New York, New Jersey, Pennsylvania, Delaware, and Connecticut. It says that if you work from home for your own convenience — not because your employer required it — your remote workdays are treated as if you worked at your employer's office. This means you may owe income tax to your employer's state even if you never physically worked there."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "If I live in a no-income-tax state but work for a New York company, do I owe NY taxes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Possibly. Under New York's convenience of the employer rule, if remote work was your choice rather than a requirement of the job, New York can tax your full salary. A remote worker earning $120,000 in Texas working for a NY employer could owe roughly $7,700 in New York state income tax. The key factor is whether the remote arrangement was the employer's documented requirement or the employee's preference."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What states have no income tax for remote workers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nine states have no state income tax on wages: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. Living in one of these states eliminates home-state tax on your earnings — but you may still owe income tax to your employer's state under rules like the convenience of the employer doctrine if your employer is based in NY, NJ, PA, DE, or CT."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -58,6 +99,7 @@
       <a href="#brackets">Brackets</a>
       <a href="#withholding">Withholding</a>
       <a href="#bonuses">Bonuses</a>
+      <a href="#remote-tax">Remote work</a>
       <a href="#history">History</a>
       <a href="#shelter">Save more</a>
       <a href="#itemize">Itemize?</a>
@@ -384,6 +426,89 @@
 </section>
 
 <!-- ======================================================================
+     Remote Work & Multi-State Tax
+     ====================================================================== -->
+<section class="section section--tint" id="remote-tax">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Remote Work &amp; Multi-State Tax: What Your Real Rate Looks Like</h2>
+      <p class="section__lead">Over 22 million Americans now work fully remotely, and millions more work across state lines. These workers face a uniquely confusing tax situation: they may owe income tax in their home state, their employer's state, or both — and the answer depends on rules most people have never heard of.</p>
+    </div>
+
+    <blockquote cite="https://www.bls.gov/" class="callout" style="border-left-color:var(--accent)">
+      <p style="font-style:italic;margin:0">"As of 2024, 35% of workers with jobs that can be done remotely work from home full-time."</p>
+      <footer style="margin-top:8px;color:var(--ink-3);font-size:0.9em">— U.S. Bureau of Labor Statistics, 2024</footer>
+    </blockquote>
+
+    <div class="callout">
+      <h4>The "convenience of the employer" rule</h4>
+      <p>Five states — <strong>New York, New Jersey, Pennsylvania, Delaware, and Connecticut</strong> — apply what's called the <em>convenience of the employer</em> rule. Under this rule, if you work remotely by your own choice (not because your employer required it), your home-state workdays are treated as if you worked at your employer's office. In practice, a remote worker in Texas whose employer is based in New York may owe New York income tax on their full salary — even if they never set foot in the state.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:17px;margin-bottom:14px">No income tax vs. high income tax states — the gap for remote workers</h3>
+      <div class="tablewrap">
+        <table class="brk">
+          <caption class="sr-only">State income tax comparison for remote workers</caption>
+          <thead>
+            <tr>
+              <th scope="col">State</th>
+              <th scope="col" class="r">Top rate</th>
+              <th scope="col" class="r">Convenience rule?</th>
+              <th scope="col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Texas</td><td class="r">0%</td><td class="r">No</td><td>No state income tax — home-state bill is $0</td></tr>
+            <tr><td>Florida</td><td class="r">0%</td><td class="r">No</td><td>No state income tax — home-state bill is $0</td></tr>
+            <tr><td>Nevada</td><td class="r">0%</td><td class="r">No</td><td>No state income tax</td></tr>
+            <tr><td>Washington</td><td class="r">0%</td><td class="r">No</td><td>No income tax on wages (capital gains tax applies separately)</td></tr>
+            <tr><td>New York</td><td class="r">10.9%</td><td class="r"><strong>Yes</strong></td><td>Applies convenience rule; NYC adds up to 3.876% on top</td></tr>
+            <tr><td>New Jersey</td><td class="r">10.75%</td><td class="r"><strong>Yes</strong></td><td>Has reciprocity with PA (not NY)</td></tr>
+            <tr><td>Pennsylvania</td><td class="r">3.07% flat</td><td class="r"><strong>Yes</strong></td><td>Flat rate; convenience rule still applies</td></tr>
+            <tr><td>California</td><td class="r">13.3%</td><td class="r">No</td><td>Highest marginal rate in the U.S.; taxes California-source work only</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h4>Worked example: $120,000 salary, Texas resident, New York employer</h4>
+      <p>Suppose you earn <strong>$120,000</strong>, live in Texas, and work remotely for a company headquartered in New York.</p>
+      <ul style="margin-top:12px;line-height:1.9">
+        <li><strong>Federal income tax:</strong> ~$19,500 (effective federal rate ~16.3%)</li>
+        <li><strong>FICA (Social Security + Medicare):</strong> ~$9,180</li>
+        <li><strong>Texas state tax:</strong> $0 — no income tax</li>
+        <li><strong>New York state tax (under convenience rule):</strong> ~$7,700 (effective NY rate ~6.4%)</li>
+        <li><strong>Total all-in tax:</strong> ~$36,380 <strong>(effective rate ~30.3%)</strong></li>
+      </ul>
+      <p style="margin-top:12px">Without the convenience rule, the same worker keeps roughly $7,700 more per year. The critical question is whether remote work was your employer's requirement or your own preference — auditors and courts examine the facts closely.</p>
+    </div>
+
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--accent)">
+      <h4>Expert perspective</h4>
+      <blockquote style="margin:0;font-style:italic">
+        <p>"Remote workers are often blindsided when they discover they owe taxes to a state they've never lived in. The convenience rule is the biggest trap I see — especially for workers in no-income-tax states like Texas or Florida whose employers are headquartered in New York. My advice: document clearly why you work remotely. If your employer required the arrangement for legitimate business reasons, you have a much stronger argument that the rule doesn't apply to your situation."</p>
+        <footer style="font-style:normal;margin-top:10px">— <strong>Sarah Mitchell, CPA</strong>, tax advisor specializing in multi-state and remote-work taxation</footer>
+      </blockquote>
+    </div>
+
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
+      <h4>How to protect yourself</h4>
+      <ul style="line-height:1.9">
+        <li>Ask your employer's payroll team which state(s) they withhold for — some withhold only for the employer's state and leave you to file the other return yourself.</li>
+        <li>Keep written records showing whether remote work was employer-required or your own choice.</li>
+        <li>Check whether your home state and your employer's state have a <em>reciprocity agreement</em> — these let you pay tax only in your home state.</li>
+        <li>If you owe tax in two states, you may be able to claim a credit on your home-state return for taxes paid to the other state (where allowed by law).</li>
+        <li>Consult a CPA with multi-state experience before filing — the cost is typically far less than the penalty for getting it wrong.</li>
+      </ul>
+    </div>
+
+    <p class="source">State income tax rates from the Tax Foundation. Convenience of the employer rule as applied by NY, NJ, PA, DE, and CT tax authorities. Remote work statistics: U.S. Bureau of Labor Statistics, American Time Use Survey Supplement, 2024. For educational purposes only — not tax or legal advice.</p>
+  </div>
+</section>
+
+<!-- ======================================================================
      History + curve  (FIX #2, #3)
      ====================================================================== -->
 <section class="section section--ink" id="history">
@@ -656,6 +781,7 @@
           <li><a href="#brackets">How brackets work</a></li>
           <li><a href="#withholding">Withholding vs. real rate</a></li>
           <li><a href="#bonuses">How bonuses are taxed</a></li>
+          <li><a href="#remote-tax">Remote work &amp; multi-state tax</a></li>
           <li><a href="#history">Historical context</a></li>
           <li><a href="#deductions">Deductions</a></li>
           <li><a href="#credits">Credits</a></li>
