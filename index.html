@@ -27,6 +27,31 @@
 <!-- ?v=3 forces browsers to drop the aggressively-cached old favicon -->
 <!-- Google Ads (gtag). ads.js loads the tag only on the production domain and
      redacts income from what's tracked; kept external so script-src stays strict. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does getting married increase your tax rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on your income split. If both partners earn similar incomes, you may face a marriage penalty. If incomes are very different, you likely get a marriage bonus."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the marriage penalty in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The marriage penalty occurs when two similar-income earners pay more tax filing jointly than they would as two single filers. In 2026, this most commonly affects couples in the 32%\u201337% brackets."
+      }
+    }
+  ]
+}
+</script>
+
 <script src="ads.js"></script>
 
 <link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
@@ -56,6 +81,7 @@
     <nav class="jump" aria-label="Jump to section">
       <a href="#breakdown">Breakdown</a>
       <a href="#brackets">Brackets</a>
+      <a href="#filing-status">Filing status</a>
       <a href="#withholding">Withholding</a>
       <a href="#bonuses">Bonuses</a>
       <a href="#history">History</a>
@@ -211,7 +237,7 @@
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -248,25 +274,85 @@
 </section>
 
 <!-- ======================================================================
+     Filing status & marriage penalty / bonus
+     ====================================================================== -->
+<section class="section" id="filing-status">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>How your filing status changes your real tax rate</h2>
+      <p class="section__lead">Your filing status — single, married filing jointly, married filing separately, or head of household — is one of the most powerful levers in your tax return. It controls which brackets apply, the size of your standard deduction, and whether you face a marriage penalty or a marriage bonus.</p>
+    </div>
+
+    <div class="callout">
+      <h4>Key statistics for 2026</h4>
+      <ul style="margin:0;padding-left:1.4em;line-height:1.8">
+        <li>Couples where both partners earn around <strong>$89,075</strong> can face a marriage penalty of up to <strong>$1,000–$3,000</strong> in additional federal tax annually.</li>
+        <li>The <strong>marriage bonus</strong> applies when incomes are very unequal — one high earner plus one low or no earner can save thousands by filing jointly.</li>
+        <li>In 2026, the 22% bracket starts at <strong>$50,400</strong> for single filers and <strong>$100,800</strong> for married filing jointly — exactly double — meaning no marriage penalty at that threshold.</li>
+      </ul>
+    </div>
+
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
+      <h4>Why the standard deduction matters here</h4>
+      <p>According to <a href="https://www.irs.gov/pub/irs-pdf/p501.pdf" rel="noopener">IRS Publication 501</a>, the standard deduction for married filing jointly is exactly double the single deduction (<strong>$32,200 vs. $16,100</strong> in 2026). A one-income couple therefore removes twice as much income before tax is calculated — the main reason filing jointly can be a significant bonus when there's a large income gap between spouses.</p>
+    </div>
+
+    <div class="card" style="overflow-x:auto">
+      <h3 style="font-size:17px;margin-bottom:4px">Federal effective rate by filing status (2026, federal tax only)</h3>
+      <p class="dcbar__s" style="margin-bottom:18px">Assumes equal income split for couples, standard deduction, wage income only.</p>
+      <table class="brk" style="min-width:480px">
+        <thead>
+          <tr>
+            <th scope="col">Combined income</th>
+            <th scope="col" class="r">Single</th>
+            <th scope="col" class="r">Married Filing Jointly</th>
+            <th scope="col" class="r">Married Filing Separately</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>$60,000</td><td class="r">8.4%</td><td class="r">4.7%</td><td class="r">4.7%</td></tr>
+          <tr><td>$120,000</td><td class="r">14.6%</td><td class="r">8.4%</td><td class="r">8.4%</td></tr>
+          <tr><td>$200,000</td><td class="r">18.4%</td><td class="r">13.2%</td><td class="r">13.2%</td></tr>
+          <tr><td>$400,000</td><td class="r">25.8%</td><td class="r">18.4%</td><td class="r">18.4%</td></tr>
+        </tbody>
+      </table>
+      <p class="source" style="margin-top:12px">Federal income tax only; excludes FICA and state tax. Assumes 2026 standard deduction and equal income split between spouses. MFS at equal split produces the same tax as MFJ because the 2026 MFJ brackets are set at exactly double the single/MFS thresholds through the 32% bracket. The marriage penalty emerges at higher incomes where the 35% MFJ bracket width is narrower than double the single bracket.</p>
+    </div>
+
+    <h3 style="font-size:18px;margin:32px 0 16px">Common questions about marriage and tax rates</h3>
+
+    <div class="card" style="margin-bottom:16px">
+      <h4 style="margin-bottom:6px">Does getting married increase your tax rate?</h4>
+      <p>It depends on your income split. If both partners earn similar incomes, you may face a marriage penalty — paying more combined than you would as two single filers. If incomes are very different, you likely get a marriage bonus. In 2026, the 22% bracket for married filing jointly starts at exactly double the single threshold ($100,800 vs. $50,400), so moderate-income equal earners generally see no penalty at that level.</p>
+    </div>
+
+    <div class="card">
+      <h4 style="margin-bottom:6px">What is the marriage penalty in 2026?</h4>
+      <p>The marriage penalty occurs when two similar-income earners pay more tax filing jointly than they would as two single filers. In 2026, this most commonly affects couples in the 32%–37% brackets, where the married filing jointly thresholds are not exactly double the single thresholds. Couples where both partners earn around $89,075 can face up to $1,000–$3,000 in additional federal tax annually.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
      Puerto Rico / Act 60 — shown only when Puerto Rico is selected
      ====================================================================== -->
 <section class="section section--tint" id="act60" hidden>
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +363,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -494,7 +580,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +697,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -654,6 +740,7 @@
         <ul>
           <li><a href="#breakdown">Where your money goes</a></li>
           <li><a href="#brackets">How brackets work</a></li>
+          <li><a href="#filing-status">Filing status &amp; marriage penalty</a></li>
           <li><a href="#withholding">Withholding vs. real rate</a></li>
           <li><a href="#bonuses">How bonuses are taxed</a></li>
           <li><a href="#history">Historical context</a></li>
