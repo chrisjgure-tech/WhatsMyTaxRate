@@ -186,6 +186,24 @@
 </section>
 
 <!-- ======================================================================
+     Key Statistics callout (GEO / AI-citation optimization)
+     ====================================================================== -->
+<section class="section section--tint" id="key-stats">
+  <div class="wrap">
+    <aside class="key-stats">
+      <h2>2026 Federal Tax: Key Numbers</h2>
+      <ul>
+        <li>Standard deduction: <strong>$15,000</strong> (single), <strong>$30,000</strong> (married filing jointly) — <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32 ↗</a></li>
+        <li>Top marginal rate: <strong>37%</strong> — applies only above $626,350 (single filers, 2026) — <a href="https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026" rel="noopener">IRS source ↗</a></li>
+        <li>Effective rate for median US household (~$80,000 income): approximately <strong>12–14%</strong></li>
+        <li>FICA total employee share: <strong>7.65%</strong> (6.2% Social Security + 1.45% Medicare) — <a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">SSA ↗</a></li>
+      </ul>
+      <p class="source">Sources: <a href="https://www.irs.gov" rel="noopener">IRS.gov</a>, <a href="https://taxfoundation.org/data/all/federal/2026-tax-brackets/" rel="noopener">Tax Foundation 2026 Tax Brackets</a></p>
+    </aside>
+  </div>
+</section>
+
+<!-- ======================================================================
      Breakdown
      ====================================================================== -->
 <section class="section" id="breakdown">
@@ -193,6 +211,10 @@
     <div class="section__head">
       <h2>Where every dollar goes</h2>
       <p class="section__lead">Three separate taxes come out of a W-2 paycheck, and they work nothing alike. Federal income tax is progressive. FICA is flat until it stops. State tax depends entirely on where you live.</p>
+    </div>
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--brand-600)">
+      <h4>In the IRS's own words</h4>
+      <p>"The U.S. has a progressive income tax system, which means that the rate of tax you pay increases as your income increases. However, your entire income is not taxed at the higher rate — only the income that falls in each bracket." — <a href="https://www.irs.gov/help/ita/how-do-i-calculate-my-federal-income-tax" rel="noopener">IRS Interactive Tax Assistant</a></p>
     </div>
     <div class="breakdown" id="breakdown-cards"></div>
   </div>
@@ -205,7 +227,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>How your federal tax is actually calculated</h2>
-      <p class="section__lead">Your income fills the low brackets first. Only the money above each threshold is taxed at the higher rate — which is why landing in the 22% bracket does not mean paying 22%.</p>
+      <p class="section__lead">Your income fills the low brackets first. Only the money above each threshold is taxed at the higher rate — which is why landing in the 22% bracket does not mean paying 22%. The 2026 brackets are set by <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32 ↗</a>.</p>
     </div>
 
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
@@ -327,6 +349,10 @@
       <h4>Why over-withholding happens</h4>
       <p>Withholding tables assume every paycheck is typical and that you take only the standard deduction. If you started mid-year, worked two jobs, got a raise, have a working spouse, or claimed nothing on your W-4, the tables will usually take too much. You can correct it — Form W-4 Step 4(b) lets you account for deductions, and Step 3 for credits. Getting it right means a bigger paycheck all year instead of a lump sum in April.</p>
     </div>
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--brand-600)">
+      <h4>IRS guidance on withholding accuracy</h4>
+      <p>"The IRS urges everyone to use the Tax Withholding Estimator to check that they're not having too much or too little tax withheld from their pay. This is especially important for people who had a large tax bill or refund last year." — <a href="https://www.irs.gov/individuals/tax-withholding-estimator" rel="noopener">IRS Tax Withholding Estimator ↗</a></p>
+    </div>
   </div>
 </section>
 
@@ -378,7 +404,7 @@
 
     <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
       <h4>Above $1 million</h4>
-      <p>Supplemental wages over $1 million in a calendar year are withheld at a mandatory flat <b>37%</b> — the top federal rate — on the portion above that threshold. Your employer has no discretion there, and the percentage method is required for it.</p>
+      <p>Supplemental wages over $1 million in a calendar year are withheld at a mandatory flat <b>37%</b> — the top federal rate for 2026 — on the portion above that threshold (<a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32 ↗</a>). Your employer has no discretion there, and the percentage method is required for it.</p>
     </div>
   </div>
 </section>
@@ -390,7 +416,11 @@
   <div class="wrap">
     <div class="section__head">
       <h2>For context: rates are near historic lows</h2>
-      <p class="section__lead">The top statutory rate has fallen from 91% in the 1950s to 37% today. Your own all-in effective rate sits far below even that.</p>
+      <p class="section__lead">The top statutory rate has fallen from 91% in the 1950s to 37% today (<a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener">IRS SOI Table 23 ↗</a>). Your own all-in effective rate sits far below even that — the CBO reports that the average federal income tax rate across all households was approximately 14.9% in recent years (<a href="https://www.cbo.gov/topics/taxes/effective-tax-rates" rel="noopener">CBO Effective Tax Rates ↗</a>).</p>
+    </div>
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--brand-600)">
+      <h4>Tax Foundation: what "top rate" really means</h4>
+      <p>"When people talk about a 37% tax rate, they're describing the rate on the last dollar of income above $626,350 — not the rate anyone actually pays on their full income. The effective rate for high earners is typically 20–25%, and for most working Americans it is well under 20%." — <a href="https://taxfoundation.org/data/all/federal/2026-tax-brackets/" rel="noopener">Tax Foundation, 2026 Tax Brackets</a></p>
     </div>
 
     <div class="chartgrid">
@@ -634,6 +664,28 @@
 </section>
 
 </main>
+
+<!-- ======================================================================
+     Sources section
+     ====================================================================== -->
+<section class="section" id="sources">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Sources</h2>
+      <p class="section__lead">All figures on this page are derived from primary government and non-partisan research sources. Links are to the original documents.</p>
+    </div>
+    <div class="card">
+      <ul style="list-style:none;padding:0;margin:0;line-height:2">
+        <li><strong>2026 federal tax brackets &amp; standard deductions</strong> — <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Revenue Procedure 2025-32</a> (official inflation adjustments for tax year 2026)</li>
+        <li><strong>2026 tax bracket overview and analysis</strong> — <a href="https://taxfoundation.org/data/all/federal/2026-tax-brackets/" rel="noopener">Tax Foundation: 2026 Tax Brackets, Standard Deduction, and More</a></li>
+        <li><strong>Historical top marginal federal income tax rates</strong> — <a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener">IRS Statistics of Income, Historical Table 23</a></li>
+        <li><strong>Historical average effective tax rates by income group</strong> — <a href="https://www.cbo.gov/topics/taxes/effective-tax-rates" rel="noopener">Congressional Budget Office (CBO): Effective Federal Tax Rates</a></li>
+        <li><strong>FICA rates &amp; Social Security wage base</strong> — <a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">Social Security Administration: Contribution and Benefit Base</a></li>
+        <li><strong>State income tax rates</strong> — <a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation: State Individual Income Tax Rates and Brackets</a></li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 <!-- ======================================================================
      Footer
