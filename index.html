@@ -35,6 +35,31 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the self-employment tax rate in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The self-employment tax rate is 15.3% in 2026: 12.4% for Social Security (on earnings up to $176,100) and 2.9% for Medicare. High earners pay an additional 0.9% Medicare surtax above $200,000."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much should a freelancer set aside for taxes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most freelancers should set aside 25\u201330% of net income to cover federal income tax plus self-employment tax. Higher earners in high-tax states may need 35\u201340%."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -58,6 +83,7 @@
       <a href="#brackets">Brackets</a>
       <a href="#withholding">Withholding</a>
       <a href="#bonuses">Bonuses</a>
+      <a href="#self-employment">Freelancers</a>
       <a href="#history">History</a>
       <a href="#shelter">Save more</a>
       <a href="#itemize">Itemize?</a>
@@ -211,7 +237,7 @@
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -254,19 +280,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +303,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -379,6 +405,50 @@
     <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
       <h4>Above $1 million</h4>
       <p>Supplemental wages over $1 million in a calendar year are withheld at a mandatory flat <b>37%</b> — the top federal rate — on the portion above that threshold. Your employer has no discretion there, and the percentage method is required for it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Self-Employment & Freelancer Tax Rates
+     ====================================================================== -->
+<section class="section" id="self-employment">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Self-Employment &amp; Freelancer Tax Rates</h2>
+      <p class="section__lead">If you're self-employed or a 1099 freelancer, you pay both the employee and employer halves of FICA yourself — what W-2 employees split with their employer. That means a separate 15.3% self-employment tax on top of income tax, making the real federal burden for a $75K freelancer roughly <strong>27–30%</strong>.</p>
+    </div>
+
+    <div class="card">
+      <p>According to the IRS, self-employed individuals must pay a self-employment tax of <strong>15.3%</strong> on net earnings up to the Social Security wage base (<a href="https://www.irs.gov/businesses/small-businesses-self-employed/self-employment-tax-social-security-and-medicare-taxes" rel="noopener">IRS SE Tax Overview</a>).</p>
+
+      <ul style="margin-top:18px;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:10px">
+        <li><strong>15.3% SE tax rate</strong> — 12.4% Social Security + 2.9% Medicare, applied to 92.35% of net self-employment earnings.</li>
+        <li><strong>$176,100 Social Security wage base (2026)</strong> — SE tax above this threshold drops to 2.9% (Medicare only). High earners owe an additional 0.9% Medicare surtax above $200,000.</li>
+        <li><strong>50% deduction</strong> — You can deduct the employer-equivalent half of SE tax from gross income, reducing your taxable income (<a href="https://www.irs.gov/publications/p505" rel="noopener">IRS Publication 505</a>).</li>
+        <li><strong>~27–30% combined federal rate</strong> — A freelancer earning $75,000 net faces roughly 27–30% in combined federal income and self-employment tax after applying the 50% SE deduction.</li>
+      </ul>
+    </div>
+
+    <div class="callout">
+      <h4>Quarterly Estimated Tax — simple formula</h4>
+      <p>Self-employed filers must prepay tax quarterly or face an underpayment penalty. A practical estimate:</p>
+      <p style="margin-top:10px;font-family:monospace;background:var(--bg-alt);padding:10px 14px;border-radius:6px;font-size:15px">
+        Quarterly payment = (Net income × 0.9235 × 0.153 + income&nbsp;tax) ÷ 4
+      </p>
+      <p style="margin-top:10px">Most freelancers set aside <strong>25–30%</strong> of each payment received. Due dates: April 15, June 16, September 15, January 15.</p>
+    </div>
+
+    <div>
+      <h3 style="font-size:18px;margin-bottom:14px">Frequently asked questions</h3>
+      <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
+        <h4>What is the self-employment tax rate in 2026?</h4>
+        <p>The self-employment tax rate is 15.3% in 2026: 12.4% for Social Security (on earnings up to $176,100) and 2.9% for Medicare. High earners pay an additional 0.9% Medicare surtax above $200,000.</p>
+      </div>
+      <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3);margin-top:14px">
+        <h4>How much should a freelancer set aside for taxes?</h4>
+        <p>Most freelancers should set aside 25–30% of net income to cover federal income tax plus self-employment tax. Higher earners in high-tax states may need 35–40%.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -494,7 +564,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +681,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -660,6 +730,7 @@
           <li><a href="#deductions">Deductions</a></li>
           <li><a href="#credits">Credits</a></li>
           <li><a href="#retirement">Social Security</a></li>
+          <li><a href="#self-employment">Self-employment tax</a></li>
           <li><a href="/tax-glossary">Tax glossary</a></li>
         </ul>
       </div>
