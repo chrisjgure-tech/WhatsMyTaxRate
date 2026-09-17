@@ -24,6 +24,39 @@
 <meta name="twitter:image" content="https://whatsmytaxrate.com/og-image.jpg">
 <meta name="theme-color" content="#2E1140">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does a bonus push me into a higher tax bracket?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only the portion of your bonus that crosses a bracket threshold is taxed at the higher rate — not your whole income. Because the US federal income tax is progressive, each bracket applies only to the income that falls within its range. If your salary is near a bracket boundary and your bonus pushes you over it, only the dollars above the threshold are taxed at the higher rate. Your existing salary and lower-bracket income are unaffected."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is my bonus taxed at 22%?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The IRS mandates a flat 22% federal withholding rate on supplemental wages (including bonuses) up to $1 million per year, per IRC §3402(g) and IRS Publication 15 (Circular E). This is a withholding rate, not your actual tax rate. At filing, your bonus is added to your other income and taxed at your normal marginal rate. If 22% exceeds your actual marginal rate, the difference comes back as a refund."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the bonus tax rate for 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For 2026, the IRS-mandated flat withholding rate on bonus and supplemental wages under $1 million is 22%. For supplemental wages exceeding $1 million in a calendar year, the mandatory withholding rate is 37% on the amount above $1 million. These are withholding rates — your actual tax owed is based on your marginal bracket, determined when you file your return."
+      }
+    }
+  ]
+}
+</script>
+
 <!-- ?v=3 forces browsers to drop the aggressively-cached old favicon -->
 <!-- Google Ads (gtag). ads.js loads the tag only on the production domain and
      redacts income from what's tracked; kept external so script-src stays strict. -->
@@ -211,7 +244,7 @@
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -254,19 +287,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +310,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -337,7 +370,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>"My bonus got destroyed"</h2>
-      <p class="section__lead">It didn't. <strong>Bonuses aren't taxed differently than your salary — they're simply withheld differently.</strong> Because the IRS treats a bonus as <em>supplemental wages</em>, your employer often takes more tax upfront than they would from a regular paycheck. When you file, the bonus is added to the rest of your income and taxed at your normal marginal rate, and anything over-withheld comes back as part of your refund.</p>
+      <p class="section__lead">It didn't. <strong>Bonuses aren't taxed differently than your salary — they're simply withheld differently.</strong> The IRS mandates a flat <strong>22% federal withholding rate</strong> on supplemental wages up to $1 million (<a href="https://www.irs.gov/publications/p15" rel="noopener">IRS Publication 15, Circular E</a>, 2026; IRC §3402(g)). For supplemental wages above $1 million, the rate jumps to 37%. Because the IRS treats a bonus as <em>supplemental wages</em>, your employer often takes more tax upfront than they would from a regular paycheck. When you file, the bonus is added to the rest of your income and taxed at your normal marginal rate, and anything over-withheld comes back as part of your refund.</p>
     </div>
 
     <div class="bonusbar">
@@ -371,6 +404,39 @@
       <p class="fill__cap" id="bonus-verdict">—</p>
     </div>
 
+    <div class="card" style="margin-top:20px">
+      <h3 style="font-size:17px;margin-bottom:14px">Flat-rate vs. aggregate: side-by-side</h3>
+      <div class="tablewrap">
+        <table class="brk">
+          <thead>
+            <tr>
+              <th scope="col">Method</th>
+              <th scope="col">How It Works</th>
+              <th scope="col">When Used</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Flat Rate (22%)</strong></td>
+              <td>IRS-mandated flat withholding applied directly to the supplemental pay amount</td>
+              <td>Most common for bonuses paid separately from regular wages</td>
+            </tr>
+            <tr>
+              <td><strong>Aggregate Method</strong></td>
+              <td>Bonus is added to the most recent regular paycheck; your normal marginal withholding rate is applied to the combined total</td>
+              <td>Used when the bonus is combined with regular wages in the same pay period</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source">Source: <a href="https://www.irs.gov/publications/p15" rel="noopener">IRS Publication 15 (Circular E)</a>, Employer's Tax Guide, 2026. Withholding rules for supplemental wages governed by IRC §3402(g).</p>
+    </div>
+
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--accent)">
+      <h4>Worked example: $10,000 bonus</h4>
+      <p>Using the flat-rate method on a <strong>$10,000 bonus</strong>: federal withholding = <strong>$2,200</strong> (22%) + FICA (Social Security 6.2% + Medicare 1.45%) = <strong>$765</strong> → total withheld on pay day = <strong>$2,965</strong>. Your actual federal income tax owed on that $10,000 at a 22% marginal rate (for a $90,000 earner) = ~$2,200. The FICA portion is a real tax, not an over-withholding. Any over-withheld federal income tax is reconciled when you file your return.</p>
+    </div>
+
     <div class="callout">
       <h4>The rule to remember</h4>
       <p>A bonus is ordinary income. It stacks on top of your salary and is taxed at your marginal rate — the same as every other dollar you earn. Both withholding methods are just estimates the payroll system makes on the day. Withhold too much and the difference comes back in your refund; too little and you settle up in April. The aggregate method is the usual culprit behind a bonus that looks like it lost half its value, because it briefly pretends you earn that much <em>every</em> pay period.</p>
@@ -379,6 +445,11 @@
     <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
       <h4>Above $1 million</h4>
       <p>Supplemental wages over $1 million in a calendar year are withheld at a mandatory flat <b>37%</b> — the top federal rate — on the portion above that threshold. Your employer has no discretion there, and the percentage method is required for it.</p>
+    </div>
+
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
+      <h3 id="bonus-bracket-faq" style="font-size:17px;margin-bottom:8px">Does a bonus push me into a higher tax bracket?</h3>
+      <p><strong>No — only the dollars that cross a bracket threshold are taxed at the higher rate, not your entire income.</strong> Because US federal income tax is progressive, each bracket rate applies only to income within that range. If your salary puts you at $89,000 (in the 22% bracket for a single filer in 2026) and you receive a $20,000 bonus, the first roughly $14,000 of that bonus is still taxed at 22%; only the slice above the next bracket threshold ($103,351 for single filers in 2026) is taxed at 24%. Your existing salary income is unaffected — it stays in the brackets it already occupies. The withholding on the day of payment may look alarming, but at filing the math always sorts itself out.</p>
     </div>
   </div>
 </section>
@@ -494,7 +565,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +682,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
