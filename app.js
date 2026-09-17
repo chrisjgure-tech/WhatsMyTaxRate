@@ -1192,6 +1192,13 @@
     el.miniMarg.textContent = pct(r.fedMarginal, 0);
     el.miniTake.textContent = money(r.takeHome);
 
+    // Update the pre-filled tweet text with the user's computed effective rate
+    if (el.tweetLink) {
+      var tweetText = 'My effective federal tax rate is ' + pct(r.fedEffective)
+        + ' — not my marginal ' + pct(r.fedMarginal, 0) + ' rate. Check yours at whatsmytaxrate.com';
+      el.tweetLink.href = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(tweetText);
+    }
+
     writeURL();
   }
 
@@ -1257,6 +1264,7 @@
       creditCards: $('credit-cards'), chrStd: $('chr-std'), chrVal: $('chr-val'),
       ministrip: $('ministrip'), miniCtx: $('mini-ctx'), miniEff: $('mini-eff'),
       miniMarg: $('mini-marg'), miniTake: $('mini-take'),
+      tweetLink: $('tweet-link'),
       toast: $('toast')
     };
 
