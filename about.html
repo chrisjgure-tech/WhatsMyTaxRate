@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>About — What's My Tax Rate?</title>
+<meta name="description" content="Who built What's My Tax Rate, what data sources we use, and how the calculations work. Federal and state effective tax rate calculator for the 2026 tax year.">
+<link rel="canonical" href="https://whatsmytaxrate.com/about">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="What's My Tax Rate?">
+<meta property="og:url" content="https://whatsmytaxrate.com/about">
+<meta property="og:title" content="About — What's My Tax Rate?">
+<meta property="og:description" content="Who built What's My Tax Rate, what data sources we use, and how the calculations work.">
+<meta property="og:image" content="https://whatsmytaxrate.com/og-image.jpg">
+<meta name="theme-color" content="#2E1140">
+
+<script src="ads.js"></script>
+
+<link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
+<link rel="icon" href="favicon.ico?v=3" sizes="any">
+<link rel="icon" href="favicon-32.png?v=3" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
+<link rel="manifest" href="site.webmanifest">
+<link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "What's My Tax Rate",
+  "url": "https://whatsmytaxrate.com",
+  "description": "Free federal and state effective tax rate calculator for the 2026 tax year.",
+  "foundingDate": "2026",
+  "sameAs": [
+    "https://twitter.com/yourhandle",
+    "https://www.linkedin.com/company/yourpage"
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "AboutPage",
+  "name": "About — What's My Tax Rate?",
+  "url": "https://whatsmytaxrate.com/about",
+  "description": "Who built What's My Tax Rate, what data sources power it, and how the calculations work.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "What's My Tax Rate",
+    "url": "https://whatsmytaxrate.com"
+  },
+  "citation": [
+    {
+      "@type": "CreativeWork",
+      "name": "IRS Rev. Proc. 2025-32 — 2026 Tax Brackets and Standard Deductions",
+      "url": "https://www.irs.gov/pub/irs-drop/rp-25-32.pdf"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "IRS Statistics of Income Historical Table 23 — Historical Federal Tax Rates",
+      "url": "https://www.irs.gov/statistics/soi-tax-stats-historical-table-23"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "SSA — Social Security Contribution and Benefit Base",
+      "url": "https://www.ssa.gov/oact/cola/cbb.html"
+    },
+    {
+      "@type": "CreativeWork",
+      "name": "Tax Foundation — State Individual Income Tax Rates",
+      "url": "https://taxfoundation.org/data/all/state/state-income-tax-rates/"
+    }
+  ]
+}
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" href="/" aria-label="What's My Tax Rate — home">
+      <svg class="brand__mark" viewBox="0 -2 48 48" fill="none" aria-hidden="true">
+        <rect x="6"  y="30" width="6" height="12" rx="2" fill="#C9B8EC"/>
+        <rect x="16" y="24" width="6" height="18" rx="2" fill="#9B7BD4"/>
+        <rect x="26" y="17" width="6" height="25" rx="2" fill="#7C3AED"/>
+        <rect x="36" y="9"  width="6" height="33" rx="2" fill="#4A1D6A"/>
+        <circle cx="39" cy="5" r="3.4" fill="#F2B347"/>
+      </svg>
+      <span class="brand__name">What's My <em>Tax Rate</em></span>
+    </a>
+  </div>
+</header>
+
+<main id="top" style="padding-top:48px;padding-bottom:72px">
+<div class="wrap" style="max-width:720px">
+
+  <h1 style="font-size:clamp(1.6rem,4vw,2.4rem);margin-bottom:8px">About What's My Tax Rate</h1>
+  <p class="hero__sub" style="margin-bottom:40px">A plain-language tool for W-2 earners who want to understand what they actually pay — not just their bracket.</p>
+
+  <section style="margin-bottom:40px">
+    <h2>What the tool does</h2>
+    <p>What's My Tax Rate is a free, browser-based calculator that breaks down your federal, FICA, and state income tax for the <strong>2026 tax year</strong>. It shows your <em>effective</em> rate — the share of your total income that goes to tax — alongside your <em>marginal</em> rate, so you can see the gap between the two numbers most people confuse.</p>
+    <p style="margin-top:14px">All calculations run locally in your browser. Your income is never sent to any server, analytics system, or ad platform. The only data that leaves your device is your state and filing status, which are used for privacy-preserving analytics.</p>
+  </section>
+
+  <section style="margin-bottom:40px">
+    <h2>Who built it</h2>
+    <p>What's My Tax Rate was built as a public-interest resource to demystify the US federal and state tax system for everyday W-2 employees. The tool is maintained by the team at <a href="https://whatsmytaxrate.com">whatsmytaxrate.com</a>, with calculations verified against official IRS publications each tax year.</p>
+    <p style="margin-top:14px">The site does not provide personalised tax, legal, or financial advice. It is an educational tool only — see the disclaimer at the bottom of every page.</p>
+  </section>
+
+  <section style="margin-bottom:40px">
+    <h2>Data sources and methodology</h2>
+    <p>All figures are sourced directly from official government publications and cross-checked against independent tax research:</p>
+
+    <ul style="margin-top:16px;line-height:1.9">
+      <li>
+        <strong>Federal tax brackets and standard deductions (2026)</strong><br>
+        <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32</a> — the official IRS revenue procedure announcing inflation-adjusted amounts for tax year 2026. Covers the seven ordinary-income brackets, the standard deduction by filing status, and relevant phase-out thresholds.
+      </li>
+      <li style="margin-top:12px">
+        <strong>FICA rates and wage base</strong><br>
+        <a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">Social Security Administration — Contribution and Benefit Base</a>. Social Security tax rate is 6.2% on wages up to the annual wage base; Medicare is 1.45% on all wages (plus 0.9% Additional Medicare Tax above applicable thresholds, not modelled here).
+      </li>
+      <li style="margin-top:12px">
+        <strong>State income tax rates</strong><br>
+        <a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation — State Individual Income Tax Rates and Brackets</a>. State brackets, standard deductions, and personal exemptions verified against each state's department of revenue for 2026 where available.
+      </li>
+      <li style="margin-top:12px">
+        <strong>Historical top federal marginal rates (1955–2026)</strong><br>
+        <a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener">IRS Statistics of Income, Historical Table 23</a> and the Tax Foundation's historical federal income tax rates series. Top statutory rate on ordinary income; excludes surtaxes and the Net Investment Income Tax.
+      </li>
+      <li style="margin-top:12px">
+        <strong>Social Security benefit taxation thresholds</strong><br>
+        IRC §86 and <a href="https://www.ssa.gov/benefits/retirement/planner/taxes.html" rel="noopener">SSA benefit taxation guidance</a>. The combined-income formula and the 50%/85% inclusion thresholds are statutory and unchanged since 1993.
+      </li>
+    </ul>
+  </section>
+
+  <section style="margin-bottom:40px">
+    <h2>What the tool does not cover</h2>
+    <p>To keep results clear and comparable, the calculator assumes W-2 wage income with the standard deduction. It does not model:</p>
+    <ul style="margin-top:12px;line-height:1.9">
+      <li>Local or municipal income taxes</li>
+      <li>The Alternative Minimum Tax (AMT)</li>
+      <li>The Net Investment Income Tax (NIIT)</li>
+      <li>Capital gains or qualified dividend rates</li>
+      <li>Self-employment tax</li>
+      <li>Itemized deductions (other than in the "Should you itemize?" section)</li>
+      <li>Most credits (a qualitative overview is shown in the Credits section)</li>
+    </ul>
+    <p style="margin-top:14px">Your actual liability will differ. Consult a qualified tax professional before acting on anything here.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <p>Spotted an error in a rate or bracket? <a href="mailto:hello@whatsmytaxrate.com">Email us</a> with a link to the official source and we will review and update promptly.</p>
+  </section>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h4>What's My Tax Rate?</h4>
+        <p style="line-height:1.65">A free, plain-language explainer for W-2 earners who want to understand what they actually pay — and why the number on their paycheck looks so much worse.</p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="/">Calculator</a></li>
+          <li><a href="/tax-glossary">Tax glossary</a></li>
+          <li><a href="/about">About &amp; sources</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sources</h4>
+        <ul>
+          <li><a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32</a> — 2026 brackets &amp; deductions</li>
+          <li><a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">SSA</a> — Social Security wage base</li>
+          <li><a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation</a> — state income tax rates</li>
+          <li><a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener">IRS SOI Table 23</a> — historical rates</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__legal">
+      <p><strong>For educational purposes only. This is not tax or financial advice.</strong></p>
+      <p style="margin-top:9px">Calculations assume wage (W-2) income only and the standard deduction, for the 2026 tax year. They exclude local and municipal income taxes, the Alternative Minimum Tax, the Net Investment Income Tax, capital gains and qualified dividend rates, self-employment tax, itemized deductions, and most credits. Your actual liability will differ. Consult a qualified tax professional before acting on anything here.</p>
+      <p style="margin-top:9px">© 2026 whatsmytaxrate.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="analytics.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
