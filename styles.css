@@ -809,6 +809,27 @@ table.brk tfoot td { font-weight: 800; border-bottom: 0; border-top: 2px solid v
 .footer__legal strong { color: #E5DAF2; }
 
 /* --------------------------------------------------------------------------
+   Author bio — E-E-A-T trust signal
+   -------------------------------------------------------------------------- */
+
+.author-bio-section { background: var(--bg-alt); padding: 48px 0; }
+.author-bio {
+  display: flex; align-items: flex-start; gap: 20px;
+  background: var(--card); border: 1px solid var(--line);
+  border-left: 4px solid var(--brand-500);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 24px 28px; max-width: 680px;
+}
+.author-bio__img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; flex-shrink: 0; background: var(--bg-alt); }
+.author-bio__body { font-size: 15px; line-height: 1.6; color: var(--ink-2); }
+.author-bio__body p { margin: 0 0 7px; }
+.author-bio__body p:last-child { margin-bottom: 0; }
+.author-bio__body strong, .author-bio__body a { color: var(--ink); }
+.author-bio__body a { text-decoration: none; }
+.author-bio__body a:hover { text-decoration: underline; }
+@media (max-width: 520px) { .author-bio { flex-direction: column; } }
+
+/* --------------------------------------------------------------------------
    Print (FIX #9 — a clean printable / save-as-PDF result)
    -------------------------------------------------------------------------- */
 
