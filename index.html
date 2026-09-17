@@ -35,6 +35,31 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the capital gains tax rate for 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For 2026, long-term capital gains rates are 0%, 15%, or 20% depending on your taxable income. Single filers with taxable income under $47,025 pay 0%; the 15% rate applies up to $518,900; the 20% rate applies above that. Short-term gains on assets held one year or less are taxed as ordinary income at your marginal rate (10%\u201337%)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is capital gains tax higher than income tax?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For most taxpayers, long-term capital gains rates (0\u201320%) are lower than ordinary income tax rates (10\u201337%). Short-term gains, however, are taxed at the same rate as your regular income. High earners above $200,000 (single) also owe an additional 3.8% Net Investment Income Tax (NIIT), bringing the maximum long-term rate to 23.8%."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -64,6 +89,7 @@
       <a href="#deductions">Deductions</a>
       <a href="#credits">Credits</a>
       <a href="#retirement">Retirement</a>
+      <a href="#capital-gains">Capital gains</a>
     </nav>
   </div>
 </header>
@@ -211,7 +237,7 @@
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -254,19 +280,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +303,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -494,7 +520,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +637,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -629,6 +655,104 @@
       <p class="ret__statessub" id="ret-statessub">—</p>
       <div class="ret__grid" id="ret-grid"></div>
       <p class="source" id="ret-source">—</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Capital gains: why your investment income is taxed differently
+     ====================================================================== -->
+<section class="section" id="capital-gains">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Capital gains: why your investment income is taxed differently</h2>
+      <p class="section__lead">When you sell a stock, a home, or any other investment at a profit, the IRS taxes that gain — but the rate depends on <em>how long</em> you held it. Hold for a year or less and you pay the same rate as your salary. Hold longer and you qualify for a separate, usually lower, long-term rate.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:17px;margin-bottom:14px">Short-term vs. long-term capital gains rates, 2026</h3>
+      <div class="tablewrap">
+        <table class="brk">
+          <caption class="sr-only">2026 capital gains tax rates comparing short-term and long-term treatment for single filers</caption>
+          <thead>
+            <tr>
+              <th scope="col">Holding period</th>
+              <th scope="col">Tax treatment</th>
+              <th scope="col">Rate</th>
+              <th scope="col">Single filer taxable income threshold (2026)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Short-term</strong> (≤ 1 year)</td>
+              <td>Ordinary income — same as wages</td>
+              <td>10% – 37%</td>
+              <td>Your normal income tax bracket</td>
+            </tr>
+            <tr>
+              <td rowspan="3"><strong>Long-term</strong> (&gt; 1 year)</td>
+              <td rowspan="3">Preferential capital gains rate</td>
+              <td>0%</td>
+              <td>Up to $47,025</td>
+            </tr>
+            <tr>
+              <td>15%</td>
+              <td>$47,025 – $518,900</td>
+            </tr>
+            <tr>
+              <td>20%</td>
+              <td>Over $518,900</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source">Source: <a href="https://www.irs.gov/taxtopics/tc409" rel="noopener">IRS Topic No. 409 — Capital Gains and Losses</a>; 2026 thresholds from <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32</a>.</p>
+    </div>
+
+    <div class="callout">
+      <h4>The 0% rate is broader than most people realize</h4>
+      <p>In 2026, a single filer with taxable income under <strong>$47,025</strong> pays <strong>0%</strong> on long-term capital gains. For married filing jointly, the threshold is <strong>$94,050</strong>. A retiree drawing on a brokerage account alongside modest Social Security income may owe nothing on investment gains — even while paying ordinary income tax on IRA withdrawals.</p>
+    </div>
+
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--warn)">
+      <h4>The 3.8% NIIT surcharge for high earners</h4>
+      <p>If your modified adjusted gross income exceeds <strong>$200,000</strong> (single) or <strong>$250,000</strong> (married filing jointly), a 3.8% <strong>Net Investment Income Tax (NIIT)</strong> stacks on top of your long-term capital gains rate. That brings the maximum effective rate on long-term gains to <strong>23.8%</strong> — not 20%. The NIIT applies to net investment income including capital gains, dividends, interest, and passive rental income.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:17px;margin-bottom:14px">Worked example: $50,000 salary + $10,000 long-term gain (single filer, 2026)</h3>
+      <div class="tablewrap">
+        <table class="brk">
+          <caption class="sr-only">Worked example showing federal tax on a $50,000 salary plus $10,000 long-term capital gain for a single filer in 2026</caption>
+          <thead>
+            <tr>
+              <th scope="col">Income type</th>
+              <th scope="col">Gross amount</th>
+              <th scope="col">Rate applied</th>
+              <th scope="col">Federal tax owed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Wages (W-2)</td>
+              <td>$50,000</td>
+              <td>10–12% on taxable wages of $34,650 (after $15,350 standard deduction)</td>
+              <td>≈ $3,920</td>
+            </tr>
+            <tr>
+              <td>Long-term capital gain</td>
+              <td>$10,000</td>
+              <td>0% — total taxable income of $44,650 stays below the $47,025 threshold</td>
+              <td>$0</td>
+            </tr>
+            <tr>
+              <td colspan="3"><strong>Blended effective federal rate on $60,000 gross</strong></td>
+              <td><strong>≈ 6.5%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin-top:12px;font-size:14px;color:var(--ink-3)">Standard deduction for 2026: $15,350 (single). Taxable ordinary income = $50,000 − $15,350 = $34,650. Capital gains stack on top: total taxable income = $44,650, below the 0% long-term rate ceiling of $47,025. Note: FICA and state taxes are separate and would increase the all-in rate.</p>
     </div>
   </div>
 </section>
