@@ -27,6 +27,47 @@
 <!-- ?v=3 forces browsers to drop the aggressively-cached old favicon -->
 <!-- Google Ads (gtag). ads.js loads the tag only on the production domain and
      redacts income from what's tracked; kept external so script-src stays strict. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the U.S. tax rate for non-resident aliens?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non-resident aliens pay a flat 30% withholding rate on most U.S.-source income under IRC §1441, unless a tax treaty between the U.S. and their home country reduces this rate. Graduated rates apply once a person qualifies as a resident alien under the Substantial Presence Test."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do H-1B visa holders pay FICA taxes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. H-1B and L-1 visa holders are generally subject to FICA taxes (Social Security 6.2% + Medicare 1.45% = 7.65%) even while classified as non-resident aliens, because those visa categories are not exempt under IRC §3121(b)(19). The FICA exemption applies primarily to F-1 and J-1 students during their first 5 calendar years of presence."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do U.S. tax treaties affect withholding for non-residents?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "As of 2026, the U.S. has income tax treaties with 68 countries. These treaties can reduce the 30% flat withholding rate on dividends, royalties, and other income to as low as 0–15%, depending on the country and income type. Non-residents must file Form W-8BEN with their payer to claim treaty benefits."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What tax form do non-resident aliens file?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Non-resident aliens file IRS Form 1040-NR (U.S. Nonresident Alien Income Tax Return) instead of the standard Form 1040. The form reports U.S.-source income and applies the flat 30% rate (or lower treaty rate) rather than the graduated brackets used by resident filers."
+      }
+    }
+  ]
+}
+</script>
+
 <script src="ads.js"></script>
 
 <link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
@@ -64,6 +105,7 @@
       <a href="#deductions">Deductions</a>
       <a href="#credits">Credits</a>
       <a href="#retirement">Retirement</a>
+      <a href="#nonresidents">Non-residents</a>
     </nav>
   </div>
 </header>
@@ -211,7 +253,7 @@
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -254,19 +296,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +319,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -494,7 +536,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +653,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -629,6 +671,88 @@
       <p class="ret__statessub" id="ret-statessub">—</p>
       <div class="ret__grid" id="ret-grid"></div>
       <p class="source" id="ret-source">—</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Tax Rates for Non-Residents, Visa Holders & International Workers
+     ====================================================================== -->
+<section class="section" id="nonresidents">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Tax Rates for Non-Residents, Visa Holders &amp; International Workers</h2>
+      <p class="section__lead">Non-resident aliens and visa holders face a fundamentally different U.S. tax structure — a 30% flat withholding rate on most U.S.-source income, FICA exemptions for certain visa categories, and treaty-reduced rates that can drop withholding to 0–15%. Here is what applies to you.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <h3 style="font-size:17px;margin-bottom:14px">Key rules at a glance</h3>
+      <ul style="line-height:1.9;padding-left:1.2em">
+        <li>Non-resident aliens are subject to a flat <strong>30% withholding rate</strong> on U.S.-source income under <strong>IRC §1441</strong>, unless reduced by a tax treaty (<cite>IRS Publication 515, 2026</cite>).</li>
+        <li>As of 2026, the U.S. has income tax treaties with <strong>68 countries</strong>, many reducing withholding to 0–15% on dividends and royalties (<cite>U.S. Treasury, 2026</cite>).</li>
+        <li>F-1 and J-1 students are exempt from FICA during their first 5 calendar years of presence; H-1B and L-1 holders are generally <strong>FICA-exempt only while classified as non-resident aliens</strong>. Once classified as resident aliens under the Substantial Presence Test, full 7.65% FICA applies.</li>
+      </ul>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <h3 style="font-size:17px;margin-bottom:14px">Visa type comparison</h3>
+      <div class="tablewrap">
+        <table class="brk">
+          <caption class="sr-only">Federal tax treatment by visa type for non-resident aliens and visa holders</caption>
+          <thead>
+            <tr>
+              <th scope="col">Visa Type</th>
+              <th scope="col">Resident Status</th>
+              <th scope="col">Federal Rate</th>
+              <th scope="col">FICA Applies</th>
+              <th scope="col">Treaty Eligible</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>F-1 / J-1 (first 5 yrs)</td>
+              <td>Non-resident alien</td>
+              <td>30% flat (IRC §1441)</td>
+              <td>No — exempt</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>F-1 OPT (after 5-yr window)</td>
+              <td>Resident alien</td>
+              <td>Graduated 10–37%</td>
+              <td>Yes — 7.65%</td>
+              <td>Limited</td>
+            </tr>
+            <tr>
+              <td>H-1B / L-1 (non-resident)</td>
+              <td>Non-resident alien</td>
+              <td>30% flat (IRC §1441)</td>
+              <td>Yes — 7.65%</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>H-1B / L-1 (resident)</td>
+              <td>Resident alien</td>
+              <td>Graduated 10–37%</td>
+              <td>Yes — 7.65%</td>
+              <td>Limited</td>
+            </tr>
+            <tr>
+              <td>Green card holder</td>
+              <td>Resident alien</td>
+              <td>Graduated 10–37%</td>
+              <td>Yes — 7.65%</td>
+              <td>No</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source">Resident vs. non-resident status determined by the Substantial Presence Test (IRC §7701(b)). FICA exemption for F-1/J-1 under IRC §3121(b)(19). Treaty eligibility depends on the filer's home country and income type. Consult IRS Publication 519 and Form 1040-NR instructions for your specific situation.</p>
+    </div>
+
+    <div class="callout">
+      <h4>What determines your tax status: the Substantial Presence Test</h4>
+      <p>You are treated as a U.S. resident alien for tax purposes if you were present in the U.S. for at least <strong>31 days during the current year</strong> and at least <strong>183 days over the prior 3 years</strong> (counting all days this year, 1/3 of last year's days, and 1/6 of the year before). Once you cross that threshold, you file on Form 1040 at graduated rates — not Form 1040-NR at the 30% flat rate.</p>
     </div>
   </div>
 </section>
@@ -660,6 +784,7 @@
           <li><a href="#deductions">Deductions</a></li>
           <li><a href="#credits">Credits</a></li>
           <li><a href="#retirement">Social Security</a></li>
+          <li><a href="#nonresidents">Non-residents &amp; visa holders</a></li>
           <li><a href="/tax-glossary">Tax glossary</a></li>
         </ul>
       </div>
@@ -670,6 +795,9 @@
           <li><a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">SSA</a> — Social Security wage base</li>
           <li><a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation</a> — state income tax rates</li>
           <li><a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener">IRS SOI Table 23</a> — historical rates</li>
+          <li><a href="https://www.irs.gov/pub/irs-pdf/p515.pdf" rel="noopener">IRS Publication 515</a> — withholding of tax on nonresident aliens</li>
+          <li><a href="https://www.irs.gov/forms-pubs/about-form-1040-nr" rel="noopener">IRS Form 1040-NR</a> — U.S. nonresident alien income tax return</li>
+          <li><a href="https://www.treasury.gov/resource-center/tax-policy/treaties/Pages/treaties.aspx" rel="noopener">U.S. Treasury</a> — income tax treaty table (68 countries)</li>
         </ul>
       </div>
     </div>
