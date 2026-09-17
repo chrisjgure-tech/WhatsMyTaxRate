@@ -24,6 +24,23 @@
 <meta name="twitter:image" content="https://whatsmytaxrate.com/og-image.jpg">
 <meta name="theme-color" content="#2E1140">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "US State Income Tax Rates 2026",
+  "description": "Top and bottom marginal income tax rates for all 50 US states for tax year 2026.",
+  "url": "https://whatsmytaxrate.com/#state-tax-rates",
+  "creator": {
+    "@type": "Organization",
+    "name": "What's My Tax Rate"
+  },
+  "dateModified": "2026-01-01",
+  "variableMeasured": "State Income Tax Rate",
+  "spatialCoverage": "United States"
+}
+</script>
+
 <!-- ?v=3 forces browsers to drop the aggressively-cached old favicon -->
 <!-- Google Ads (gtag). ads.js loads the tag only on the production domain and
      redacts income from what's tracked; kept external so script-src stays strict. -->
@@ -64,6 +81,7 @@
       <a href="#deductions">Deductions</a>
       <a href="#credits">Credits</a>
       <a href="#retirement">Retirement</a>
+      <a href="#state-tax-rates">State rates</a>
     </nav>
   </div>
 </header>
@@ -211,7 +229,7 @@
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -254,19 +272,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +295,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -494,7 +512,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +629,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -632,6 +650,121 @@
     </div>
   </div>
 </section>
+
+<!-- ======================================================================
+     State Income Tax Rates: All 50 States (2026)
+     ====================================================================== -->
+<section class="section" id="state-tax-rates">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>State Income Tax Rates: All 50 States (2026)</h2>
+      <p class="section__lead">Nine states charge <strong>no income tax</strong> at all: Alaska, Florida, Nevada, New Hampshire, South Dakota, Tennessee, Texas, Washington, and Wyoming. The remaining 41 states use either a flat rate or graduated brackets. California's 13.3% top rate is the highest in the nation — a difference worth over $65,000/year for a $500K earner compared to living in a no-tax state. Click any column header to sort.</p>
+    </div>
+
+    <div class="card">
+      <div class="tablewrap">
+        <table class="brk" id="state-tax-table">
+          <caption class="sr-only">State income tax rates for all 50 US states, tax year 2026. Source: Tax Foundation and IRS Publication 17.</caption>
+          <thead>
+            <tr>
+              <th scope="col" class="sortable" data-col="0" style="cursor:pointer" aria-sort="ascending">State <span aria-hidden="true">↕</span></th>
+              <th scope="col" class="sortable" data-col="1" style="cursor:pointer">Tax Type <span aria-hidden="true">↕</span></th>
+              <th scope="col" class="sortable r" data-col="2" style="cursor:pointer">Top Rate <span aria-hidden="true">↕</span></th>
+              <th scope="col" class="sortable r" data-col="3" style="cursor:pointer">Bottom Rate <span aria-hidden="true">↕</span></th>
+            </tr>
+          </thead>
+          <tbody id="state-tax-body">
+            <tr><td>Alabama</td><td>Graduated</td><td class="r">5.0%</td><td class="r">2.0%</td></tr>
+            <tr><td>Alaska</td><td>None</td><td class="r">0%</td><td class="r">0%</td></tr>
+            <tr><td>Arizona</td><td>Flat</td><td class="r">2.5%</td><td class="r">2.5%</td></tr>
+            <tr><td>Arkansas</td><td>Graduated</td><td class="r">3.9%</td><td class="r">2.0%</td></tr>
+            <tr><td>California</td><td>Graduated</td><td class="r">13.3%</td><td class="r">1.0%</td></tr>
+            <tr><td>Colorado</td><td>Flat</td><td class="r">4.4%</td><td class="r">4.4%</td></tr>
+            <tr><td>Connecticut</td><td>Graduated</td><td class="r">6.99%</td><td class="r">3.0%</td></tr>
+            <tr><td>Delaware</td><td>Graduated</td><td class="r">6.6%</td><td class="r">2.2%</td></tr>
+            <tr><td>Florida</td><td>None</td><td class="r">0%</td><td class="r">0%</td></tr>
+            <tr><td>Georgia</td><td>Flat</td><td class="r">5.49%</td><td class="r">5.49%</td></tr>
+            <tr><td>Hawaii</td><td>Graduated</td><td class="r">11.0%</td><td class="r">1.4%</td></tr>
+            <tr><td>Idaho</td><td>Flat</td><td class="r">5.8%</td><td class="r">5.8%</td></tr>
+            <tr><td>Illinois</td><td>Flat</td><td class="r">4.95%</td><td class="r">4.95%</td></tr>
+            <tr><td>Indiana</td><td>Flat</td><td class="r">3.05%</td><td class="r">3.05%</td></tr>
+            <tr><td>Iowa</td><td>Flat</td><td class="r">3.8%</td><td class="r">3.8%</td></tr>
+            <tr><td>Kansas</td><td>Graduated</td><td class="r">5.7%</td><td class="r">3.1%</td></tr>
+            <tr><td>Kentucky</td><td>Flat</td><td class="r">4.0%</td><td class="r">4.0%</td></tr>
+            <tr><td>Louisiana</td><td>Flat</td><td class="r">3.0%</td><td class="r">3.0%</td></tr>
+            <tr><td>Maine</td><td>Graduated</td><td class="r">7.15%</td><td class="r">5.8%</td></tr>
+            <tr><td>Maryland</td><td>Graduated</td><td class="r">5.75%</td><td class="r">2.0%</td></tr>
+            <tr><td>Massachusetts</td><td>Flat</td><td class="r">5.0%</td><td class="r">5.0%</td></tr>
+            <tr><td>Michigan</td><td>Flat</td><td class="r">4.25%</td><td class="r">4.25%</td></tr>
+            <tr><td>Minnesota</td><td>Graduated</td><td class="r">9.85%</td><td class="r">5.35%</td></tr>
+            <tr><td>Mississippi</td><td>Flat</td><td class="r">4.4%</td><td class="r">4.4%</td></tr>
+            <tr><td>Missouri</td><td>Graduated</td><td class="r">4.8%</td><td class="r">1.5%</td></tr>
+            <tr><td>Montana</td><td>Graduated</td><td class="r">5.9%</td><td class="r">4.7%</td></tr>
+            <tr><td>Nebraska</td><td>Graduated</td><td class="r">5.84%</td><td class="r">2.46%</td></tr>
+            <tr><td>Nevada</td><td>None</td><td class="r">0%</td><td class="r">0%</td></tr>
+            <tr><td>New Hampshire</td><td>None</td><td class="r">0%</td><td class="r">0%</td></tr>
+            <tr><td>New Jersey</td><td>Graduated</td><td class="r">10.75%</td><td class="r">1.4%</td></tr>
+            <tr><td>New Mexico</td><td>Graduated</td><td class="r">5.9%</td><td class="r">1.7%</td></tr>
+            <tr><td>New York</td><td>Graduated</td><td class="r">10.9%</td><td class="r">4.0%</td></tr>
+            <tr><td>North Carolina</td><td>Flat</td><td class="r">4.5%</td><td class="r">4.5%</td></tr>
+            <tr><td>North Dakota</td><td>Graduated</td><td class="r">2.5%</td><td class="r">1.1%</td></tr>
+            <tr><td>Ohio</td><td>Graduated</td><td class="r">3.5%</td><td class="r">2.75%</td></tr>
+            <tr><td>Oklahoma</td><td>Graduated</td><td class="r">4.75%</td><td class="r">0.5%</td></tr>
+            <tr><td>Oregon</td><td>Graduated</td><td class="r">9.9%</td><td class="r">4.75%</td></tr>
+            <tr><td>Pennsylvania</td><td>Flat</td><td class="r">3.07%</td><td class="r">3.07%</td></tr>
+            <tr><td>Rhode Island</td><td>Graduated</td><td class="r">5.99%</td><td class="r">3.75%</td></tr>
+            <tr><td>South Carolina</td><td>Graduated</td><td class="r">6.2%</td><td class="r">0.0%</td></tr>
+            <tr><td>South Dakota</td><td>None</td><td class="r">0%</td><td class="r">0%</td></tr>
+            <tr><td>Tennessee</td><td>None</td><td class="r">0%</td><td class="r">0%</td></tr>
+            <tr><td>Texas</td><td>None</td><td class="r">0%</td><td class="r">0%</td></tr>
+            <tr><td>Utah</td><td>Flat</td><td class="r">4.55%</td><td class="r">4.55%</td></tr>
+            <tr><td>Vermont</td><td>Graduated</td><td class="r">8.75%</td><td class="r">3.35%</td></tr>
+            <tr><td>Virginia</td><td>Graduated</td><td class="r">5.75%</td><td class="r">2.0%</td></tr>
+            <tr><td>Washington</td><td>None</td><td class="r">0%</td><td class="r">0%</td></tr>
+            <tr><td>West Virginia</td><td>Graduated</td><td class="r">5.12%</td><td class="r">2.36%</td></tr>
+            <tr><td>Wisconsin</td><td>Graduated</td><td class="r">7.65%</td><td class="r">3.5%</td></tr>
+            <tr><td>Wyoming</td><td>None</td><td class="r">0%</td><td class="r">0%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source">Source: <a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation</a> — state income tax rates; <a href="https://www.irs.gov/pub/irs-pdf/p17.pdf" rel="noopener">IRS Publication 17</a>. Rates reflect the 2026 tax year. Local and municipal income taxes not included. Massachusetts levies an additional 4% surtax on income over $1 million.</p>
+    </div>
+
+    <div class="callout">
+      <h4>No-tax vs. high-tax: the real dollar difference</h4>
+      <p>California's 13.3% top marginal rate is the highest in the nation; Hawaii's 11% and New Jersey's 10.75% follow. At $500,000 of taxable income, the state tax difference between California and Texas or Florida exceeds $65,000 per year — before accounting for federal deductibility. For most earners, state income tax is the second-largest tax bill after federal income tax, surpassing FICA once wages clear the Social Security wage base ($176,100 in 2026).</p>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var table = document.getElementById('state-tax-table');
+  if (!table) return;
+  var tbody = document.getElementById('state-tax-body');
+  var headers = table.querySelectorAll('th.sortable');
+  var sortCol = 0, sortAsc = true;
+
+  function parseRate(s) { return parseFloat(s) || 0; }
+
+  headers.forEach(function (th) {
+    th.addEventListener('click', function () {
+      var col = parseInt(th.getAttribute('data-col'), 10);
+      if (sortCol === col) { sortAsc = !sortAsc; } else { sortCol = col; sortAsc = true; }
+      headers.forEach(function (h) { h.removeAttribute('aria-sort'); });
+      th.setAttribute('aria-sort', sortAsc ? 'ascending' : 'descending');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      rows.sort(function (a, b) {
+        var av = a.cells[col].textContent.trim();
+        var bv = b.cells[col].textContent.trim();
+        var n = (col === 2 || col === 3) ? (parseRate(av) - parseRate(bv)) : av.localeCompare(bv);
+        return sortAsc ? n : -n;
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    });
+  });
+})();
+</script>
 
 </main>
 
@@ -660,6 +793,7 @@
           <li><a href="#deductions">Deductions</a></li>
           <li><a href="#credits">Credits</a></li>
           <li><a href="#retirement">Social Security</a></li>
+          <li><a href="#state-tax-rates">State income tax rates</a></li>
           <li><a href="/tax-glossary">Tax glossary</a></li>
         </ul>
       </div>
