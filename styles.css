@@ -486,6 +486,7 @@ table.brk tfoot td { font-weight: 800; border-bottom: 0; border-top: 2px solid v
 .gloss-hero h1 { font-size: clamp(30px, 5vw, 48px); letter-spacing: -0.035em; max-width: 20ch; }
 .gloss-hero p { margin-top: 16px; font-size: clamp(16px, 2vw, 19px); color: #D9CFE8; max-width: 66ch; line-height: 1.6; }
 .gloss-hero .btn { margin-top: 24px; }
+.gloss-hero .gloss-updated { font-size: 13px; color: #9C90AC; margin-top: 8px; font-weight: 650; }
 
 .az { display: flex; flex-wrap: wrap; gap: 6px; padding: 22px 0; border-bottom: 1px solid var(--line); position: sticky; top: 60px; background: rgba(250,250,247,.92); backdrop-filter: saturate(180%) blur(8px); z-index: 40; }
 .az a { display: inline-flex; align-items: center; justify-content: center; min-width: 34px; min-height: 34px; padding: 0 6px; border-radius: 9px; font-size: 13px; font-weight: 800; color: var(--brand-700); text-decoration: none; background: var(--brand-50); }
@@ -496,7 +497,7 @@ table.brk tfoot td { font-weight: 800; border-bottom: 0; border-top: 2px solid v
 .gloss__letter { font-size: 13px; font-weight: 800; letter-spacing: .18em; color: var(--brand-500); border-bottom: 2px solid var(--line-2); padding-bottom: 8px; margin-bottom: 18px; }
 .term { padding: 20px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 120px; }
 .term:last-child { border-bottom: 0; }
-.term h3 { font-size: 20px; letter-spacing: -0.02em; margin-bottom: 8px; }
+.term h2 { font-size: 20px; letter-spacing: -0.02em; margin-bottom: 8px; }
 .term__abbr { font-size: 14px; font-weight: 650; color: var(--ink-3); }
 .term p { font-size: 16px; line-height: 1.65; color: var(--ink-2); max-width: 74ch; }
 .term__link { display: inline-block; margin-top: 10px; font-size: 14.5px; font-weight: 750; color: var(--brand-600); text-decoration: none; }
