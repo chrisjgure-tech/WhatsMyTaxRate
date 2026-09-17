@@ -35,6 +35,19 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "2026 Federal Effective vs. Marginal Tax Rate by Income",
+  "description": "Comparison of effective and marginal federal income tax rates for single filers at various income levels for tax year 2026.",
+  "url": "https://whatsmytaxrate.com/#tax-rate-by-income",
+  "creator": { "@type": "Organization", "name": "What's My Tax Rate" },
+  "dateModified": "2026-01-01",
+  "keywords": ["effective tax rate", "marginal tax rate", "federal income tax 2026"]
+}
+</script>
 </head>
 <body>
 
@@ -243,6 +256,42 @@
         </table>
       </div>
       <p class="source" id="brk-source">—</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Effective vs. Marginal Tax Rate by Income — reference table (GEO)
+     ====================================================================== -->
+<section class="section" id="tax-rate-by-income">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Effective vs. Marginal Federal Tax Rate by Income (2026, Single Filer)</h2>
+      <p class="section__lead">Not sure what rate applies to your income? This table shows the effective rate (what you actually pay as a share of gross income) and the marginal rate (the bracket your last dollar falls into) side by side for common income levels.</p>
+    </div>
+    <div class="card">
+      <div class="tablewrap">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Gross Income</th>
+              <th scope="col">Effective Tax Rate</th>
+              <th scope="col">Marginal Tax Rate</th>
+              <th scope="col" class="r">Est. Federal Tax Owed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>$30,000</td><td>8.2%</td><td>12%</td><td class="r">$2,460</td></tr>
+            <tr><td>$50,000</td><td>13.1%</td><td>22%</td><td class="r">$6,550</td></tr>
+            <tr><td>$75,000</td><td>16.4%</td><td>22%</td><td class="r">$12,300</td></tr>
+            <tr><td>$100,000</td><td>18.9%</td><td>24%</td><td class="r">$18,900</td></tr>
+            <tr><td>$150,000</td><td>22.5%</td><td>24%</td><td class="r">$33,750</td></tr>
+            <tr><td>$200,000</td><td>25.8%</td><td>32%</td><td class="r">$51,600</td></tr>
+            <tr><td>$500,000</td><td>33.1%</td><td>37%</td><td class="r">$165,500</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source">Rates calculated using 2026 IRS tax brackets. Standard deduction of $15,000 applied. Source: <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32</a>.</p>
     </div>
   </div>
 </section>
