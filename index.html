@@ -35,6 +35,23 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What tax rate does an S-Corp owner pay compared to a sole proprietor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An S-Corp owner who pays themselves a reasonable salary of $80,000 pays 7.65% FICA on that salary ($6,120), while a sole proprietor earning $80,000 net profit pays 15.3% self-employment tax ($12,240) — a $6,120 annual difference before income tax."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -63,6 +80,7 @@
       <a href="#itemize">Itemize?</a>
       <a href="#deductions">Deductions</a>
       <a href="#credits">Credits</a>
+      <a href="#entity-tax-rates">Business taxes</a>
       <a href="#retirement">Retirement</a>
     </nav>
   </div>
@@ -211,7 +229,7 @@
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -254,19 +272,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +295,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -494,7 +512,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -592,6 +610,72 @@
 </section>
 
 <!-- ======================================================================
+     Small Business Entity Tax Rates
+     ====================================================================== -->
+<section class="section section--tint" id="entity-tax-rates">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Small Business Entity Tax Rates Compared</h2>
+      <p class="section__lead">The entity type you choose determines how much self-employment tax you pay — which can dwarf the income-tax difference between structures. Here's how the numbers actually compare at the same profit level.</p>
+    </div>
+
+    <div class="callout">
+      <p>As of 2024, there are approximately <strong>5.4 million S-corporations filing in the U.S.</strong>, making it the most popular pass-through entity for tax savings. <cite>— IRS Statistics of Income, 2024</cite></p>
+    </div>
+
+    <div class="card">
+      <div class="tablewrap">
+        <table class="brk">
+          <caption class="sr-only">Federal tax burden by entity type — same net profit, different structure</caption>
+          <thead>
+            <tr>
+              <th scope="col">Entity Type</th>
+              <th scope="col">Self-Employment Tax</th>
+              <th scope="col">Federal Income Tax</th>
+              <th scope="col">Estimated Total Effective Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sole Proprietor</td>
+              <td>15.3% on net profit</td>
+              <td>10–37% marginal</td>
+              <td>25–52% combined</td>
+            </tr>
+            <tr>
+              <td>Single-Member LLC</td>
+              <td>15.3% on net profit</td>
+              <td>10–37% marginal</td>
+              <td>25–52% combined</td>
+            </tr>
+            <tr>
+              <td>S-Corporation</td>
+              <td>7.65% on salary only</td>
+              <td>10–37% on salary + distributions</td>
+              <td>18–42% combined</td>
+            </tr>
+            <tr>
+              <td>C-Corporation</td>
+              <td>N/A (entity pays)</td>
+              <td>21% flat corporate rate</td>
+              <td>21% + dividend tax</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source"><cite>Source: IRS Publication 334 (2025), <a href="https://www.irs.gov/pub/irs-pdf/p334.pdf" rel="noopener">Tax Guide for Small Business</a></cite>; IRS Schedule SE; <a href="https://taxfoundation.org/data/all/federal/pass-through-businesses/" rel="noopener">Tax Foundation — pass-through business data</a>.</p>
+    </div>
+
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
+      <h4>The S-Corp self-employment tax saving, in numbers</h4>
+      <p>An S-Corp owner who pays themselves a reasonable salary of $80,000 pays 7.65% FICA on that salary ($6,120), while a sole proprietor earning $80,000 net profit pays 15.3% self-employment tax ($12,240) — a <strong>$6,120 annual difference</strong> before income tax. The trade-off is the added cost and compliance of running an S-Corp: annual filings, payroll, and state fees can easily consume part of that saving.</p>
+    </div>
+
+    <p class="source">For educational purposes only — not tax or legal advice. Entity choice has implications beyond tax, including liability, compliance costs, and state fees. Consult a qualified tax professional before structuring your business.</p>
+  </div>
+</section>
+
+<!-- ======================================================================
      Retirement — how your Social Security is taxed & where to retire
      ====================================================================== -->
 <section class="section section--tint" id="retirement">
@@ -611,7 +695,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -660,6 +744,7 @@
           <li><a href="#deductions">Deductions</a></li>
           <li><a href="#credits">Credits</a></li>
           <li><a href="#retirement">Social Security</a></li>
+          <li><a href="#entity-tax-rates">Business entity tax rates</a></li>
           <li><a href="/tax-glossary">Tax glossary</a></li>
         </ul>
       </div>
