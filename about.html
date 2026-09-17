@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About &amp; Methodology | What's My Tax Rate?</title>
+<meta name="description" content="Who built What's My Tax Rate, how the tax calculator works, and which IRS and SSA sources we use — including federal brackets, FICA, and state income tax rates for 2026.">
+<link rel="canonical" href="https://whatsmytaxrate.com/about">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="What's My Tax Rate?">
+<meta property="og:url" content="https://whatsmytaxrate.com/about">
+<meta property="og:title" content="About &amp; Methodology | What's My Tax Rate?">
+<meta property="og:description" content="Who built What's My Tax Rate and how the tax calculator works — sources, methodology, and data currency.">
+<meta property="og:image" content="https://whatsmytaxrate.com/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About &amp; Methodology | What's My Tax Rate?">
+<meta name="twitter:image" content="https://whatsmytaxrate.com/og-image.jpg">
+<meta name="theme-color" content="#2E1140">
+<script src="ads.js"></script>
+<link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
+<link rel="icon" href="favicon.ico?v=3" sizes="any">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
+<link rel="manifest" href="site.webmanifest">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "What's My Tax Rate",
+  "url": "https://whatsmytaxrate.com",
+  "description": "Free federal and state tax rate calculator for the 2026 tax year.",
+  "foundingDate": "2026",
+  "knowsAbout": ["Federal Income Tax", "Effective Tax Rate", "FICA", "Marginal Tax Rate", "State Income Tax", "Standard Deduction"],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "hello@whatsmytaxrate.com",
+    "contactType": "customer support"
+  }
+}
+</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" href="/" aria-label="What's My Tax Rate — home">
+      <svg class="brand__mark" viewBox="0 -2 48 48" fill="none" aria-hidden="true">
+        <rect x="6"  y="30" width="6" height="12" rx="2" fill="#C9B8EC"/>
+        <rect x="16" y="24" width="6" height="18" rx="2" fill="#9B7BD4"/>
+        <rect x="26" y="17" width="6" height="25" rx="2" fill="#7C3AED"/>
+        <rect x="36" y="9"  width="6" height="33" rx="2" fill="#4A1D6A"/>
+        <circle cx="39" cy="5" r="3.4" fill="#F2B347"/>
+      </svg>
+      <span class="brand__name">What's My <em>Tax Rate</em></span>
+    </a>
+    <nav class="jump" aria-label="Page sections">
+      <a href="#who-built-this">Who built this</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#data-sources">Data sources</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="gloss-hero">
+  <div class="wrap">
+    <h1>About &amp; Methodology</h1>
+    <p>Who built this calculator, how the tax math works, and which official sources we use to keep the numbers accurate. Transparency about methodology is important for a YMYL (Your Money or Your Life) tool — so here it all is.</p>
+    <a class="btn btn--ghost" href="/">Open the calculator →</a>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <!-- ===== Who built this ===== -->
+  <section class="section" id="who-built-this" style="padding-top:0">
+    <div class="card" style="margin-bottom:0">
+      <h2 style="font-size:20px;margin-bottom:12px">Who built this</h2>
+      <p>What's My Tax Rate was built by a CPA and software engineer who got tired of explaining to friends and colleagues why their marginal bracket wasn't their actual tax rate — and why the number on their paycheck was misleading. The goal: a plain-language tool that shows real numbers, cites its sources, and doesn't require a tax background to understand.</p>
+      <p style="margin-top:12px">The CPA background covers federal and state income tax compliance, FICA payroll tax, retirement account rules, and the withholding mechanics that make paychecks look worse than your true bill. The engineering side keeps the calculations current each tax year and the site fast and accessible.</p>
+      <p style="margin-top:12px">This is an independent project — not affiliated with the IRS, any state tax agency, or any tax preparation service.</p>
+    </div>
+  </section>
+
+  <!-- ===== How it works ===== -->
+  <section class="section" id="how-it-works">
+    <div class="card" style="margin-bottom:0">
+      <h2 style="font-size:20px;margin-bottom:12px">How the calculator works</h2>
+
+      <h3 style="font-size:16px;margin:18px 0 8px">Federal income tax</h3>
+      <p>Federal income tax uses the 2026 brackets and standard deduction amounts from <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Revenue Procedure 2025-32</a>. The calculator subtracts the standard deduction from gross income to get taxable income, then runs it through the progressive brackets for the selected filing status. Each bracket's rate applies only to the portion of income within that band — not to all income.</p>
+      <p style="margin-top:10px">Effective rate = total federal income tax ÷ gross income.<br>
+      Marginal rate = the bracket containing the last dollar of income.</p>
+
+      <h3 style="font-size:16px;margin:18px 0 8px">FICA (Social Security &amp; Medicare)</h3>
+      <p>FICA is applied as two flat rates on gross wages:</p>
+      <ul style="margin:8px 0 0 20px;line-height:1.8">
+        <li><strong>Social Security:</strong> 6.2% on wages up to the annual wage base ($184,500 for 2026, per <a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">SSA OACT</a>). Wages above this cap are not subject to Social Security tax.</li>
+        <li><strong>Medicare:</strong> 1.45% on all wages, with no cap. (An additional 0.9% applies above $200,000 single / $250,000 married, but the calculator focuses on the base rate for clarity.)</li>
+      </ul>
+      <p style="margin-top:10px">These are the employee-side rates. Employers match them, but the employee portion is what comes out of your paycheck.</p>
+
+      <h3 style="font-size:16px;margin:18px 0 8px">State income tax</h3>
+      <p>State rates and brackets are sourced from each state's Department of Revenue (or equivalent), cross-referenced with the <a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation's state income tax rate series</a>. The calculator applies the state's standard deduction or personal exemption where applicable, and uses the filing-status-appropriate bracket schedule. States with no income tax (e.g., Texas, Florida, Nevada) return a $0 state liability.</p>
+      <p style="margin-top:10px">Local and municipal income taxes are excluded — they vary by city and county and would require a separate data layer. The calculator notes this where relevant.</p>
+
+      <h3 style="font-size:16px;margin:18px 0 8px">Withholding estimate</h3>
+      <p>The withholding comparison uses the IRS Publication 15-T (2026) percentage method tables, annualized from a standard biweekly paycheck. It assumes the default W-4 with no adjustments — the result most employees see who haven't updated their W-4 for their specific situation. The purpose is to show why withholding often exceeds your actual tax bill, not to produce a precise withholding amount.</p>
+
+      <h3 style="font-size:16px;margin:18px 0 8px">What the calculator excludes</h3>
+      <ul style="margin:8px 0 0 20px;line-height:1.8">
+        <li>Self-employment income and self-employment tax</li>
+        <li>Capital gains and qualified dividends (lower rates apply)</li>
+        <li>Alternative Minimum Tax (AMT)</li>
+        <li>Net Investment Income Tax (3.8% on investment income above income thresholds)</li>
+        <li>Itemized deductions (the tool has a separate itemize calculator)</li>
+        <li>Most tax credits (the tool has a separate credits explainer)</li>
+        <li>Local and municipal income taxes</li>
+      </ul>
+      <p style="margin-top:10px">The calculator is designed for W-2 wage earners taking the standard deduction — the most common situation. For other income types, results will not reflect actual liability.</p>
+    </div>
+  </section>
+
+  <!-- ===== Data sources ===== -->
+  <section class="section" id="data-sources">
+    <div class="card" style="margin-bottom:0">
+      <h2 style="font-size:20px;margin-bottom:12px">Data sources</h2>
+      <p>Every figure in the calculator is drawn from primary government or non-partisan sources. All figures reflect the <strong>2026 tax year</strong>.</p>
+
+      <h3 style="font-size:16px;margin:18px 0 8px">Federal tax brackets &amp; standard deduction</h3>
+      <ul style="margin:8px 0 0 20px;line-height:1.8">
+        <li><a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Revenue Procedure 2025-32</a> — the official 2026 inflation adjustments for tax rate schedules, standard deduction amounts, and other parameters.</li>
+      </ul>
+
+      <h3 style="font-size:16px;margin:18px 0 8px">FICA &amp; Social Security wage base</h3>
+      <ul style="margin:8px 0 0 20px;line-height:1.8">
+        <li><a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">Social Security Administration — Cost-of-Living Adjustments</a> — the annual Social Security wage base announcement.</li>
+        <li><a href="https://www.irs.gov/publications/p15" rel="noopener">IRS Publication 15 (Employer's Tax Guide)</a> — FICA rates, deposit schedules, and supplemental wage withholding rules.</li>
+        <li><a href="https://www.irs.gov/publications/p15t" rel="noopener">IRS Publication 15-T (Federal Income Tax Withholding Methods)</a> — percentage method withholding tables used for the paycheck estimate.</li>
+      </ul>
+
+      <h3 style="font-size:16px;margin:18px 0 8px">State income tax rates</h3>
+      <ul style="margin:8px 0 0 20px;line-height:1.8">
+        <li>Each state's Department of Revenue (or equivalent) — primary source for rates, brackets, and standard deductions.</li>
+        <li><a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation — State Income Tax Rates</a> — used for cross-referencing and confirming rates.</li>
+      </ul>
+
+      <h3 style="font-size:16px;margin:18px 0 8px">Historical rates</h3>
+      <ul style="margin:8px 0 0 20px;line-height:1.8">
+        <li><a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener">IRS Statistics of Income — Historical Table 23</a> — top statutory federal marginal rates 1955–2026.</li>
+        <li><a href="https://taxfoundation.org/data/all/federal/historical-income-tax-rates-brackets/" rel="noopener">Tax Foundation — Historical Federal Income Tax Rates</a> — used for cross-referencing the historical rate series.</li>
+      </ul>
+
+      <p class="source" style="margin-top:20px"><strong>Last updated:</strong> July 2026. State rates and deductions are reviewed at the start of each tax year and updated when a state legislature makes a mid-year change. If you spot an error, please <a href="#contact">contact us</a>.</p>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section class="section" id="contact">
+    <div class="card" style="margin-bottom:0">
+      <h2 style="font-size:20px;margin-bottom:12px">Contact &amp; feedback</h2>
+      <p>Found an error in a rate or bracket? Have a question about the methodology? Reach out:</p>
+      <p style="margin-top:14px"><strong>Email:</strong> <a href="mailto:hello@whatsmytaxrate.com">hello@whatsmytaxrate.com</a></p>
+      <p style="margin-top:10px">We read everything and aim to respond within a few business days. Tax rate corrections are prioritized — accuracy matters here more than anything.</p>
+      <p style="margin-top:10px">For general tax questions, we recommend the <a href="https://www.irs.gov/help/ita" rel="noopener">IRS Interactive Tax Assistant</a> or a qualified tax professional. This tool is for education, not advice.</p>
+    </div>
+  </section>
+
+  <section class="gloss-sources">
+    <h2>Disclaimer</h2>
+    <p><strong>For educational purposes only. This is not tax or financial advice.</strong> Calculations assume W-2 wage income and the standard deduction. Individual circumstances vary; consult a qualified tax professional before acting on anything here. Figures reflect the 2026 tax year.</p>
+  </section>
+
+</div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h4>What's My Tax Rate?</h4>
+        <p style="line-height:1.65">See your real federal, state and FICA tax rate — not the bracket you land in. Free, plain-language, 2026 tax year.</p>
+        <p style="margin-top:14px"><a class="btn btn--ghost" href="/">Open the calculator →</a></p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="/">Calculator</a></li>
+          <li><a href="/tax-glossary">Tax glossary</a></li>
+          <li><a href="/about">About &amp; methodology</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sources</h4>
+        <ul>
+          <li><a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32</a> — 2026 brackets &amp; deductions</li>
+          <li><a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">SSA</a> — Social Security wage base</li>
+          <li><a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation</a> — state income tax rates</li>
+          <li><a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener">IRS SOI Table 23</a> — historical rates</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <p><strong>For educational purposes only. This is not tax or financial advice.</strong></p>
+      <p style="margin-top:9px">© 2026 whatsmytaxrate.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="analytics.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
