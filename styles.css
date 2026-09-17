@@ -809,6 +809,51 @@ table.brk tfoot td { font-weight: 800; border-bottom: 0; border-top: 2px solid v
 .footer__legal strong { color: #E5DAF2; }
 
 /* --------------------------------------------------------------------------
+   Key Statistics callout (GEO optimisation)
+   -------------------------------------------------------------------------- */
+.key-stats {
+  background: var(--bg-alt);
+  border: 1px solid var(--line-2);
+  border-left: 4px solid var(--brand-500);
+  border-radius: 10px;
+  padding: 22px 26px;
+}
+.key-stats h2 { font-size: 17px; margin-bottom: 13px; color: var(--ink); }
+.key-stats ul { list-style: none; padding: 0; margin: 0 0 12px; }
+.key-stats li { font-size: 15px; color: var(--ink-2); line-height: 1.6; margin-bottom: 7px; padding-left: 14px; position: relative; }
+.key-stats li::before { content: "•"; position: absolute; left: 0; color: var(--brand-500); }
+.key-stats p { font-size: 13px; color: var(--ink-3); margin: 0; }
+.key-stats a { color: var(--brand-500); text-decoration: none; }
+.key-stats a:hover { text-decoration: underline; }
+
+/* --------------------------------------------------------------------------
+   Expert quote blocks
+   -------------------------------------------------------------------------- */
+blockquote.expert-quote {
+  margin: 22px 0 0;
+  padding: 16px 20px;
+  background: var(--bg-alt);
+  border-left: 3px solid var(--brand-300);
+  border-radius: 0 8px 8px 0;
+}
+blockquote.expert-quote p { font-size: 14.5px; color: var(--ink-2); line-height: 1.65; margin: 0 0 8px; font-style: italic; }
+blockquote.expert-quote cite { font-size: 13px; color: var(--ink-3); font-style: normal; }
+blockquote.expert-quote cite a { color: var(--brand-500); text-decoration: none; }
+blockquote.expert-quote cite a:hover { text-decoration: underline; }
+.section--ink blockquote.expert-quote { background: rgba(255,255,255,.06); border-left-color: var(--brand-300); }
+.section--ink blockquote.expert-quote p { color: #C9BCD9; }
+.section--ink blockquote.expert-quote cite { color: #A79BB6; }
+
+/* --------------------------------------------------------------------------
+   Sources section list
+   -------------------------------------------------------------------------- */
+.sources-list { list-style: none; padding: 0; margin: 0; }
+.sources-list li { font-size: 14.5px; color: var(--ink-2); line-height: 1.6; margin-bottom: 10px; padding-left: 18px; position: relative; }
+.sources-list li::before { content: "→"; position: absolute; left: 0; color: var(--brand-500); font-size: 13px; top: 2px; }
+.sources-list a { color: var(--brand-500); text-decoration: none; font-weight: 600; }
+.sources-list a:hover { text-decoration: underline; }
+
+/* --------------------------------------------------------------------------
    Print (FIX #9 — a clean printable / save-as-PDF result)
    -------------------------------------------------------------------------- */
 
