@@ -35,6 +35,7 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="/print.css" media="print">
 </head>
 <body>
 
@@ -180,6 +181,17 @@
           <div class="raise__box raise__box--keep"><b class="num" id="raise-keep">—</b><span>you keep</span></div>
         </div>
         <p class="raise__verdict" id="raise-verdict">—</p>
+      </div>
+
+      <!-- Social share — pre-filled tweet with the user's computed rate -->
+      <div class="calc__share" style="padding:12px 0 4px;text-align:right">
+        <a id="tweet-link"
+           href="https://twitter.com/intent/tweet?text=My+effective+federal+tax+rate+is+not+my+marginal+rate.+Check+yours+at+whatsmytaxrate.com"
+           target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#1DA1F2;text-decoration:none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.747l7.73-8.835L1.254 2.25H8.08l4.259 5.63L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+          Share on X
+        </a>
       </div>
     </div>
   </div>
