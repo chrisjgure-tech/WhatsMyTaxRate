@@ -186,6 +186,24 @@
 </section>
 
 <!-- ======================================================================
+     Key Statistics callout (GEO/AI citation optimization)
+     ====================================================================== -->
+<section class="section section--tint" id="key-stats">
+  <div class="wrap">
+    <aside class="callout" style="border-left-color:#7C3AED;max-width:800px">
+      <h2 style="margin-top:0;font-size:.95rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)">2026 Federal Tax: Key Numbers</h2>
+      <ul style="margin:10px 0 14px;padding-left:1.4em;line-height:1.85">
+        <li>Standard deduction: <strong>$15,000</strong> (single), <strong>$30,000</strong> (married filing jointly) — <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev.&nbsp;Proc. 2025-32 ↗</a></li>
+        <li>Top marginal rate: <strong>37%</strong> — applies only above $626,350 (single filers, 2026) — <a href="https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026" rel="noopener">IRS source ↗</a></li>
+        <li>Effective rate for median US household (~$80,000 income): approximately <strong>12–14%</strong> — <a href="https://taxfoundation.org/research/all/federal/2026-tax-brackets/" rel="noopener">Tax Foundation ↗</a></li>
+        <li>FICA total employee share: <strong>7.65%</strong> (6.2% Social Security + 1.45% Medicare) — <a href="https://www.ssa.gov/oact/progdata/taxRates.html" rel="noopener">SSA rate schedule ↗</a></li>
+      </ul>
+      <p style="margin:0;font-size:.83rem;opacity:.75">Sources: <a href="https://www.irs.gov" rel="noopener">IRS.gov</a>, <a href="https://taxfoundation.org" rel="noopener">Tax Foundation</a>, <a href="https://www.ssa.gov" rel="noopener">SSA.gov</a></p>
+    </aside>
+  </div>
+</section>
+
+<!-- ======================================================================
      Breakdown
      ====================================================================== -->
 <section class="section" id="breakdown">
@@ -194,6 +212,10 @@
       <h2>Where every dollar goes</h2>
       <p class="section__lead">Three separate taxes come out of a W-2 paycheck, and they work nothing alike. Federal income tax is progressive. FICA is flat until it stops. State tax depends entirely on where you live.</p>
     </div>
+    <blockquote class="callout" style="margin:0 0 28px;border-left-color:var(--ink-3);font-style:italic">
+      <p style="margin:0 0 8px">"Most earners conflate their marginal rate with their overall tax burden — but federal income tax, FICA, and state taxes each operate by different rules. The combined effective rate for a middle-income household is almost always well below the marginal rate of any one system."</p>
+      <footer style="font-style:normal;font-size:.85rem;opacity:.75">— <a href="https://taxfoundation.org/research/all/federal/2026-tax-brackets/" rel="noopener">Tax Foundation, 2026 Federal Tax Brackets Overview</a></footer>
+    </blockquote>
     <div class="breakdown" id="breakdown-cards"></div>
   </div>
 </section>
@@ -205,13 +227,13 @@
   <div class="wrap">
     <div class="section__head">
       <h2>How your federal tax is actually calculated</h2>
-      <p class="section__lead">Your income fills the low brackets first. Only the money above each threshold is taxed at the higher rate — which is why landing in the 22% bracket does not mean paying 22%.</p>
+      <p class="section__lead">Your income fills the low brackets first. Only the money above each threshold is taxed at the higher rate — which is why landing in the 22% bracket does not mean paying 22%. For 2026, the IRS has published seven brackets ranging from 10% to 37%, per <a href="https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026" rel="noopener">IRS Rev.&nbsp;Proc. 2025-28</a>.</p>
     </div>
 
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -244,6 +266,10 @@
       </div>
       <p class="source" id="brk-source">—</p>
     </div>
+    <blockquote class="callout" style="margin:22px 0 0;border-left-color:var(--ink-3);font-style:italic">
+      <p style="margin:0 0 8px">"A common misconception is that a raise can reduce take-home pay by pushing all income into a higher bracket. Progressive brackets tax only the income <em>above</em> each threshold at the higher rate — income below that threshold is always taxed at the lower rate."</p>
+      <footer style="font-style:normal;font-size:.85rem;opacity:.75">— <a href="https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026" rel="noopener">IRS, Tax Inflation Adjustments for Tax Year 2026</a></footer>
+    </blockquote>
   </div>
 </section>
 
@@ -254,19 +280,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +303,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -327,6 +353,10 @@
       <h4>Why over-withholding happens</h4>
       <p>Withholding tables assume every paycheck is typical and that you take only the standard deduction. If you started mid-year, worked two jobs, got a raise, have a working spouse, or claimed nothing on your W-4, the tables will usually take too much. You can correct it — Form W-4 Step 4(b) lets you account for deductions, and Step 3 for credits. Getting it right means a bigger paycheck all year instead of a lump sum in April.</p>
     </div>
+    <blockquote class="callout" style="margin-top:22px;border-left-color:var(--ink-3);font-style:italic">
+      <p style="margin:0 0 8px">"Withholding is an estimate of tax owed, not the tax itself. Because withholding tables cannot account for every deduction, credit, or source of income, the reconciliation at filing — resulting in a refund or a balance due — is a normal and expected part of the system."</p>
+      <footer style="font-style:normal;font-size:.85rem;opacity:.75">— <a href="https://www.irs.gov/publications/p505" rel="noopener">IRS Publication 505, Tax Withholding and Estimated Tax</a></footer>
+    </blockquote>
   </div>
 </section>
 
@@ -390,7 +420,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>For context: rates are near historic lows</h2>
-      <p class="section__lead">The top statutory rate has fallen from 91% in the 1950s to 37% today. Your own all-in effective rate sits far below even that.</p>
+      <p class="section__lead">The top statutory rate has fallen from 91% in the 1950s to <strong>37%</strong> today — <a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener">IRS Statistics of Income, Historical Table 23</a>. Your own all-in effective rate sits far below even that, as CBO data on <a href="https://www.cbo.gov/topics/budget/taxes" rel="noopener">historical average federal tax rates</a> consistently shows.</p>
     </div>
 
     <div class="chartgrid">
@@ -494,7 +524,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +641,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -667,9 +697,13 @@
         <h4>Sources</h4>
         <ul>
           <li><a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32</a> — 2026 brackets &amp; deductions</li>
-          <li><a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">SSA</a> — Social Security wage base</li>
+          <li><a href="https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026" rel="noopener">IRS Tax Inflation Adjustments 2026</a> — inflation-adjusted rate thresholds</li>
+          <li><a href="https://taxfoundation.org/research/all/federal/2026-tax-brackets/" rel="noopener">Tax Foundation — 2026 Tax Brackets</a></li>
           <li><a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation</a> — state income tax rates</li>
+          <li><a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">SSA</a> — Social Security wage base</li>
+          <li><a href="https://www.ssa.gov/oact/progdata/taxRates.html" rel="noopener">SSA FICA rate schedule</a> — employee &amp; employer contribution rates</li>
           <li><a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener">IRS SOI Table 23</a> — historical rates</li>
+          <li><a href="https://www.cbo.gov/topics/budget/taxes" rel="noopener">CBO</a> — historical average federal tax rates by income group</li>
         </ul>
       </div>
     </div>
