@@ -189,6 +189,8 @@ a { color: var(--brand-600); }
   font-size: 12.5px; font-weight: 700; letter-spacing: .04em; color: #E5DAF2;
 }
 .hero__stamp .dot { width: 6px; height: 6px; border-radius: 50%; background: #4ADE80; }
+.hero__counter { margin-top: 14px; font-size: 13.5px; font-weight: 600; color: #B8A9D4; letter-spacing: .01em; }
+.hero__counter strong { color: #E5DAF2; }
 
 /* --------------------------------------------------------------------------
    Calculator card — inputs AND the answer, side by side (FIX #6)
