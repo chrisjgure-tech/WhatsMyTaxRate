@@ -35,6 +35,23 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the tax rate on inherited money?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Most inherited cash and assets are not subject to income tax. However, inherited IRAs and 401(k)s are taxed as ordinary income when withdrawn. The federal estate tax rate is up to 40%, but only applies to estates above $13.61 million in 2026."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -64,6 +81,7 @@
       <a href="#deductions">Deductions</a>
       <a href="#credits">Credits</a>
       <a href="#retirement">Retirement</a>
+      <a href="#inherited">Inheritance</a>
     </nav>
   </div>
 </header>
@@ -211,7 +229,7 @@
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -254,19 +272,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +295,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -494,7 +512,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +629,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -630,6 +648,56 @@
       <div class="ret__grid" id="ret-grid"></div>
       <p class="source" id="ret-source">—</p>
     </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Inherited Assets & Estate Taxes
+     ====================================================================== -->
+<section class="section" id="inherited">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Inherited Assets &amp; Estate Taxes: What Rate Do You Actually Pay?</h2>
+      <p class="section__lead">Most inherited money is not taxed the way people expect — but the rules differ sharply depending on what you inherited. Cash and appreciated stock often arrive nearly tax-free. An inherited IRA is a different story.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <h3 style="font-size:17px;margin-bottom:12px">Federal estate tax: the $13.61 million threshold</h3>
+      <p>The federal estate tax only applies to estates above the exemption — <b>$13.61 million per individual in 2026</b> ($27.22 million for married couples), per <a href="https://www.irs.gov/pub/irs-drop/rp-23-34.pdf" rel="noopener">IRS Rev. Proc. 2023-34</a>. On amounts above that threshold the top rate is <b>40%</b>. Because of the high exemption, <b>only about 0.2% of estates owe any federal estate tax</b> (Tax Policy Center, 2023). Among those that do, the average effective rate paid is roughly 17% (IRS Statistics of Income) — far below the 40% top statutory rate.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <h3 style="font-size:17px;margin-bottom:12px">Stepped-up basis: why heirs often owe $0 in capital gains</h3>
+      <p>When you inherit appreciated stock, real estate, or other assets, the cost basis is <b>reset to the fair market value on the date of death</b>. This is called a <em>stepped-up basis</em>. If the decedent bought stock for $20,000 that was worth $200,000 at death, you inherit at a $200,000 basis — the $180,000 gain that built up during their lifetime <b>is never subject to capital gains tax</b>. Only appreciation after you inherit would be taxable when you eventually sell.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <h3 style="font-size:17px;margin-bottom:12px">Inherited IRAs: the 10-year rule post-SECURE Act 2.0</h3>
+      <p>Inherited retirement accounts are the most tax-heavy type of inheritance. Unlike a spouse — who can roll an inherited IRA into their own — <b>non-spouse beneficiaries must withdraw the entire balance within 10 years</b> under the SECURE Act 2.0. There is no stretching distributions over a lifetime anymore. Each withdrawal is taxed as <b>ordinary income</b> at your marginal rate, potentially pushing you into a higher bracket. With roughly <a href="https://www.ici.org/" rel="noopener">$11 trillion held in IRAs as of 2024 (ICI)</a>, this rule affects an enormous number of beneficiaries.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <h3 style="font-size:17px;margin-bottom:12px">State inheritance taxes: 6 states still have them</h3>
+      <p>The federal government taxes <em>estates</em> (what the deceased owned). Six states levy a separate <em>inheritance</em> tax on what <em>you receive</em>: <b>Iowa, Kentucky, Maryland, Nebraska, New Jersey, and Pennsylvania</b>. Maryland is the only state with both an estate tax and an inheritance tax. Rates and exemptions vary by state and by your relationship to the decedent — spouses are typically exempt, and direct descendants often receive favorable treatment. If you live in one of these states, check your state revenue department for current rates.</p>
+    </div>
+
+    <div class="callout">
+      <h4>Key statistics at a glance</h4>
+      <ul style="margin:8px 0 0;padding-left:20px;line-height:1.8">
+        <li>Only <b>0.2%</b> of estates owe federal estate tax (Tax Policy Center, 2023)</li>
+        <li>Average effective estate tax rate paid: <b>~17%</b> (IRS Statistics of Income)</li>
+        <li><b>~$11 trillion</b> held in IRAs as of 2024 — much of it eventually inherited (ICI)</li>
+        <li>Federal estate tax exemption in 2026: <b>$13.61 million</b> per individual (<a href="https://www.irs.gov/pub/irs-drop/rp-23-34.pdf" rel="noopener">IRS Rev. Proc. 2023-34</a>)</li>
+      </ul>
+    </div>
+
+    <p class="source">
+      Sources: <a href="https://www.irs.gov/publications/p559" rel="noopener">IRS Publication 559</a> (survivors, executors, and administrators);
+      <a href="https://taxpolicycenter.org" rel="noopener">Tax Policy Center</a> — estate tax data;
+      <a href="https://www.congress.gov/bill/117th-congress/house-bill/2954" rel="noopener">SECURE Act 2.0</a> (H.R. 2954, enacted Dec. 2022);
+      <a href="https://www.ici.org/" rel="noopener">Investment Company Institute</a> — IRA asset data.
+      For educational purposes only — not tax or legal advice.
+    </p>
   </div>
 </section>
 
@@ -660,6 +728,7 @@
           <li><a href="#deductions">Deductions</a></li>
           <li><a href="#credits">Credits</a></li>
           <li><a href="#retirement">Social Security</a></li>
+          <li><a href="#inherited">Inherited assets &amp; estate taxes</a></li>
           <li><a href="/tax-glossary">Tax glossary</a></li>
         </ul>
       </div>
