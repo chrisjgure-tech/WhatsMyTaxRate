@@ -24,6 +24,23 @@
 <meta name="twitter:image" content="https://whatsmytaxrate.com/og-image.jpg">
 <meta name="theme-color" content="#2E1140">
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the tax rate on gig economy or side hustle income?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Gig workers pay both income tax and self-employment tax (15.3%) on net profit. For someone in the 22% federal bracket, the combined effective rate on side hustle income is typically 35\u201337% before deductions."
+      }
+    }
+  ]
+}
+</script>
+
 <!-- ?v=3 forces browsers to drop the aggressively-cached old favicon -->
 <!-- Google Ads (gtag). ads.js loads the tag only on the production domain and
      redacts income from what's tracked; kept external so script-src stays strict. -->
@@ -64,6 +81,7 @@
       <a href="#deductions">Deductions</a>
       <a href="#credits">Credits</a>
       <a href="#retirement">Retirement</a>
+      <a href="#gig-economy">Gig workers</a>
     </nav>
   </div>
 </header>
@@ -211,7 +229,7 @@
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -254,19 +272,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +295,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -494,7 +512,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +629,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -630,6 +648,75 @@
       <div class="ret__grid" id="ret-grid"></div>
       <p class="source" id="ret-source">—</p>
     </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Gig Economy & Side Hustle: Your Real Tax Rate
+     ====================================================================== -->
+<section class="section section--tint" id="gig-economy">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Gig Economy &amp; Side Hustle: Your Real Tax Rate</h2>
+      <p class="section__lead">Over 59 million Americans earn gig or freelance income (Upwork, 2023), yet most discover their true tax bill only at filing time. The reason: gig workers pay <em>both</em> the employee and employer halves of <a href="#breakdown">FICA</a> — a 15.3% self-employment tax on top of ordinary income tax. The number is almost always higher than people expect.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <h3 style="font-size:17px;margin-bottom:16px">Worked example: $10,000 in side-hustle profit</h3>
+      <div class="tablewrap">
+        <table class="brk">
+          <caption class="sr-only">Tax calculation on $10,000 of side-hustle net profit</caption>
+          <tbody>
+            <tr>
+              <td>Side hustle net profit</td>
+              <td class="r num">$10,000</td>
+            </tr>
+            <tr>
+              <td>Self-employment tax (15.3%)</td>
+              <td class="r num">−$1,530</td>
+            </tr>
+            <tr>
+              <td>SE tax deduction (50% of SE tax)</td>
+              <td class="r num">−$765</td>
+            </tr>
+            <tr>
+              <td>Taxable income added to your return</td>
+              <td class="r num">$9,235</td>
+            </tr>
+            <tr>
+              <td>Federal income tax at 22% marginal rate</td>
+              <td class="r num">~$2,032</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td><strong>Total effective burden on that $10,000</strong></td>
+              <td class="r num"><strong>~35.6%</strong></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <p class="source">The 15.3% self-employment tax covers Social Security (12.4%) and Medicare (2.9%). You can deduct half of it before calculating income tax — a real but partial offset.</p>
+    </div>
+
+    <div class="callout">
+      <h4>What the IRS data shows</h4>
+      <p>The IRS estimates <strong>40% of gig workers underpay quarterly estimated taxes</strong>, resulting in an average underpayment penalty of $150–$400 per year. Because no employer withholds for you, the bill arrives in a lump — and for workers who didn't set money aside, it is often a shock.</p>
+    </div>
+
+    <div class="callout" style="background:var(--bg-alt);border-left-color:var(--ink-3)">
+      <h4>Quarterly estimated tax: the four due dates</h4>
+      <p>If you expect to owe $1,000 or more from self-employment, you must pay quarterly or face a penalty. The IRS due dates are:</p>
+      <ul style="margin:10px 0 10px 18px;line-height:1.8">
+        <li><strong>April 15</strong> — income earned Jan 1–Mar 31</li>
+        <li><strong>June 16</strong> — income earned Apr 1–May 31</li>
+        <li><strong>September 15</strong> — income earned Jun 1–Aug 31</li>
+        <li><strong>January 15</strong> (following year) — income earned Sep 1–Dec 31</li>
+      </ul>
+      <p><strong>Safe harbor rule:</strong> pay at least 100% of your prior-year total tax liability across the four quarters and you avoid all underpayment penalties — no matter how much you earn this year. The threshold rises to 110% if your prior-year adjusted gross income exceeded $150,000.</p>
+    </div>
+
+    <p class="section__lead" style="margin-top:22px">To cut your gig tax bill, the same pre-tax accounts that work for W-2 earners are available — plus some extras. A SEP-IRA or solo 401(k) can shelter up to $70,000 of self-employment income in 2026. See the <a href="#shelter">save-more calculator</a> and <a href="#deductions">deductions section</a> for contribution limits and rules.</p>
   </div>
 </section>
 
@@ -660,6 +747,7 @@
           <li><a href="#deductions">Deductions</a></li>
           <li><a href="#credits">Credits</a></li>
           <li><a href="#retirement">Social Security</a></li>
+          <li><a href="#gig-economy">Gig economy &amp; side hustles</a></li>
           <li><a href="/tax-glossary">Tax glossary</a></li>
         </ul>
       </div>
