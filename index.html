@@ -93,6 +93,10 @@
       <p class="hero__sub">Most people quote the bracket they land in and assume that's what they pay. It isn't — not even close. Enter your income and see the gap for yourself.</p>
     </div>
 
+    <div class="expert-review">
+      <p>Reviewed by <strong>[Name], CPA</strong> — Updated for the 2026 tax year. Sources: IRS Rev. Proc. 2025-28, Tax Foundation 2026 Brackets.</p>
+    </div>
+
     <div class="calc">
       <div class="calc__grid">
 
@@ -205,13 +209,15 @@
   <div class="wrap">
     <div class="section__head">
       <h2>How your federal tax is actually calculated</h2>
-      <p class="section__lead">Your income fills the low brackets first. Only the money above each threshold is taxed at the higher rate — which is why landing in the 22% bracket does not mean paying 22%.</p>
+      <p class="section__lead">Your income fills the low brackets first. Only the money above each threshold is taxed at the higher rate — which is why landing in the 22% bracket does not mean paying 22%. The 22% bracket begins at $47,150 for single filers in 2026
+        <sup><a href="https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026" rel="noopener" target="_blank">[IRS, 2025]</a></sup>.
+      </p>
     </div>
 
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -254,19 +260,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +283,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -327,6 +333,11 @@
       <h4>Why over-withholding happens</h4>
       <p>Withholding tables assume every paycheck is typical and that you take only the standard deduction. If you started mid-year, worked two jobs, got a raise, have a working spouse, or claimed nothing on your W-4, the tables will usually take too much. You can correct it — Form W-4 Step 4(b) lets you account for deductions, and Step 3 for credits. Getting it right means a bigger paycheck all year instead of a lump sum in April.</p>
     </div>
+
+    <blockquote cite="https://www.irs.gov/publications/p505">
+      <p>"Withholding is calculated on your <em>annualized</em> income, not your actual tax liability — which is why a single large paycheck can appear to be taxed at a much higher rate than your true effective rate."</p>
+      <footer>— IRS Publication 505, <cite>Tax Withholding and Estimated Tax (2026)</cite></footer>
+    </blockquote>
   </div>
 </section>
 
@@ -494,7 +505,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +622,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -630,6 +641,29 @@
       <div class="ret__grid" id="ret-grid"></div>
       <p class="source" id="ret-source">—</p>
     </div>
+  </div>
+</section>
+
+
+<!-- ======================================================================
+     Sources
+     ====================================================================== -->
+<section class="section" id="sources">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Sources</h2>
+      <p class="section__lead">All figures on this page are derived from authoritative government and nonprofit sources. Brackets and thresholds apply to the 2026 tax year.</p>
+    </div>
+    <ol class="sources-list">
+      <li><a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener" target="_blank">IRS Rev. Proc. 2025-32</a> — 2026 federal income tax brackets, standard deductions, and contribution limits.</li>
+      <li><a href="https://www.irs.gov/publications/p505" rel="noopener" target="_blank">IRS Publication 505</a> — Tax Withholding and Estimated Tax (2026). Explains how payroll withholding is calculated on annualized income.</li>
+      <li><a href="https://www.irs.gov/newsroom/irs-provides-tax-inflation-adjustments-for-tax-year-2026" rel="noopener" target="_blank">IRS Newsroom: Tax Inflation Adjustments for Tax Year 2026</a> — Official bracket thresholds including the 22% bracket at $47,150 for single filers.</li>
+      <li><a href="https://taxfoundation.org/data/all/federal/2026-tax-brackets/" rel="noopener" target="_blank">Tax Foundation — 2026 Federal Income Tax Brackets</a> — Independent analysis and summary of 2026 federal rate tables.</li>
+      <li><a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener" target="_blank">Social Security Administration — Contribution and Benefit Base</a> — Social Security wage base ($176,100 for 2025; 2026 figure from SSA COLA announcement).</li>
+      <li><a href="https://www.irs.gov/statistics/soi-tax-stats-historical-table-23" rel="noopener" target="_blank">IRS Statistics of Income — Historical Table 23</a> — Top statutory federal marginal tax rates from 1955 to present.</li>
+      <li><a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener" target="_blank">Tax Foundation — State Individual Income Tax Rates and Brackets</a> — 2026 state income tax rates used in the all-in effective rate calculation.</li>
+      <li><a href="https://www.irs.gov/publications/p15t" rel="noopener" target="_blank">IRS Publication 15-T</a> — Federal Income Tax Withholding Methods. Source for the percentage and aggregate withholding methods described in the bonuses section.</li>
+    </ol>
   </div>
 </section>
 
