@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>State Income Tax Rates 2026 — All 50 States + DC | What's My Tax Rate?</title>
+<meta name="description" content="2026 state income tax rates for all 50 US states and DC. Includes each state's rate range, number of brackets, and whether Social Security is taxed — with a color-coded state map.">
+<link rel="canonical" href="https://whatsmytaxrate.com/state-tax-rates">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="What's My Tax Rate?">
+<meta property="og:url" content="https://whatsmytaxrate.com/state-tax-rates">
+<meta property="og:title" content="State Income Tax Rates 2026 — All 50 States + DC">
+<meta property="og:description" content="Complete 2026 state income tax data: rate ranges, bracket counts, and Social Security taxation rules for every US state and DC.">
+<meta property="og:image" content="https://whatsmytaxrate.com/og-image.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="State Income Tax Rates 2026 — All 50 States + DC">
+<meta name="twitter:description" content="Rate ranges, bracket counts, and Social Security rules for every US state — 2026 tax year.">
+<meta name="twitter:image" content="https://whatsmytaxrate.com/og-image.jpg">
+<meta name="theme-color" content="#2E1140">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "US State Income Tax Rates 2026",
+  "description": "Complete table of 2026 state income tax rates for all 50 US states and DC, including brackets and Social Security taxation rules.",
+  "url": "https://whatsmytaxrate.com/state-tax-rates/",
+  "creator": {
+    "@type": "Organization",
+    "name": "What's My Tax Rate"
+  },
+  "dateModified": "2026-01-01",
+  "license": "https://creativecommons.org/licenses/by/4.0/"
+}
+</script>
+
+<script src="ads.js"></script>
+<link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
+<link rel="icon" href="favicon.ico?v=3" sizes="any">
+<link rel="icon" href="favicon-32.png?v=3" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
+<link rel="manifest" href="site.webmanifest">
+<link rel="stylesheet" href="styles.css">
+<style>
+.statetable { width:100%; border-collapse:collapse; font-size:15px; min-width:540px; }
+.statetable th { padding:10px 12px; text-align:left; background:var(--bg-alt); border-bottom:2px solid var(--line-2); font-size:12.5px; text-transform:uppercase; letter-spacing:.055em; color:var(--ink-2); font-weight:700; }
+.statetable th.r, .statetable td.r { text-align:right; }
+.statetable td { padding:10px 12px; border-bottom:1px solid var(--line); font-variant-numeric:tabular-nums lining-nums; }
+.statetable tbody tr:last-child td { border-bottom:0; }
+.notax { color:var(--take); font-weight:700; }
+.sstax { color:var(--warn); font-weight:600; }
+.sstax--yes { color:var(--danger); font-weight:700; }
+.map-legend { display:flex; flex-wrap:wrap; gap:8px 20px; margin:14px 0 20px; font-size:13px; color:var(--ink-2); }
+.map-legend__item { display:flex; align-items:center; gap:6px; }
+.map-legend__swatch { width:14px; height:14px; border-radius:2px; flex:none; }
+.breadcrumb { font-size:14px; color:var(--ink-3); margin-bottom:18px; }
+.breadcrumb a { color:var(--brand-600); text-decoration:none; }
+.breadcrumb a:hover { text-decoration:underline; }
+.cta-inline { display:inline-flex; align-items:center; gap:8px; margin-top:16px; padding:12px 16px; background:var(--brand-100); border-radius:10px; font-size:15px; color:var(--ink); text-decoration:none; transition:.14s; }
+.cta-inline:hover { background:var(--brand-300); color:var(--ink); }
+.notes-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:18px; }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <a class="brand" href="/" aria-label="What's My Tax Rate — home">
+      <svg class="brand__mark" viewBox="0 -2 48 48" fill="none" aria-hidden="true">
+        <rect x="6"  y="30" width="6" height="12" rx="2" fill="#C9B8EC"/>
+        <rect x="16" y="24" width="6" height="18" rx="2" fill="#9B7BD4"/>
+        <rect x="26" y="17" width="6" height="25" rx="2" fill="#7C3AED"/>
+        <rect x="36" y="9"  width="6" height="33" rx="2" fill="#4A1D6A"/>
+        <circle cx="39" cy="5" r="3.4" fill="#F2B347"/>
+      </svg>
+      <span class="brand__name">What's My <em>Tax Rate</em></span>
+    </a>
+    <nav class="jump" aria-label="Site navigation">
+      <a href="/">Calculator</a>
+      <a href="/tax-glossary">Glossary</a>
+      <a href="/state-tax-rates" aria-current="page">State Rates</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ======================================================================
+     Hero
+     ====================================================================== -->
+<section class="section">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="/">What's My Tax Rate?</a> &rsaquo; State Income Tax Rates 2026</p>
+    <div class="section__head" style="max-width:none">
+      <h1 style="font-size:clamp(28px,4vw,42px);max-width:22ch">US State Income Tax Rates 2026</h1>
+      <p class="section__lead" style="max-width:68ch">Nine states levy no income tax at all. The other 42 range from a flat 2.5% to a top marginal rate of 13.3%. Here is every state's rate range, bracket count, and Social Security rule for 2026 — all sourced from state revenue department schedules.</p>
+      <a class="cta-inline" href="/">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="5" y="14" width="4" height="7" rx="1.5" fill="#9B7BD4"/>
+          <rect x="10" y="10" width="4" height="11" rx="1.5" fill="#7C3AED"/>
+          <rect x="15" y="6"  width="4" height="15" rx="1.5" fill="#4A1D6A"/>
+        </svg>
+        See your personal all-in rate (federal + state + FICA) in the free calculator &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Map
+     ====================================================================== -->
+<section class="section section--tint" id="map">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>State income tax rates at a glance</h2>
+      <p class="section__lead">Color-coded by the top marginal rate for a single filer. Click any state to jump to its row in the data table.</p>
+    </div>
+
+    <div class="map-legend" aria-label="Map color legend">
+      <div class="map-legend__item"><span class="map-legend__swatch" style="background:#4ade80"></span>No income tax (9 states)</div>
+      <div class="map-legend__item"><span class="map-legend__swatch" style="background:#a3e635"></span>Up to 3%</div>
+      <div class="map-legend__item"><span class="map-legend__swatch" style="background:#facc15"></span>3%&ndash;5%</div>
+      <div class="map-legend__item"><span class="map-legend__swatch" style="background:#f97316"></span>5%&ndash;7%</div>
+      <div class="map-legend__item"><span class="map-legend__swatch" style="background:#ef4444"></span>Over 7%</div>
+    </div>
+
+    <div class="card" style="padding:20px;overflow-x:auto">
+      <svg viewBox="0 0 556 292" width="100%" style="max-width:556px;display:block;margin:0 auto;min-width:280px;font-family:var(--sans)" role="img" aria-label="US state income tax rates 2026 — tile map color-coded by top marginal rate">
+        <title>US State Income Tax Rates 2026 — Tile Map</title>
+        <desc>A tile map of the United States showing income tax rate categories. Nine states with no income tax shown in green. Up to 3% in light green, 3–5% in yellow, 5–7% in orange, over 7% in red.</desc>
+
+        <!-- No income tax (#4ade80 / #14532d) -->
+        <a href="#state-ak"><rect x="50"  y="256" width="40" height="28" rx="3" fill="#4ade80"/><text x="70"  y="270" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#14532d">AK</text></a>
+        <a href="#state-fl"><rect x="280" y="220" width="40" height="28" rx="3" fill="#4ade80"/><text x="300" y="234" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#14532d">FL</text></a>
+        <a href="#state-nh"><rect x="464" y="40"  width="40" height="28" rx="3" fill="#4ade80"/><text x="484" y="54"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#14532d">NH</text></a>
+        <a href="#state-nv"><rect x="50"  y="112" width="40" height="28" rx="3" fill="#4ade80"/><text x="70"  y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#14532d">NV</text></a>
+        <a href="#state-sd"><rect x="188" y="76"  width="40" height="28" rx="3" fill="#4ade80"/><text x="208" y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#14532d">SD</text></a>
+        <a href="#state-tn"><rect x="234" y="148" width="40" height="28" rx="3" fill="#4ade80"/><text x="254" y="162" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#14532d">TN</text></a>
+        <a href="#state-tx"><rect x="142" y="220" width="40" height="28" rx="3" fill="#4ade80"/><text x="162" y="234" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#14532d">TX</text></a>
+        <a href="#state-wa"><rect x="4"   y="76"  width="40" height="28" rx="3" fill="#4ade80"/><text x="24"  y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#14532d">WA</text></a>
+        <a href="#state-wy"><rect x="142" y="76"  width="40" height="28" rx="3" fill="#4ade80"/><text x="162" y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#14532d">WY</text></a>
+
+        <!-- Up to 3% (#a3e635 / #365314) -->
+        <a href="#state-az"><rect x="50"  y="148" width="40" height="28" rx="3" fill="#a3e635"/><text x="70"  y="162" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#365314">AZ</text></a>
+        <a href="#state-in"><rect x="326" y="76"  width="40" height="28" rx="3" fill="#a3e635"/><text x="346" y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#365314">IN</text></a>
+        <a href="#state-la"><rect x="188" y="220" width="40" height="28" rx="3" fill="#a3e635"/><text x="208" y="234" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#365314">LA</text></a>
+        <a href="#state-nd"><rect x="142" y="40"  width="40" height="28" rx="3" fill="#a3e635"/><text x="162" y="54"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#365314">ND</text></a>
+        <a href="#state-oh"><rect x="372" y="76"  width="40" height="28" rx="3" fill="#a3e635"/><text x="392" y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#365314">OH</text></a>
+
+        <!-- 3–5% (#facc15 / #713f12) -->
+        <a href="#state-al"><rect x="234" y="184" width="40" height="28" rx="3" fill="#facc15"/><text x="254" y="198" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">AL</text></a>
+        <a href="#state-ar"><rect x="188" y="148" width="40" height="28" rx="3" fill="#facc15"/><text x="208" y="162" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">AR</text></a>
+        <a href="#state-co"><rect x="142" y="112" width="40" height="28" rx="3" fill="#facc15"/><text x="162" y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">CO</text></a>
+        <a href="#state-ga"><rect x="280" y="184" width="40" height="28" rx="3" fill="#facc15"/><text x="300" y="198" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">GA</text></a>
+        <a href="#state-ia"><rect x="234" y="76"  width="40" height="28" rx="3" fill="#facc15"/><text x="254" y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">IA</text></a>
+        <a href="#state-il"><rect x="280" y="76"  width="40" height="28" rx="3" fill="#facc15"/><text x="300" y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">IL</text></a>
+        <a href="#state-ky"><rect x="280" y="112" width="40" height="28" rx="3" fill="#facc15"/><text x="300" y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">KY</text></a>
+        <a href="#state-mi"><rect x="280" y="40"  width="40" height="28" rx="3" fill="#facc15"/><text x="300" y="54"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">MI</text></a>
+        <a href="#state-mo"><rect x="234" y="112" width="40" height="28" rx="3" fill="#facc15"/><text x="254" y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">MO</text></a>
+        <a href="#state-ms"><rect x="188" y="184" width="40" height="28" rx="3" fill="#facc15"/><text x="208" y="198" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">MS</text></a>
+        <a href="#state-nc"><rect x="280" y="148" width="40" height="28" rx="3" fill="#facc15"/><text x="300" y="162" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">NC</text></a>
+        <a href="#state-ne"><rect x="188" y="112" width="40" height="28" rx="3" fill="#facc15"/><text x="208" y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">NE</text></a>
+        <a href="#state-ok"><rect x="142" y="184" width="40" height="28" rx="3" fill="#facc15"/><text x="162" y="198" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">OK</text></a>
+        <a href="#state-pa"><rect x="418" y="76"  width="40" height="28" rx="3" fill="#facc15"/><text x="438" y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">PA</text></a>
+        <a href="#state-ut"><rect x="96"  y="112" width="40" height="28" rx="3" fill="#facc15"/><text x="116" y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">UT</text></a>
+        <a href="#state-wv"><rect x="326" y="112" width="40" height="28" rx="3" fill="#facc15"/><text x="346" y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#713f12">WV</text></a>
+
+        <!-- 5–7% (#f97316 / #fff) -->
+        <a href="#state-ct"><rect x="510" y="76"  width="40" height="28" rx="3" fill="#f97316"/><text x="530" y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">CT</text></a>
+        <a href="#state-de"><rect x="418" y="148" width="40" height="28" rx="3" fill="#f97316"/><text x="438" y="162" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">DE</text></a>
+        <a href="#state-id"><rect x="96"  y="76"  width="40" height="28" rx="3" fill="#f97316"/><text x="116" y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">ID</text></a>
+        <a href="#state-ks"><rect x="142" y="148" width="40" height="28" rx="3" fill="#f97316"/><text x="162" y="162" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">KS</text></a>
+        <a href="#state-md"><rect x="418" y="112" width="40" height="28" rx="3" fill="#f97316"/><text x="438" y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">MD</text></a>
+        <a href="#state-mt"><rect x="96"  y="40"  width="40" height="28" rx="3" fill="#f97316"/><text x="116" y="54"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">MT</text></a>
+        <a href="#state-nm"><rect x="96"  y="148" width="40" height="28" rx="3" fill="#f97316"/><text x="116" y="162" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">NM</text></a>
+        <a href="#state-ri"><rect x="510" y="112" width="40" height="28" rx="3" fill="#f97316"/><text x="530" y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">RI</text></a>
+        <a href="#state-sc"><rect x="326" y="148" width="40" height="28" rx="3" fill="#f97316"/><text x="346" y="162" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">SC</text></a>
+        <a href="#state-va"><rect x="372" y="112" width="40" height="28" rx="3" fill="#f97316"/><text x="392" y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">VA</text></a>
+
+        <!-- Over 7% (#ef4444 / #fff) -->
+        <a href="#state-ca"><rect x="4"   y="112" width="40" height="28" rx="3" fill="#ef4444"/><text x="24"  y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">CA</text></a>
+        <a href="#state-dc"><rect x="372" y="148" width="40" height="28" rx="3" fill="#ef4444"/><text x="392" y="162" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">DC</text></a>
+        <a href="#state-hi"><rect x="4"   y="256" width="40" height="28" rx="3" fill="#ef4444"/><text x="24"  y="270" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">HI</text></a>
+        <a href="#state-ma"><rect x="510" y="40"  width="40" height="28" rx="3" fill="#ef4444"/><text x="530" y="54"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">MA</text></a>
+        <a href="#state-me"><rect x="510" y="4"   width="40" height="28" rx="3" fill="#ef4444"/><text x="530" y="18"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">ME</text></a>
+        <a href="#state-mn"><rect x="188" y="40"  width="40" height="28" rx="3" fill="#ef4444"/><text x="208" y="54"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">MN</text></a>
+        <a href="#state-nj"><rect x="464" y="112" width="40" height="28" rx="3" fill="#ef4444"/><text x="484" y="126" text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">NJ</text></a>
+        <a href="#state-ny"><rect x="464" y="76"  width="40" height="28" rx="3" fill="#ef4444"/><text x="484" y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">NY</text></a>
+        <a href="#state-or"><rect x="50"  y="76"  width="40" height="28" rx="3" fill="#ef4444"/><text x="70"  y="90"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">OR</text></a>
+        <a href="#state-vt"><rect x="418" y="40"  width="40" height="28" rx="3" fill="#ef4444"/><text x="438" y="54"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">VT</text></a>
+        <a href="#state-wi"><rect x="234" y="40"  width="40" height="28" rx="3" fill="#ef4444"/><text x="254" y="54"  text-anchor="middle" dominant-baseline="central" font-size="10" font-weight="700" fill="#fff">WI</text></a>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Data Table
+     ====================================================================== -->
+<section class="section" id="table">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>All 50 states + DC &mdash; 2026 income tax rates</h2>
+      <p class="section__lead">Sorted alphabetically. Rate ranges are for a single filer before the standard deduction. Flat-rate states show one rate. &ldquo;SS Taxed&rdquo; means whether the state taxes Social Security retirement benefits at your income level.</p>
+    </div>
+
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="tablewrap">
+        <table class="statetable" itemscope itemtype="https://schema.org/Table">
+          <caption class="sr-only">2026 State Income Tax Rates for all 50 US states and the District of Columbia, showing rate range for a single filer, tax structure type, number of brackets, and whether Social Security benefits are taxed</caption>
+          <thead>
+            <tr>
+              <th scope="col">State</th>
+              <th scope="col">Rate range (single filer)</th>
+              <th scope="col">Structure</th>
+              <th scope="col" class="r">Brackets</th>
+              <th scope="col">SS taxed?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="state-al"><td>Alabama</td><td>2%&ndash;5%</td><td>Graduated</td><td class="r">3</td><td>No</td></tr>
+            <tr id="state-ak"><td>Alaska</td><td class="notax">None</td><td class="notax">No income tax</td><td class="r">&mdash;</td><td>No</td></tr>
+            <tr id="state-az"><td>Arizona</td><td>2.5%</td><td>Flat rate</td><td class="r">1</td><td>No</td></tr>
+            <tr id="state-ar"><td>Arkansas</td><td>2%&ndash;3.7%</td><td>Graduated</td><td class="r">2</td><td>No</td></tr>
+            <tr id="state-ca"><td>California</td><td>1%&ndash;13.3%</td><td>Graduated</td><td class="r">10</td><td>No</td></tr>
+            <tr id="state-co"><td>Colorado</td><td>4.4%</td><td>Flat rate</td><td class="r">1</td><td><span class="sstax">Partial*</span></td></tr>
+            <tr id="state-ct"><td>Connecticut</td><td>2%&ndash;6.99%</td><td>Graduated</td><td class="r">7</td><td><span class="sstax">Partial*</span></td></tr>
+            <tr id="state-de"><td>Delaware</td><td>0%&ndash;6.6%</td><td>Graduated</td><td class="r">7</td><td>No</td></tr>
+            <tr id="state-dc"><td>District of Columbia</td><td>4%&ndash;10.75%</td><td>Graduated</td><td class="r">7</td><td>No</td></tr>
+            <tr id="state-fl"><td>Florida</td><td class="notax">None</td><td class="notax">No income tax</td><td class="r">&mdash;</td><td>No</td></tr>
+            <tr id="state-ga"><td>Georgia</td><td>4.99%</td><td>Flat rate</td><td class="r">1</td><td>No</td></tr>
+            <tr id="state-hi"><td>Hawaii</td><td>1.4%&ndash;11%</td><td>Graduated</td><td class="r">12</td><td>No</td></tr>
+            <tr id="state-id"><td>Idaho</td><td>0%&ndash;5.3%</td><td>Graduated</td><td class="r">2</td><td>No</td></tr>
+            <tr id="state-il"><td>Illinois</td><td>4.95%</td><td>Flat rate</td><td class="r">1</td><td>No</td></tr>
+            <tr id="state-in"><td>Indiana</td><td>2.95%</td><td>Flat rate</td><td class="r">1</td><td>No</td></tr>
+            <tr id="state-ia"><td>Iowa</td><td>3.8%</td><td>Flat rate</td><td class="r">1</td><td>No</td></tr>
+            <tr id="state-ks"><td>Kansas</td><td>5.2%&ndash;5.58%</td><td>Graduated</td><td class="r">2</td><td>No</td></tr>
+            <tr id="state-ky"><td>Kentucky</td><td>3.5%</td><td>Flat rate</td><td class="r">1</td><td>No</td></tr>
+            <tr id="state-la"><td>Louisiana</td><td>3%</td><td>Flat rate</td><td class="r">1</td><td>No</td></tr>
+            <tr id="state-me"><td>Maine</td><td>5.8%&ndash;9.15%</td><td>Graduated</td><td class="r">4</td><td>No</td></tr>
+            <tr id="state-md"><td>Maryland</td><td>2%&ndash;6.5%</td><td>Graduated</td><td class="r">10</td><td>No</td></tr>
+            <tr id="state-ma"><td>Massachusetts</td><td>5%&ndash;9%</td><td>Graduated</td><td class="r">2</td><td>No</td></tr>
+            <tr id="state-mi"><td>Michigan</td><td>4.25%</td><td>Flat rate</td><td class="r">1</td><td>No</td></tr>
+            <tr id="state-mn"><td>Minnesota</td><td>5.35%&ndash;9.85%</td><td>Graduated</td><td class="r">4</td><td><span class="sstax">Partial*</span></td></tr>
+            <tr id="state-ms"><td>Mississippi</td><td>0%&ndash;4%</td><td>Graduated</td><td class="r">2</td><td>No</td></tr>
+            <tr id="state-mo"><td>Missouri</td><td>0%&ndash;4.7%</td><td>Graduated</td><td class="r">8</td><td>No</td></tr>
+            <tr id="state-mt"><td>Montana</td><td>4.7%&ndash;5.65%</td><td>Graduated</td><td class="r">2</td><td><span class="sstax--yes">Yes</span></td></tr>
+            <tr id="state-ne"><td>Nebraska</td><td>2.46%&ndash;4.55%</td><td>Graduated</td><td class="r">3</td><td>No</td></tr>
+            <tr id="state-nv"><td>Nevada</td><td class="notax">None</td><td class="notax">No income tax</td><td class="r">&mdash;</td><td>No</td></tr>
+            <tr id="state-nh"><td>New Hampshire</td><td class="notax">None</td><td class="notax">No income tax</td><td class="r">&mdash;</td><td>No</td></tr>
+            <tr id="state-nj"><td>New Jersey</td><td>1.4%&ndash;10.75%</td><td>Graduated</td><td class="r">7</td><td>No</td></tr>
+            <tr id="state-nm"><td>New Mexico</td><td>1.5%&ndash;5.9%</td><td>Graduated</td><td class="r">6</td><td><span class="sstax">Partial*</span></td></tr>
+            <tr id="state-ny"><td>New York</td><td>3.9%&ndash;10.9%</td><td>Graduated</td><td class="r">9</td><td>No</td></tr>
+            <tr id="state-nc"><td>North Carolina</td><td>3.99%</td><td>Flat rate</td><td class="r">1</td><td>No</td></tr>
+            <tr id="state-nd"><td>North Dakota</td><td>0%&ndash;2.5%</td><td>Graduated</td><td class="r">3</td><td>No</td></tr>
+            <tr id="state-oh"><td>Ohio</td><td>0%&ndash;2.75%</td><td>Graduated</td><td class="r">2</td><td>No</td></tr>
+            <tr id="state-ok"><td>Oklahoma</td><td>0%&ndash;4.5%</td><td>Graduated</td><td class="r">4</td><td>No</td></tr>
+            <tr id="state-or"><td>Oregon</td><td>4.75%&ndash;9.9%</td><td>Graduated</td><td class="r">4</td><td>No</td></tr>
+            <tr id="state-pa"><td>Pennsylvania</td><td>3.07%</td><td>Flat rate</td><td class="r">1</td><td>No</td></tr>
+            <tr id="state-ri"><td>Rhode Island</td><td>3.75%&ndash;5.99%</td><td>Graduated</td><td class="r">3</td><td><span class="sstax">Partial*</span></td></tr>
+            <tr id="state-sc"><td>South Carolina</td><td>1.99%&ndash;5.21%</td><td>Graduated</td><td class="r">2</td><td>No</td></tr>
+            <tr id="state-sd"><td>South Dakota</td><td class="notax">None</td><td class="notax">No income tax</td><td class="r">&mdash;</td><td>No</td></tr>
+            <tr id="state-tn"><td>Tennessee</td><td class="notax">None</td><td class="notax">No income tax</td><td class="r">&mdash;</td><td>No</td></tr>
+            <tr id="state-tx"><td>Texas</td><td class="notax">None</td><td class="notax">No income tax</td><td class="r">&mdash;</td><td>No</td></tr>
+            <tr id="state-ut"><td>Utah</td><td>4.45%</td><td>Flat rate</td><td class="r">1</td><td><span class="sstax">Partial*</span></td></tr>
+            <tr id="state-vt"><td>Vermont</td><td>3.35%&ndash;8.75%</td><td>Graduated</td><td class="r">4</td><td><span class="sstax">Partial*</span></td></tr>
+            <tr id="state-va"><td>Virginia</td><td>2%&ndash;5.75%</td><td>Graduated</td><td class="r">4</td><td>No</td></tr>
+            <tr id="state-wa"><td>Washington</td><td class="notax">None</td><td class="notax">No income tax</td><td class="r">&mdash;</td><td>No</td></tr>
+            <tr id="state-wv"><td>West Virginia</td><td>2.11%&ndash;4.58%</td><td>Graduated</td><td class="r">5</td><td>No</td></tr>
+            <tr id="state-wi"><td>Wisconsin</td><td>3.5%&ndash;7.65%</td><td>Graduated</td><td class="r">4</td><td>No</td></tr>
+            <tr id="state-wy"><td>Wyoming</td><td class="notax">None</td><td class="notax">No income tax</td><td class="r">&mdash;</td><td>No</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p class="source">Rates for tax year 2026. Rate ranges reflect the lowest and highest brackets for a single filer before applying the standard deduction — your effective rate will be lower once deductions are applied. Flat-rate states show the single applicable rate. * &ldquo;SS Taxed: Partial&rdquo; means Social Security is exempt below an income threshold (CO, CT, MN, NM, RI, UT, VT) or taxed at the same share the federal government taxes (MT). Use the <a href="/#retirement">retirement section of the calculator</a> to find your exact taxable amount. Primary sources: state revenue department 2026 rate schedules and enacted legislation; <a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation</a> state income tax rates.</p>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Notes
+     ====================================================================== -->
+<section class="section section--tint">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>What this table doesn&rsquo;t show</h2>
+      <p class="section__lead">State income tax is only one piece of the picture. Here are the most common blind spots.</p>
+    </div>
+    <div class="notes-grid">
+      <div class="callout">
+        <h4>Local taxes can add 1%&ndash;4%</h4>
+        <p>Many states allow cities and counties to levy their own income taxes. Maryland counties add 2.25%&ndash;3.2%. Indiana counties add 0.5%&ndash;3%. New York City residents owe an extra 3.1%&ndash;3.9% on top of New York State. Ohio has hundreds of municipal tax jurisdictions. The table above shows state-level rates only.</p>
+      </div>
+      <div class="callout">
+        <h4>Your effective rate is well below the top bracket</h4>
+        <p>In graduated states, only the dollars above each threshold hit the higher rate &mdash; so a 9.85% top bracket doesn&rsquo;t mean paying 9.85% on everything. Your real state effective rate is typically several points below the top marginal rate shown here. Use the <a href="/">calculator</a> to see your actual state effective rate at your income.</p>
+      </div>
+      <div class="callout">
+        <h4>No income tax &ne; low state taxes overall</h4>
+        <p>States without an income tax often make up the revenue elsewhere. Texas and Washington have above-average sales tax rates. Alaska relies on oil revenues and a Permanent Fund dividend. Tennessee has higher-than-average sales tax. The total state-and-local tax burden can still be significant even with a 0% income tax rate.</p>
+      </div>
+      <div class="callout">
+        <h4>Washington&rsquo;s capital gains excise tax</h4>
+        <p>Washington has no income tax on wages. But since 2022 it levies a 7% excise tax on long-term capital gains above $270,000. This doesn&rsquo;t affect most W-2 earners, but it matters if you have large investment gains.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================================================================
+     Footer
+     ====================================================================== -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h4>What&rsquo;s My Tax Rate?</h4>
+        <p style="line-height:1.65">See your real federal, state and FICA tax rate &mdash; not the bracket you land in. Free, plain-language, 2026 tax year.</p>
+        <p style="margin-top:14px"><a class="btn btn--ghost" href="/">Open the calculator &rarr;</a></p>
+      </div>
+      <div>
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="/">Tax Rate Calculator</a></li>
+          <li><a href="/tax-glossary">Tax Glossary</a></li>
+          <li><a href="/state-tax-rates">State Income Tax Rates</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sources</h4>
+        <ul>
+          <li><a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32</a> &mdash; 2026 federal brackets</li>
+          <li><a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/" rel="noopener">Tax Foundation</a> &mdash; state rates</li>
+          <li><a href="https://www.ssa.gov/oact/cola/cbb.html" rel="noopener">SSA</a> &mdash; Social Security</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <p><strong>For educational purposes only. This is not tax or financial advice.</strong></p>
+      <p style="margin-top:9px">Rates shown are for a single filer, tax year 2026. Local and municipal income taxes, the Alternative Minimum Tax, deduction phase-outs, and most credits are not reflected in this table. Your actual liability will differ. Consult a qualified tax professional before relying on any of this. State rates verified July 2026. &copy; 2026 whatsmytaxrate.com</p>
+    </div>
+  </div>
+</footer>
+
+<script src="analytics.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
