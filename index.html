@@ -35,6 +35,39 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
 <link rel="manifest" href="site.webmanifest">
 <link rel="stylesheet" href="styles.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What tax rate do trusts pay in 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In 2026, trusts reach the top 37% federal tax bracket at just $15,200 of taxable income, compared to $609,350 for single individuals. The 2026 trust brackets are: 10% on income up to $3,100; 24% from $3,101 to $11,150; 35% from $11,151 to $15,200; and 37% above $15,200 (IRS Rev. Proc. 2025-32)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are LLC profits taxed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "By default, a single-member LLC is taxed as a sole proprietorship and a multi-member LLC as a partnership — both pass-through structures. LLC profits flow to the owners' personal tax returns and are taxed at individual income tax rates (10%–37% in 2026). Owners may also qualify for the 20% qualified business income (QBI) deduction under IRC §199A, which can reduce the effective federal rate on qualified business income to as low as 29.6% for top-bracket taxpayers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the pass-through deduction?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The pass-through deduction — formally the qualified business income (QBI) deduction under IRC §199A — lets eligible self-employed individuals and pass-through business owners (sole proprietors, S-corp shareholders, partners, and LLC members) deduct up to 20% of their qualified business income. This can reduce the effective federal income tax rate on that income from 37% to as low as 29.6% for top-bracket taxpayers. Income thresholds and business-type restrictions apply."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -64,6 +97,7 @@
       <a href="#deductions">Deductions</a>
       <a href="#credits">Credits</a>
       <a href="#retirement">Retirement</a>
+      <a href="#trust-pass-through">Trusts</a>
     </nav>
   </div>
 </header>
@@ -211,7 +245,7 @@
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -254,19 +288,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +311,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -494,7 +528,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +645,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -629,6 +663,65 @@
       <p class="ret__statessub" id="ret-statessub">—</p>
       <div class="ret__grid" id="ret-grid"></div>
       <p class="source" id="ret-source">—</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================================================================
+     Trust & Pass-Through Entity Tax Rates
+     ====================================================================== -->
+<section class="section section--tint" id="trust-pass-through">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Trust &amp; Pass-Through Entity Tax Rates</h2>
+      <p class="section__lead">Trusts hit the top 37% federal bracket at just $15,200 of taxable income in 2026 — a threshold single individuals don't reach until $609,350. If you own a business structured as an LLC, S-corp, or partnership, understanding how pass-through income is taxed (and the deductions that reduce it) can be worth tens of thousands of dollars.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <h3 style="font-size:17px;margin-bottom:14px">2026 Trust Tax Brackets vs. Single Individual Brackets</h3>
+      <div class="tablewrap">
+        <table class="brk">
+          <caption class="sr-only">2026 federal income tax brackets for trusts and estates compared to single individual filers</caption>
+          <thead>
+            <tr>
+              <th scope="col">Rate</th>
+              <th scope="col">Trust &amp; Estate taxable income</th>
+              <th scope="col">Single individual taxable income</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>10%</td><td>$0 – $3,100</td><td>$0 – $11,925</td></tr>
+            <tr><td>24%</td><td>$3,101 – $11,150</td><td>$11,926 – $48,475</td></tr>
+            <tr><td>35%</td><td>$11,151 – $15,200</td><td>$48,476 – $103,350</td></tr>
+            <tr><td><strong>37%</strong></td><td><strong>Above $15,200</strong></td><td>Above $609,350</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="source">Source: <a href="https://www.irs.gov/pub/irs-drop/rp-25-32.pdf" rel="noopener">IRS Rev. Proc. 2025-32</a> — 2026 tax year inflation adjustments. Trust brackets compress into a far narrower range than individual brackets, reaching the top rate roughly 40× sooner.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:22px">
+      <h3 style="font-size:17px;margin-bottom:14px">The 20% Pass-Through Deduction (QBI, IRC §199A)</h3>
+      <p>If you own a pass-through business — an LLC, S-corp, sole proprietorship, or partnership — you may qualify to deduct up to <strong>20% of your qualified business income (QBI)</strong> under IRC §199A. For a top-bracket taxpayer, this effectively reduces the federal rate on that income from 37% to <strong>29.6%</strong>.</p>
+      <ul style="margin:14px 0 0 18px;line-height:1.75">
+        <li><strong>Who qualifies:</strong> Most pass-through owners with taxable income below $197,300 (single) / $394,600 (married) for 2026. Specified service businesses (law, medicine, consulting, financial services) phase out above these thresholds.</li>
+        <li><strong>How it works:</strong> The deduction reduces taxable income, not the tax directly — so $100,000 of QBI is treated as $80,000 before your bracket rate applies.</li>
+        <li><strong>W-2 and capital limits:</strong> Above the income threshold, the deduction is capped at 50% of W-2 wages paid by the business, or 25% of W-2 wages plus 2.5% of unadjusted basis in qualified property.</li>
+      </ul>
+      <p class="source" style="margin-top:14px">Source: <a href="https://www.irs.gov/newsroom/qualified-business-income-deduction" rel="noopener">IRS — Qualified Business Income Deduction</a>; IRC §199A; <a href="https://taxpolicycenter.org" rel="noopener">Tax Policy Center</a>.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="font-size:17px;margin-bottom:14px">Net Investment Income Tax (NIIT): 3.8% Surtax</h3>
+      <p>The <strong>Net Investment Income Tax</strong> adds a 3.8% surtax on passive investment income (interest, dividends, capital gains, rental income) when your modified adjusted gross income exceeds:</p>
+      <ul style="margin:14px 0 14px 18px;line-height:1.75">
+        <li><strong>$200,000</strong> for single filers</li>
+        <li><strong>$250,000</strong> for married filing jointly</li>
+        <li><strong>$0 threshold for trusts and estates</strong> — the NIIT applies to all undistributed net investment income, subject to the top-bracket threshold</li>
+      </ul>
+      <p>Because trusts reach the top bracket so quickly, undistributed passive investment income held in a trust can face a combined 40.8% federal rate (37% income tax + 3.8% NIIT). Distributing that income to beneficiaries pushes the tax to their personal returns, where lower brackets and the higher NIIT thresholds often apply.</p>
+      <p class="source" style="margin-top:14px">Source: <a href="https://www.irs.gov/pub/irs-pdf/p550.pdf" rel="noopener">IRS Publication 550</a>; <a href="https://www.irs.gov/forms-pubs/about-form-1041" rel="noopener">IRS Form 1041 Instructions</a>; IRC §1411.</p>
     </div>
   </div>
 </section>
@@ -660,6 +753,7 @@
           <li><a href="#deductions">Deductions</a></li>
           <li><a href="#credits">Credits</a></li>
           <li><a href="#retirement">Social Security</a></li>
+          <li><a href="#trust-pass-through">Trust &amp; pass-through tax rates</a></li>
           <li><a href="/tax-glossary">Tax glossary</a></li>
         </ul>
       </div>
