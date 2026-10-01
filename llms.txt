@@ -1,0 +1,22 @@
+# What's My Tax Rate
+
+> A free, interactive tool that shows your real effective federal, state, and FICA tax rate for 2026 — not just your marginal rate.
+
+## Key Topics
+- Federal effective vs. marginal tax rate explained
+- FICA (Social Security + Medicare) tax breakdown
+- Paycheck withholding vs. actual tax liability
+- Historical US federal tax rates (1955–2026)
+- Tax sheltering: 401(k), IRA, HSA impact
+- Itemized vs. standard deduction comparison
+- Tax credits vs. deductions
+- State-level Social Security taxation
+- Puerto Rico Act 60 tax rules
+
+## Primary URL
+https://whatsmytaxrate.com/
+
+## Data Sources
+- IRS Publication 15-T (2026)
+- IRS Revenue Procedure 2025-28
+- Tax Policy Center Historical Tables
