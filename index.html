@@ -29,6 +29,59 @@
      redacts income from what's tracked; kept external so script-src stays strict. -->
 <script src="ads.js"></script>
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".faq-section"]
+  },
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does earning more money mean all my income gets taxed at the higher rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The US uses a progressive bracket system. In 2026, only dollars earned above each threshold are taxed at the higher marginal rate. A single filer earning $50,000 never pays 22% on the full amount — only on dollars above the 12% bracket ceiling of $48,475."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does my bonus look like it is taxed at a higher rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The IRS requires employers to withhold at a flat 22% supplemental rate on bonuses under $1 million. This is a withholding rule, not your actual tax rate. You reconcile the difference when you file your annual return."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between marginal and effective tax rate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your marginal rate is the rate applied to your last dollar of income. Your effective rate is total federal income tax divided by total income. For most US middle-income earners in 2026, the effective federal rate is 8–14%, significantly below the marginal rate."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the standard deduction for 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In 2026, the standard deduction is $15,000 for single filers and $30,000 for married filing jointly. This amount is subtracted from your gross income before federal tax is calculated, meaning the first $15,000 of a single filer's income is effectively tax-free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is a tax credit worth more than a tax deduction of the same dollar amount?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. A deduction reduces your taxable income, so a $1,000 deduction saves you $220 if you're in the 22% bracket. A $1,000 credit reduces your actual tax bill by the full $1,000 — regardless of your bracket. Credits are almost always more valuable dollar for dollar."
+      }
+    }
+  ]
+}
+</script>
+
 <link rel="icon" href="favicon.svg?v=3" type="image/svg+xml">
 <link rel="icon" href="favicon.ico?v=3" sizes="any">
 <link rel="icon" href="favicon-32.png?v=3" sizes="32x32" type="image/png">
@@ -64,6 +117,7 @@
       <a href="#deductions">Deductions</a>
       <a href="#credits">Credits</a>
       <a href="#retirement">Retirement</a>
+      <a href="#faq">FAQ</a>
     </nav>
   </div>
 </header>
@@ -211,7 +265,7 @@
     <!-- Shown instead of the federal bracket table when federal tax is excluded (Puerto Rico). -->
     <div class="card prcard" id="brk-pr" hidden>
       <h3 class="prcard__h">Your federal income tax here is $0.</h3>
-      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don’t apply to that income. What you actually pay on those wages is <b>Puerto Rico’s own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
+      <p class="prcard__p">As a bona fide Puerto Rico resident, your Puerto-Rico-source wages are excluded from US federal income tax under <b>IRC §933</b> — they never appear on a federal return. So these federal brackets simply don't apply to that income. What you actually pay on those wages is <b>Puerto Rico's own income tax</b> (shown in your breakdown) plus <b>FICA</b>, which still comes out just like on the mainland. The Act 60 section below explains where the famous 0% and 4% rates really apply.</p>
     </div>
 
     <div class="card" id="brk-card">
@@ -254,19 +308,19 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Puerto Rico &amp; Act 60: what actually happens to your paycheck</h2>
-      <p class="section__lead">You’ve probably heard some version of “move to Puerto Rico and pay 4% on everything.” For a salary, that isn’t how it works — and the difference is worth understanding before it drives a decision. Here’s the real picture, by type of income.</p>
+      <p class="section__lead">You've probably heard some version of "move to Puerto Rico and pay 4% on everything." For a salary, that isn't how it works — and the difference is worth understanding before it drives a decision. Here's the real picture, by type of income.</p>
     </div>
 
     <div class="a60grid">
       <div class="a60card">
         <span class="a60card__tag">Your salary</span>
         <div class="a60card__rate">0–33%</div>
-        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico’s regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
+        <p class="a60card__p">Ordinary wages are taxed at <b>Puerto Rico's regular income tax rates</b> — the same 0% to 33% brackets shown in your result above. <b>Act 60 does not lower this.</b> What you <em>do</em> get is the federal side: your PR-source wages are excluded from US federal income tax under IRC §933, so your federal rate is 0%. FICA still applies.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Investment income</span>
         <div class="a60card__rate">0%</div>
-        <p class="a60card__p">This is the real Act 60 headline — but it’s <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
+        <p class="a60card__p">This is the real Act 60 headline — but it's <b>investment</b> income, not salary. The individual-investor decree (Chapter 2, formerly Act 22) grants <b>0% Puerto Rico tax on interest, dividends, and capital gains</b> that build up <em>after</em> you become a resident. Gains from before your move generally stay US-taxable.</p>
       </div>
       <div class="a60card a60card--good">
         <span class="a60card__tag">Export-services business</span>
@@ -277,7 +331,7 @@
 
     <div class="callout">
       <h4>So the myth, plainly</h4>
-      <p>“I’ll pay 4% on my paycheck” conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico’s regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
+      <p>"I'll pay 4% on my paycheck" conflates three separate things: a <b>0% investor rate</b> on investment income, a <b>4% corporate rate</b> on export-services profit, and your <b>salary — which is taxed at Puerto Rico's regular rates</b>. A plain W-2 earner who moves to Puerto Rico gets the federal §933 exclusion and still owes full PR income tax on wages, plus FICA.</p>
     </div>
 
     <div class="a60two">
@@ -494,7 +548,7 @@
   <div class="wrap">
     <div class="section__head">
       <h2>Should you itemize?</h2>
-      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You’d only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
+      <p class="section__lead">Everyone gets the <b>standard deduction</b> for free — a flat amount subtracted before tax, no receipts. You'd only <em>itemize</em> if your deductible expenses add up to more than that. Two 2026 changes shifted the math: a much bigger cap on state-and-local taxes, and a new floor on charitable gifts. Enter your numbers and see which way you land.</p>
     </div>
 
     <div class="itemize">
@@ -611,7 +665,7 @@
           <label for="ret-other">Other retirement income <span class="itemize__hint">pension, IRA/401k</span></label>
           <div class="minput"><span>$</span><input id="ret-other" type="text" inputmode="numeric" autocomplete="off" value="40,000"></div>
         </div>
-        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. “Other income” is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
+        <p class="ret__hint">Uses your <b id="ret-status">Single</b> filing status from the top of the page. "Other income" is your taxable pension and retirement-account withdrawals — the money that pushes your Social Security into being taxed.</p>
       </div>
 
       <div class="ret__result">
@@ -629,6 +683,49 @@
       <p class="ret__statessub" id="ret-statessub">—</p>
       <div class="ret__grid" id="ret-grid"></div>
       <p class="source" id="ret-source">—</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================================
+     Tax Rate Myths FAQ
+     ====================================================================== -->
+<section class="section faq-section" id="faq">
+  <div class="wrap">
+    <div class="section__head">
+      <h2>Common tax rate myths — answered</h2>
+      <p class="section__lead">These are the questions we hear most often. Each answer is short, specific, and backed by the actual 2026 numbers.</p>
+    </div>
+
+    <div class="card">
+      <div class="faq">
+
+        <div class="faq__item">
+          <h3 class="faq__q">Does earning more money mean ALL my income gets taxed at the higher rate?</h3>
+          <p class="faq__a">No. The US uses a progressive bracket system. In 2026, only dollars earned <em>above</em> each threshold are taxed at the higher rate. A single filer earning $50,000 pays 10% on the first $11,925, 12% on the next $36,550 — never 22% on the full $50,000. The 22% rate kicks in only on dollars above $48,475.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__q">Why does my bonus look like it's taxed at 22% or more?</h3>
+          <p class="faq__a">Employers are required by the IRS to withhold at a flat 22% supplemental rate on bonuses under $1 million. This is <em>withholding</em>, not your actual tax rate. When you file, the bonus is added to your salary and taxed at your normal marginal rate — you reconcile the difference and get any over-withheld amount back as part of your refund.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__q">What is the difference between my marginal and effective tax rate?</h3>
+          <p class="faq__a">Your marginal rate is the rate on your <em>last</em> dollar earned — the bracket you're in. Your effective rate is total tax ÷ total income. For most US middle-income earners in 2026, the effective federal rate is 8–14%, well below the marginal rate. A single filer earning $75,000 is in the 22% marginal bracket but typically has an effective federal rate around 12%.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__q">What is the standard deduction for 2026, and how does it affect what I owe?</h3>
+          <p class="faq__a">In 2026, the standard deduction is $15,000 for single filers and $30,000 for married filing jointly. It is subtracted from your gross income before any federal tax is calculated — meaning the first $15,000 of a single filer's income is effectively tax-free. This is why the effective rate is always lower than the marginal rate.</p>
+        </div>
+
+        <div class="faq__item">
+          <h3 class="faq__q">Is a tax credit worth more than a tax deduction of the same dollar amount?</h3>
+          <p class="faq__a">Almost always, yes. A deduction reduces your <em>taxable income</em>, so its value scales with your bracket — a $1,000 deduction saves $220 at the 22% rate. A $1,000 credit reduces your <em>tax bill</em> directly by $1,000, regardless of bracket. That makes a credit worth 4–5× more than a deduction of the same size for many middle-income earners.</p>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
